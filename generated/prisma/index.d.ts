@@ -33,6 +33,21 @@ export type AppliedJob = $Result.DefaultSelection<Prisma.$AppliedJobPayload>
  * 
  */
 export type Progress = $Result.DefaultSelection<Prisma.$ProgressPayload>
+/**
+ * Model AdminMentor
+ * 
+ */
+export type AdminMentor = $Result.DefaultSelection<Prisma.$AdminMentorPayload>
+/**
+ * Model MentorSessionNote
+ * 
+ */
+export type MentorSessionNote = $Result.DefaultSelection<Prisma.$MentorSessionNotePayload>
+/**
+ * Model UserStatus
+ * 
+ */
+export type UserStatus = $Result.DefaultSelection<Prisma.$UserStatusPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -191,6 +206,36 @@ export class PrismaClient<
     * ```
     */
   get progress(): Prisma.ProgressDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adminMentor`: Exposes CRUD operations for the **AdminMentor** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdminMentors
+    * const adminMentors = await prisma.adminMentor.findMany()
+    * ```
+    */
+  get adminMentor(): Prisma.AdminMentorDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mentorSessionNote`: Exposes CRUD operations for the **MentorSessionNote** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MentorSessionNotes
+    * const mentorSessionNotes = await prisma.mentorSessionNote.findMany()
+    * ```
+    */
+  get mentorSessionNote(): Prisma.MentorSessionNoteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userStatus`: Exposes CRUD operations for the **UserStatus** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserStatuses
+    * const userStatuses = await prisma.userStatus.findMany()
+    * ```
+    */
+  get userStatus(): Prisma.UserStatusDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -634,7 +679,10 @@ export namespace Prisma {
     User: 'User',
     ApiKey: 'ApiKey',
     AppliedJob: 'AppliedJob',
-    Progress: 'Progress'
+    Progress: 'Progress',
+    AdminMentor: 'AdminMentor',
+    MentorSessionNote: 'MentorSessionNote',
+    UserStatus: 'UserStatus'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -653,7 +701,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "apiKey" | "appliedJob" | "progress"
+      modelProps: "user" | "apiKey" | "appliedJob" | "progress" | "adminMentor" | "mentorSessionNote" | "userStatus"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -953,6 +1001,228 @@ export namespace Prisma {
           }
         }
       }
+      AdminMentor: {
+        payload: Prisma.$AdminMentorPayload<ExtArgs>
+        fields: Prisma.AdminMentorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdminMentorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdminMentorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload>
+          }
+          findFirst: {
+            args: Prisma.AdminMentorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdminMentorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload>
+          }
+          findMany: {
+            args: Prisma.AdminMentorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload>[]
+          }
+          create: {
+            args: Prisma.AdminMentorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload>
+          }
+          createMany: {
+            args: Prisma.AdminMentorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdminMentorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload>[]
+          }
+          delete: {
+            args: Prisma.AdminMentorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload>
+          }
+          update: {
+            args: Prisma.AdminMentorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdminMentorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdminMentorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdminMentorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload>[]
+          }
+          upsert: {
+            args: Prisma.AdminMentorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminMentorPayload>
+          }
+          aggregate: {
+            args: Prisma.AdminMentorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdminMentor>
+          }
+          groupBy: {
+            args: Prisma.AdminMentorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdminMentorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdminMentorCountArgs<ExtArgs>
+            result: $Utils.Optional<AdminMentorCountAggregateOutputType> | number
+          }
+        }
+      }
+      MentorSessionNote: {
+        payload: Prisma.$MentorSessionNotePayload<ExtArgs>
+        fields: Prisma.MentorSessionNoteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MentorSessionNoteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MentorSessionNoteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload>
+          }
+          findFirst: {
+            args: Prisma.MentorSessionNoteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MentorSessionNoteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload>
+          }
+          findMany: {
+            args: Prisma.MentorSessionNoteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload>[]
+          }
+          create: {
+            args: Prisma.MentorSessionNoteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload>
+          }
+          createMany: {
+            args: Prisma.MentorSessionNoteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MentorSessionNoteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload>[]
+          }
+          delete: {
+            args: Prisma.MentorSessionNoteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload>
+          }
+          update: {
+            args: Prisma.MentorSessionNoteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload>
+          }
+          deleteMany: {
+            args: Prisma.MentorSessionNoteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MentorSessionNoteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MentorSessionNoteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload>[]
+          }
+          upsert: {
+            args: Prisma.MentorSessionNoteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MentorSessionNotePayload>
+          }
+          aggregate: {
+            args: Prisma.MentorSessionNoteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMentorSessionNote>
+          }
+          groupBy: {
+            args: Prisma.MentorSessionNoteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MentorSessionNoteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MentorSessionNoteCountArgs<ExtArgs>
+            result: $Utils.Optional<MentorSessionNoteCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserStatus: {
+        payload: Prisma.$UserStatusPayload<ExtArgs>
+        fields: Prisma.UserStatusFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserStatusFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserStatusFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload>
+          }
+          findFirst: {
+            args: Prisma.UserStatusFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserStatusFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload>
+          }
+          findMany: {
+            args: Prisma.UserStatusFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload>[]
+          }
+          create: {
+            args: Prisma.UserStatusCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload>
+          }
+          createMany: {
+            args: Prisma.UserStatusCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserStatusCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload>[]
+          }
+          delete: {
+            args: Prisma.UserStatusDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload>
+          }
+          update: {
+            args: Prisma.UserStatusUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserStatusDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserStatusUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserStatusUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserStatusUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatusPayload>
+          }
+          aggregate: {
+            args: Prisma.UserStatusAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserStatus>
+          }
+          groupBy: {
+            args: Prisma.UserStatusGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserStatusGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserStatusCountArgs<ExtArgs>
+            result: $Utils.Optional<UserStatusCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1053,6 +1323,9 @@ export namespace Prisma {
     apiKey?: ApiKeyOmit
     appliedJob?: AppliedJobOmit
     progress?: ProgressOmit
+    adminMentor?: AdminMentorOmit
+    mentorSessionNote?: MentorSessionNoteOmit
+    userStatus?: UserStatusOmit
   }
 
   /* Types for Logging */
@@ -1169,6 +1442,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type AdminMentorCountOutputType
+   */
+
+  export type AdminMentorCountOutputType = {
+    User: number
+  }
+
+  export type AdminMentorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | AdminMentorCountOutputTypeCountUserArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AdminMentorCountOutputType without action
+   */
+  export type AdminMentorCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentorCountOutputType
+     */
+    select?: AdminMentorCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AdminMentorCountOutputType without action
+   */
+  export type AdminMentorCountOutputTypeCountUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -1178,8 +1482,18 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    goalPerDay: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    goalPerDay: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -1189,6 +1503,10 @@ export namespace Prisma {
     fullName: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    goalPerDay: number | null
+    mentorId: string | null
+    deletedAt: Date | null
+    verifiedByAdmin: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1198,6 +1516,10 @@ export namespace Prisma {
     fullName: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    goalPerDay: number | null
+    mentorId: string | null
+    deletedAt: Date | null
+    verifiedByAdmin: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1207,9 +1529,21 @@ export namespace Prisma {
     fullName: number
     createdAt: number
     updatedAt: number
+    goalPerDay: number
+    mentorId: number
+    deletedAt: number
+    verifiedByAdmin: number
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    goalPerDay?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    goalPerDay?: true
+  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -1218,6 +1552,10 @@ export namespace Prisma {
     fullName?: true
     createdAt?: true
     updatedAt?: true
+    goalPerDay?: true
+    mentorId?: true
+    deletedAt?: true
+    verifiedByAdmin?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1227,6 +1565,10 @@ export namespace Prisma {
     fullName?: true
     createdAt?: true
     updatedAt?: true
+    goalPerDay?: true
+    mentorId?: true
+    deletedAt?: true
+    verifiedByAdmin?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1236,6 +1578,10 @@ export namespace Prisma {
     fullName?: true
     createdAt?: true
     updatedAt?: true
+    goalPerDay?: true
+    mentorId?: true
+    deletedAt?: true
+    verifiedByAdmin?: true
     _all?: true
   }
 
@@ -1277,6 +1623,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -1307,6 +1665,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -1318,7 +1678,13 @@ export namespace Prisma {
     fullName: string | null
     createdAt: Date
     updatedAt: Date
+    goalPerDay: number
+    mentorId: string | null
+    deletedAt: Date | null
+    verifiedByAdmin: boolean
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -1344,9 +1710,15 @@ export namespace Prisma {
     fullName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    goalPerDay?: boolean
+    mentorId?: boolean
+    deletedAt?: boolean
+    verifiedByAdmin?: boolean
     apiKeys?: boolean | User$apiKeysArgs<ExtArgs>
     appliedJobs?: boolean | User$appliedJobsArgs<ExtArgs>
     Progress?: boolean | User$ProgressArgs<ExtArgs>
+    AdminMentor?: boolean | User$AdminMentorArgs<ExtArgs>
+    UserStatus?: boolean | User$UserStatusArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1357,6 +1729,11 @@ export namespace Prisma {
     fullName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    goalPerDay?: boolean
+    mentorId?: boolean
+    deletedAt?: boolean
+    verifiedByAdmin?: boolean
+    AdminMentor?: boolean | User$AdminMentorArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1366,6 +1743,11 @@ export namespace Prisma {
     fullName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    goalPerDay?: boolean
+    mentorId?: boolean
+    deletedAt?: boolean
+    verifiedByAdmin?: boolean
+    AdminMentor?: boolean | User$AdminMentorArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1375,17 +1757,27 @@ export namespace Prisma {
     fullName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    goalPerDay?: boolean
+    mentorId?: boolean
+    deletedAt?: boolean
+    verifiedByAdmin?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firebaseUid" | "email" | "fullName" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firebaseUid" | "email" | "fullName" | "createdAt" | "updatedAt" | "goalPerDay" | "mentorId" | "deletedAt" | "verifiedByAdmin", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     apiKeys?: boolean | User$apiKeysArgs<ExtArgs>
     appliedJobs?: boolean | User$appliedJobsArgs<ExtArgs>
     Progress?: boolean | User$ProgressArgs<ExtArgs>
+    AdminMentor?: boolean | User$AdminMentorArgs<ExtArgs>
+    UserStatus?: boolean | User$UserStatusArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    AdminMentor?: boolean | User$AdminMentorArgs<ExtArgs>
+  }
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    AdminMentor?: boolean | User$AdminMentorArgs<ExtArgs>
+  }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -1393,6 +1785,8 @@ export namespace Prisma {
       apiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
       appliedJobs: Prisma.$AppliedJobPayload<ExtArgs>[]
       Progress: Prisma.$ProgressPayload<ExtArgs> | null
+      AdminMentor: Prisma.$AdminMentorPayload<ExtArgs> | null
+      UserStatus: Prisma.$UserStatusPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1401,6 +1795,10 @@ export namespace Prisma {
       fullName: string | null
       createdAt: Date
       updatedAt: Date
+      goalPerDay: number
+      mentorId: string | null
+      deletedAt: Date | null
+      verifiedByAdmin: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1798,6 +2196,8 @@ export namespace Prisma {
     apiKeys<T extends User$apiKeysArgs<ExtArgs> = {}>(args?: Subset<T, User$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     appliedJobs<T extends User$appliedJobsArgs<ExtArgs> = {}>(args?: Subset<T, User$appliedJobsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppliedJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Progress<T extends User$ProgressArgs<ExtArgs> = {}>(args?: Subset<T, User$ProgressArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    AdminMentor<T extends User$AdminMentorArgs<ExtArgs> = {}>(args?: Subset<T, User$AdminMentorArgs<ExtArgs>>): Prisma__AdminMentorClient<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    UserStatus<T extends User$UserStatusArgs<ExtArgs> = {}>(args?: Subset<T, User$UserStatusArgs<ExtArgs>>): Prisma__UserStatusClient<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1833,6 +2233,10 @@ export namespace Prisma {
     readonly fullName: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly goalPerDay: FieldRef<"User", 'Int'>
+    readonly mentorId: FieldRef<"User", 'String'>
+    readonly deletedAt: FieldRef<"User", 'DateTime'>
+    readonly verifiedByAdmin: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -2082,6 +2486,10 @@ export namespace Prisma {
      */
     data: UserCreateManyInput | UserCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2152,6 +2560,10 @@ export namespace Prisma {
      * Limit how many Users to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2288,6 +2700,44 @@ export namespace Prisma {
   }
 
   /**
+   * User.AdminMentor
+   */
+  export type User$AdminMentorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+    where?: AdminMentorWhereInput
+  }
+
+  /**
+   * User.UserStatus
+   */
+  export type User$UserStatusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+    where?: UserStatusWhereInput
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2324,6 +2774,7 @@ export namespace Prisma {
     createdAt: Date | null
     lastUsedAt: Date | null
     isActive: boolean | null
+    deletedAt: Date | null
   }
 
   export type ApiKeyMaxAggregateOutputType = {
@@ -2334,6 +2785,7 @@ export namespace Prisma {
     createdAt: Date | null
     lastUsedAt: Date | null
     isActive: boolean | null
+    deletedAt: Date | null
   }
 
   export type ApiKeyCountAggregateOutputType = {
@@ -2344,6 +2796,7 @@ export namespace Prisma {
     createdAt: number
     lastUsedAt: number
     isActive: number
+    deletedAt: number
     _all: number
   }
 
@@ -2356,6 +2809,7 @@ export namespace Prisma {
     createdAt?: true
     lastUsedAt?: true
     isActive?: true
+    deletedAt?: true
   }
 
   export type ApiKeyMaxAggregateInputType = {
@@ -2366,6 +2820,7 @@ export namespace Prisma {
     createdAt?: true
     lastUsedAt?: true
     isActive?: true
+    deletedAt?: true
   }
 
   export type ApiKeyCountAggregateInputType = {
@@ -2376,6 +2831,7 @@ export namespace Prisma {
     createdAt?: true
     lastUsedAt?: true
     isActive?: true
+    deletedAt?: true
     _all?: true
   }
 
@@ -2459,6 +2915,7 @@ export namespace Prisma {
     createdAt: Date
     lastUsedAt: Date | null
     isActive: boolean
+    deletedAt: Date | null
     _count: ApiKeyCountAggregateOutputType | null
     _min: ApiKeyMinAggregateOutputType | null
     _max: ApiKeyMaxAggregateOutputType | null
@@ -2486,6 +2943,7 @@ export namespace Prisma {
     createdAt?: boolean
     lastUsedAt?: boolean
     isActive?: boolean
+    deletedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["apiKey"]>
 
@@ -2497,6 +2955,7 @@ export namespace Prisma {
     createdAt?: boolean
     lastUsedAt?: boolean
     isActive?: boolean
+    deletedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["apiKey"]>
 
@@ -2508,6 +2967,7 @@ export namespace Prisma {
     createdAt?: boolean
     lastUsedAt?: boolean
     isActive?: boolean
+    deletedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["apiKey"]>
 
@@ -2519,9 +2979,10 @@ export namespace Prisma {
     createdAt?: boolean
     lastUsedAt?: boolean
     isActive?: boolean
+    deletedAt?: boolean
   }
 
-  export type ApiKeyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "name" | "userId" | "createdAt" | "lastUsedAt" | "isActive", ExtArgs["result"]["apiKey"]>
+  export type ApiKeyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "name" | "userId" | "createdAt" | "lastUsedAt" | "isActive" | "deletedAt", ExtArgs["result"]["apiKey"]>
   export type ApiKeyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2545,6 +3006,7 @@ export namespace Prisma {
       createdAt: Date
       lastUsedAt: Date | null
       isActive: boolean
+      deletedAt: Date | null
     }, ExtArgs["result"]["apiKey"]>
     composites: {}
   }
@@ -2976,6 +3438,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"ApiKey", 'DateTime'>
     readonly lastUsedAt: FieldRef<"ApiKey", 'DateTime'>
     readonly isActive: FieldRef<"ApiKey", 'Boolean'>
+    readonly deletedAt: FieldRef<"ApiKey", 'DateTime'>
   }
     
 
@@ -3413,6 +3876,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     type: string | null
+    deletedAt: Date | null
   }
 
   export type AppliedJobMaxAggregateOutputType = {
@@ -3428,6 +3892,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     type: string | null
+    deletedAt: Date | null
   }
 
   export type AppliedJobCountAggregateOutputType = {
@@ -3443,6 +3908,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     type: number
+    deletedAt: number
     _all: number
   }
 
@@ -3460,6 +3926,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     type?: true
+    deletedAt?: true
   }
 
   export type AppliedJobMaxAggregateInputType = {
@@ -3475,6 +3942,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     type?: true
+    deletedAt?: true
   }
 
   export type AppliedJobCountAggregateInputType = {
@@ -3490,6 +3958,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     type?: true
+    deletedAt?: true
     _all?: true
   }
 
@@ -3578,6 +4047,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     type: string
+    deletedAt: Date | null
     _count: AppliedJobCountAggregateOutputType | null
     _min: AppliedJobMinAggregateOutputType | null
     _max: AppliedJobMaxAggregateOutputType | null
@@ -3610,6 +4080,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     type?: boolean
+    deletedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["appliedJob"]>
 
@@ -3626,6 +4097,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     type?: boolean
+    deletedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["appliedJob"]>
 
@@ -3642,6 +4114,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     type?: boolean
+    deletedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["appliedJob"]>
 
@@ -3658,9 +4131,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     type?: boolean
+    deletedAt?: boolean
   }
 
-  export type AppliedJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "company" | "location" | "url" | "appliedDate" | "appliedText" | "status" | "createdAt" | "updatedAt" | "type", ExtArgs["result"]["appliedJob"]>
+  export type AppliedJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "company" | "location" | "url" | "appliedDate" | "appliedText" | "status" | "createdAt" | "updatedAt" | "type" | "deletedAt", ExtArgs["result"]["appliedJob"]>
   export type AppliedJobInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3689,6 +4163,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       type: string
+      deletedAt: Date | null
     }, ExtArgs["result"]["appliedJob"]>
     composites: {}
   }
@@ -4125,6 +4600,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"AppliedJob", 'DateTime'>
     readonly updatedAt: FieldRef<"AppliedJob", 'DateTime'>
     readonly type: FieldRef<"AppliedJob", 'String'>
+    readonly deletedAt: FieldRef<"AppliedJob", 'DateTime'>
   }
     
 
@@ -4554,6 +5030,7 @@ export namespace Prisma {
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
   }
 
   export type ProgressMaxAggregateOutputType = {
@@ -4561,6 +5038,7 @@ export namespace Prisma {
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
   }
 
   export type ProgressCountAggregateOutputType = {
@@ -4569,6 +5047,7 @@ export namespace Prisma {
     weeks: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     _all: number
   }
 
@@ -4578,6 +5057,7 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
   }
 
   export type ProgressMaxAggregateInputType = {
@@ -4585,6 +5065,7 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
   }
 
   export type ProgressCountAggregateInputType = {
@@ -4593,6 +5074,7 @@ export namespace Prisma {
     weeks?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     _all?: true
   }
 
@@ -4674,6 +5156,7 @@ export namespace Prisma {
     weeks: JsonValue
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     _count: ProgressCountAggregateOutputType | null
     _min: ProgressMinAggregateOutputType | null
     _max: ProgressMaxAggregateOutputType | null
@@ -4699,6 +5182,7 @@ export namespace Prisma {
     weeks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["progress"]>
 
@@ -4708,6 +5192,7 @@ export namespace Prisma {
     weeks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["progress"]>
 
@@ -4717,6 +5202,7 @@ export namespace Prisma {
     weeks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["progress"]>
 
@@ -4726,9 +5212,10 @@ export namespace Prisma {
     weeks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
   }
 
-  export type ProgressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "weeks" | "createdAt" | "updatedAt", ExtArgs["result"]["progress"]>
+  export type ProgressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "weeks" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["progress"]>
   export type ProgressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -4750,6 +5237,7 @@ export namespace Prisma {
       weeks: Prisma.JsonValue
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
     }, ExtArgs["result"]["progress"]>
     composites: {}
   }
@@ -5179,6 +5667,7 @@ export namespace Prisma {
     readonly weeks: FieldRef<"Progress", 'Json'>
     readonly createdAt: FieldRef<"Progress", 'DateTime'>
     readonly updatedAt: FieldRef<"Progress", 'DateTime'>
+    readonly deletedAt: FieldRef<"Progress", 'DateTime'>
   }
     
 
@@ -5594,6 +6083,3709 @@ export namespace Prisma {
 
 
   /**
+   * Model AdminMentor
+   */
+
+  export type AggregateAdminMentor = {
+    _count: AdminMentorCountAggregateOutputType | null
+    _min: AdminMentorMinAggregateOutputType | null
+    _max: AdminMentorMaxAggregateOutputType | null
+  }
+
+  export type AdminMentorMinAggregateOutputType = {
+    id: string | null
+    email: string | null
+    password: string | null
+    name: string | null
+    picture: string | null
+    expertise: string | null
+    background: string | null
+    availability: string | null
+    isAdmin: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+    company: string | null
+    role: string | null
+    verifiedByAdmin: boolean | null
+  }
+
+  export type AdminMentorMaxAggregateOutputType = {
+    id: string | null
+    email: string | null
+    password: string | null
+    name: string | null
+    picture: string | null
+    expertise: string | null
+    background: string | null
+    availability: string | null
+    isAdmin: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+    company: string | null
+    role: string | null
+    verifiedByAdmin: boolean | null
+  }
+
+  export type AdminMentorCountAggregateOutputType = {
+    id: number
+    email: number
+    password: number
+    name: number
+    picture: number
+    expertise: number
+    background: number
+    availability: number
+    isAdmin: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    company: number
+    role: number
+    verifiedByAdmin: number
+    _all: number
+  }
+
+
+  export type AdminMentorMinAggregateInputType = {
+    id?: true
+    email?: true
+    password?: true
+    name?: true
+    picture?: true
+    expertise?: true
+    background?: true
+    availability?: true
+    isAdmin?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    company?: true
+    role?: true
+    verifiedByAdmin?: true
+  }
+
+  export type AdminMentorMaxAggregateInputType = {
+    id?: true
+    email?: true
+    password?: true
+    name?: true
+    picture?: true
+    expertise?: true
+    background?: true
+    availability?: true
+    isAdmin?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    company?: true
+    role?: true
+    verifiedByAdmin?: true
+  }
+
+  export type AdminMentorCountAggregateInputType = {
+    id?: true
+    email?: true
+    password?: true
+    name?: true
+    picture?: true
+    expertise?: true
+    background?: true
+    availability?: true
+    isAdmin?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    company?: true
+    role?: true
+    verifiedByAdmin?: true
+    _all?: true
+  }
+
+  export type AdminMentorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminMentor to aggregate.
+     */
+    where?: AdminMentorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminMentors to fetch.
+     */
+    orderBy?: AdminMentorOrderByWithRelationInput | AdminMentorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdminMentorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminMentors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminMentors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdminMentors
+    **/
+    _count?: true | AdminMentorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdminMentorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdminMentorMaxAggregateInputType
+  }
+
+  export type GetAdminMentorAggregateType<T extends AdminMentorAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdminMentor]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdminMentor[P]>
+      : GetScalarType<T[P], AggregateAdminMentor[P]>
+  }
+
+
+
+
+  export type AdminMentorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminMentorWhereInput
+    orderBy?: AdminMentorOrderByWithAggregationInput | AdminMentorOrderByWithAggregationInput[]
+    by: AdminMentorScalarFieldEnum[] | AdminMentorScalarFieldEnum
+    having?: AdminMentorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdminMentorCountAggregateInputType | true
+    _min?: AdminMentorMinAggregateInputType
+    _max?: AdminMentorMaxAggregateInputType
+  }
+
+  export type AdminMentorGroupByOutputType = {
+    id: string
+    email: string
+    password: string
+    name: string
+    picture: string | null
+    expertise: string | null
+    background: string | null
+    availability: string | null
+    isAdmin: boolean
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    company: string | null
+    role: string | null
+    verifiedByAdmin: boolean
+    _count: AdminMentorCountAggregateOutputType | null
+    _min: AdminMentorMinAggregateOutputType | null
+    _max: AdminMentorMaxAggregateOutputType | null
+  }
+
+  type GetAdminMentorGroupByPayload<T extends AdminMentorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdminMentorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdminMentorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdminMentorGroupByOutputType[P]>
+            : GetScalarType<T[P], AdminMentorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdminMentorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    password?: boolean
+    name?: boolean
+    picture?: boolean
+    expertise?: boolean
+    background?: boolean
+    availability?: boolean
+    isAdmin?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    company?: boolean
+    role?: boolean
+    verifiedByAdmin?: boolean
+    User?: boolean | AdminMentor$UserArgs<ExtArgs>
+    _count?: boolean | AdminMentorCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adminMentor"]>
+
+  export type AdminMentorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    password?: boolean
+    name?: boolean
+    picture?: boolean
+    expertise?: boolean
+    background?: boolean
+    availability?: boolean
+    isAdmin?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    company?: boolean
+    role?: boolean
+    verifiedByAdmin?: boolean
+  }, ExtArgs["result"]["adminMentor"]>
+
+  export type AdminMentorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    password?: boolean
+    name?: boolean
+    picture?: boolean
+    expertise?: boolean
+    background?: boolean
+    availability?: boolean
+    isAdmin?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    company?: boolean
+    role?: boolean
+    verifiedByAdmin?: boolean
+  }, ExtArgs["result"]["adminMentor"]>
+
+  export type AdminMentorSelectScalar = {
+    id?: boolean
+    email?: boolean
+    password?: boolean
+    name?: boolean
+    picture?: boolean
+    expertise?: boolean
+    background?: boolean
+    availability?: boolean
+    isAdmin?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    company?: boolean
+    role?: boolean
+    verifiedByAdmin?: boolean
+  }
+
+  export type AdminMentorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "picture" | "expertise" | "background" | "availability" | "isAdmin" | "createdAt" | "updatedAt" | "deletedAt" | "company" | "role" | "verifiedByAdmin", ExtArgs["result"]["adminMentor"]>
+  export type AdminMentorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | AdminMentor$UserArgs<ExtArgs>
+    _count?: boolean | AdminMentorCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AdminMentorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AdminMentorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AdminMentorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdminMentor"
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email: string
+      password: string
+      name: string
+      picture: string | null
+      expertise: string | null
+      background: string | null
+      availability: string | null
+      isAdmin: boolean
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+      company: string | null
+      role: string | null
+      verifiedByAdmin: boolean
+    }, ExtArgs["result"]["adminMentor"]>
+    composites: {}
+  }
+
+  type AdminMentorGetPayload<S extends boolean | null | undefined | AdminMentorDefaultArgs> = $Result.GetResult<Prisma.$AdminMentorPayload, S>
+
+  type AdminMentorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdminMentorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdminMentorCountAggregateInputType | true
+    }
+
+  export interface AdminMentorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdminMentor'], meta: { name: 'AdminMentor' } }
+    /**
+     * Find zero or one AdminMentor that matches the filter.
+     * @param {AdminMentorFindUniqueArgs} args - Arguments to find a AdminMentor
+     * @example
+     * // Get one AdminMentor
+     * const adminMentor = await prisma.adminMentor.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdminMentorFindUniqueArgs>(args: SelectSubset<T, AdminMentorFindUniqueArgs<ExtArgs>>): Prisma__AdminMentorClient<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdminMentor that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdminMentorFindUniqueOrThrowArgs} args - Arguments to find a AdminMentor
+     * @example
+     * // Get one AdminMentor
+     * const adminMentor = await prisma.adminMentor.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdminMentorFindUniqueOrThrowArgs>(args: SelectSubset<T, AdminMentorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdminMentorClient<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdminMentor that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminMentorFindFirstArgs} args - Arguments to find a AdminMentor
+     * @example
+     * // Get one AdminMentor
+     * const adminMentor = await prisma.adminMentor.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdminMentorFindFirstArgs>(args?: SelectSubset<T, AdminMentorFindFirstArgs<ExtArgs>>): Prisma__AdminMentorClient<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdminMentor that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminMentorFindFirstOrThrowArgs} args - Arguments to find a AdminMentor
+     * @example
+     * // Get one AdminMentor
+     * const adminMentor = await prisma.adminMentor.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdminMentorFindFirstOrThrowArgs>(args?: SelectSubset<T, AdminMentorFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdminMentorClient<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdminMentors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminMentorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdminMentors
+     * const adminMentors = await prisma.adminMentor.findMany()
+     * 
+     * // Get first 10 AdminMentors
+     * const adminMentors = await prisma.adminMentor.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adminMentorWithIdOnly = await prisma.adminMentor.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdminMentorFindManyArgs>(args?: SelectSubset<T, AdminMentorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdminMentor.
+     * @param {AdminMentorCreateArgs} args - Arguments to create a AdminMentor.
+     * @example
+     * // Create one AdminMentor
+     * const AdminMentor = await prisma.adminMentor.create({
+     *   data: {
+     *     // ... data to create a AdminMentor
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdminMentorCreateArgs>(args: SelectSubset<T, AdminMentorCreateArgs<ExtArgs>>): Prisma__AdminMentorClient<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdminMentors.
+     * @param {AdminMentorCreateManyArgs} args - Arguments to create many AdminMentors.
+     * @example
+     * // Create many AdminMentors
+     * const adminMentor = await prisma.adminMentor.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdminMentorCreateManyArgs>(args?: SelectSubset<T, AdminMentorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdminMentors and returns the data saved in the database.
+     * @param {AdminMentorCreateManyAndReturnArgs} args - Arguments to create many AdminMentors.
+     * @example
+     * // Create many AdminMentors
+     * const adminMentor = await prisma.adminMentor.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdminMentors and only return the `id`
+     * const adminMentorWithIdOnly = await prisma.adminMentor.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdminMentorCreateManyAndReturnArgs>(args?: SelectSubset<T, AdminMentorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AdminMentor.
+     * @param {AdminMentorDeleteArgs} args - Arguments to delete one AdminMentor.
+     * @example
+     * // Delete one AdminMentor
+     * const AdminMentor = await prisma.adminMentor.delete({
+     *   where: {
+     *     // ... filter to delete one AdminMentor
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdminMentorDeleteArgs>(args: SelectSubset<T, AdminMentorDeleteArgs<ExtArgs>>): Prisma__AdminMentorClient<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdminMentor.
+     * @param {AdminMentorUpdateArgs} args - Arguments to update one AdminMentor.
+     * @example
+     * // Update one AdminMentor
+     * const adminMentor = await prisma.adminMentor.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdminMentorUpdateArgs>(args: SelectSubset<T, AdminMentorUpdateArgs<ExtArgs>>): Prisma__AdminMentorClient<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdminMentors.
+     * @param {AdminMentorDeleteManyArgs} args - Arguments to filter AdminMentors to delete.
+     * @example
+     * // Delete a few AdminMentors
+     * const { count } = await prisma.adminMentor.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdminMentorDeleteManyArgs>(args?: SelectSubset<T, AdminMentorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminMentors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminMentorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdminMentors
+     * const adminMentor = await prisma.adminMentor.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdminMentorUpdateManyArgs>(args: SelectSubset<T, AdminMentorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminMentors and returns the data updated in the database.
+     * @param {AdminMentorUpdateManyAndReturnArgs} args - Arguments to update many AdminMentors.
+     * @example
+     * // Update many AdminMentors
+     * const adminMentor = await prisma.adminMentor.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdminMentors and only return the `id`
+     * const adminMentorWithIdOnly = await prisma.adminMentor.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdminMentorUpdateManyAndReturnArgs>(args: SelectSubset<T, AdminMentorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AdminMentor.
+     * @param {AdminMentorUpsertArgs} args - Arguments to update or create a AdminMentor.
+     * @example
+     * // Update or create a AdminMentor
+     * const adminMentor = await prisma.adminMentor.upsert({
+     *   create: {
+     *     // ... data to create a AdminMentor
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdminMentor we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdminMentorUpsertArgs>(args: SelectSubset<T, AdminMentorUpsertArgs<ExtArgs>>): Prisma__AdminMentorClient<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdminMentors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminMentorCountArgs} args - Arguments to filter AdminMentors to count.
+     * @example
+     * // Count the number of AdminMentors
+     * const count = await prisma.adminMentor.count({
+     *   where: {
+     *     // ... the filter for the AdminMentors we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdminMentorCountArgs>(
+      args?: Subset<T, AdminMentorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdminMentorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdminMentor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminMentorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdminMentorAggregateArgs>(args: Subset<T, AdminMentorAggregateArgs>): Prisma.PrismaPromise<GetAdminMentorAggregateType<T>>
+
+    /**
+     * Group by AdminMentor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminMentorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdminMentorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdminMentorGroupByArgs['orderBy'] }
+        : { orderBy?: AdminMentorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdminMentorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdminMentorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdminMentor model
+   */
+  readonly fields: AdminMentorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdminMentor.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdminMentorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    User<T extends AdminMentor$UserArgs<ExtArgs> = {}>(args?: Subset<T, AdminMentor$UserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdminMentor model
+   */
+  interface AdminMentorFieldRefs {
+    readonly id: FieldRef<"AdminMentor", 'String'>
+    readonly email: FieldRef<"AdminMentor", 'String'>
+    readonly password: FieldRef<"AdminMentor", 'String'>
+    readonly name: FieldRef<"AdminMentor", 'String'>
+    readonly picture: FieldRef<"AdminMentor", 'String'>
+    readonly expertise: FieldRef<"AdminMentor", 'String'>
+    readonly background: FieldRef<"AdminMentor", 'String'>
+    readonly availability: FieldRef<"AdminMentor", 'String'>
+    readonly isAdmin: FieldRef<"AdminMentor", 'Boolean'>
+    readonly createdAt: FieldRef<"AdminMentor", 'DateTime'>
+    readonly updatedAt: FieldRef<"AdminMentor", 'DateTime'>
+    readonly deletedAt: FieldRef<"AdminMentor", 'DateTime'>
+    readonly company: FieldRef<"AdminMentor", 'String'>
+    readonly role: FieldRef<"AdminMentor", 'String'>
+    readonly verifiedByAdmin: FieldRef<"AdminMentor", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdminMentor findUnique
+   */
+  export type AdminMentorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminMentor to fetch.
+     */
+    where: AdminMentorWhereUniqueInput
+  }
+
+  /**
+   * AdminMentor findUniqueOrThrow
+   */
+  export type AdminMentorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminMentor to fetch.
+     */
+    where: AdminMentorWhereUniqueInput
+  }
+
+  /**
+   * AdminMentor findFirst
+   */
+  export type AdminMentorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminMentor to fetch.
+     */
+    where?: AdminMentorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminMentors to fetch.
+     */
+    orderBy?: AdminMentorOrderByWithRelationInput | AdminMentorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminMentors.
+     */
+    cursor?: AdminMentorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminMentors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminMentors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminMentors.
+     */
+    distinct?: AdminMentorScalarFieldEnum | AdminMentorScalarFieldEnum[]
+  }
+
+  /**
+   * AdminMentor findFirstOrThrow
+   */
+  export type AdminMentorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminMentor to fetch.
+     */
+    where?: AdminMentorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminMentors to fetch.
+     */
+    orderBy?: AdminMentorOrderByWithRelationInput | AdminMentorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminMentors.
+     */
+    cursor?: AdminMentorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminMentors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminMentors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminMentors.
+     */
+    distinct?: AdminMentorScalarFieldEnum | AdminMentorScalarFieldEnum[]
+  }
+
+  /**
+   * AdminMentor findMany
+   */
+  export type AdminMentorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminMentors to fetch.
+     */
+    where?: AdminMentorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminMentors to fetch.
+     */
+    orderBy?: AdminMentorOrderByWithRelationInput | AdminMentorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdminMentors.
+     */
+    cursor?: AdminMentorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminMentors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminMentors.
+     */
+    skip?: number
+    distinct?: AdminMentorScalarFieldEnum | AdminMentorScalarFieldEnum[]
+  }
+
+  /**
+   * AdminMentor create
+   */
+  export type AdminMentorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AdminMentor.
+     */
+    data: XOR<AdminMentorCreateInput, AdminMentorUncheckedCreateInput>
+  }
+
+  /**
+   * AdminMentor createMany
+   */
+  export type AdminMentorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdminMentors.
+     */
+    data: AdminMentorCreateManyInput | AdminMentorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdminMentor createManyAndReturn
+   */
+  export type AdminMentorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdminMentors.
+     */
+    data: AdminMentorCreateManyInput | AdminMentorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdminMentor update
+   */
+  export type AdminMentorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AdminMentor.
+     */
+    data: XOR<AdminMentorUpdateInput, AdminMentorUncheckedUpdateInput>
+    /**
+     * Choose, which AdminMentor to update.
+     */
+    where: AdminMentorWhereUniqueInput
+  }
+
+  /**
+   * AdminMentor updateMany
+   */
+  export type AdminMentorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdminMentors.
+     */
+    data: XOR<AdminMentorUpdateManyMutationInput, AdminMentorUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminMentors to update
+     */
+    where?: AdminMentorWhereInput
+    /**
+     * Limit how many AdminMentors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminMentor updateManyAndReturn
+   */
+  export type AdminMentorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * The data used to update AdminMentors.
+     */
+    data: XOR<AdminMentorUpdateManyMutationInput, AdminMentorUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminMentors to update
+     */
+    where?: AdminMentorWhereInput
+    /**
+     * Limit how many AdminMentors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminMentor upsert
+   */
+  export type AdminMentorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AdminMentor to update in case it exists.
+     */
+    where: AdminMentorWhereUniqueInput
+    /**
+     * In case the AdminMentor found by the `where` argument doesn't exist, create a new AdminMentor with this data.
+     */
+    create: XOR<AdminMentorCreateInput, AdminMentorUncheckedCreateInput>
+    /**
+     * In case the AdminMentor was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdminMentorUpdateInput, AdminMentorUncheckedUpdateInput>
+  }
+
+  /**
+   * AdminMentor delete
+   */
+  export type AdminMentorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+    /**
+     * Filter which AdminMentor to delete.
+     */
+    where: AdminMentorWhereUniqueInput
+  }
+
+  /**
+   * AdminMentor deleteMany
+   */
+  export type AdminMentorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminMentors to delete
+     */
+    where?: AdminMentorWhereInput
+    /**
+     * Limit how many AdminMentors to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminMentor.User
+   */
+  export type AdminMentor$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * AdminMentor without action
+   */
+  export type AdminMentorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMentor
+     */
+    select?: AdminMentorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMentor
+     */
+    omit?: AdminMentorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMentorInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MentorSessionNote
+   */
+
+  export type AggregateMentorSessionNote = {
+    _count: MentorSessionNoteCountAggregateOutputType | null
+    _avg: MentorSessionNoteAvgAggregateOutputType | null
+    _sum: MentorSessionNoteSumAggregateOutputType | null
+    _min: MentorSessionNoteMinAggregateOutputType | null
+    _max: MentorSessionNoteMaxAggregateOutputType | null
+  }
+
+  export type MentorSessionNoteAvgAggregateOutputType = {
+    callNumber: number | null
+  }
+
+  export type MentorSessionNoteSumAggregateOutputType = {
+    callNumber: number | null
+  }
+
+  export type MentorSessionNoteMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    callNumber: number | null
+    notes: string | null
+    mentorId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type MentorSessionNoteMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    callNumber: number | null
+    notes: string | null
+    mentorId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type MentorSessionNoteCountAggregateOutputType = {
+    id: number
+    userId: number
+    callNumber: number
+    notes: number
+    mentorId: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    _all: number
+  }
+
+
+  export type MentorSessionNoteAvgAggregateInputType = {
+    callNumber?: true
+  }
+
+  export type MentorSessionNoteSumAggregateInputType = {
+    callNumber?: true
+  }
+
+  export type MentorSessionNoteMinAggregateInputType = {
+    id?: true
+    userId?: true
+    callNumber?: true
+    notes?: true
+    mentorId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type MentorSessionNoteMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    callNumber?: true
+    notes?: true
+    mentorId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type MentorSessionNoteCountAggregateInputType = {
+    id?: true
+    userId?: true
+    callNumber?: true
+    notes?: true
+    mentorId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    _all?: true
+  }
+
+  export type MentorSessionNoteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MentorSessionNote to aggregate.
+     */
+    where?: MentorSessionNoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MentorSessionNotes to fetch.
+     */
+    orderBy?: MentorSessionNoteOrderByWithRelationInput | MentorSessionNoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MentorSessionNoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MentorSessionNotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MentorSessionNotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MentorSessionNotes
+    **/
+    _count?: true | MentorSessionNoteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MentorSessionNoteAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MentorSessionNoteSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MentorSessionNoteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MentorSessionNoteMaxAggregateInputType
+  }
+
+  export type GetMentorSessionNoteAggregateType<T extends MentorSessionNoteAggregateArgs> = {
+        [P in keyof T & keyof AggregateMentorSessionNote]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMentorSessionNote[P]>
+      : GetScalarType<T[P], AggregateMentorSessionNote[P]>
+  }
+
+
+
+
+  export type MentorSessionNoteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MentorSessionNoteWhereInput
+    orderBy?: MentorSessionNoteOrderByWithAggregationInput | MentorSessionNoteOrderByWithAggregationInput[]
+    by: MentorSessionNoteScalarFieldEnum[] | MentorSessionNoteScalarFieldEnum
+    having?: MentorSessionNoteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MentorSessionNoteCountAggregateInputType | true
+    _avg?: MentorSessionNoteAvgAggregateInputType
+    _sum?: MentorSessionNoteSumAggregateInputType
+    _min?: MentorSessionNoteMinAggregateInputType
+    _max?: MentorSessionNoteMaxAggregateInputType
+  }
+
+  export type MentorSessionNoteGroupByOutputType = {
+    id: string
+    userId: string
+    callNumber: number
+    notes: string
+    mentorId: string | null
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    _count: MentorSessionNoteCountAggregateOutputType | null
+    _avg: MentorSessionNoteAvgAggregateOutputType | null
+    _sum: MentorSessionNoteSumAggregateOutputType | null
+    _min: MentorSessionNoteMinAggregateOutputType | null
+    _max: MentorSessionNoteMaxAggregateOutputType | null
+  }
+
+  type GetMentorSessionNoteGroupByPayload<T extends MentorSessionNoteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MentorSessionNoteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MentorSessionNoteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MentorSessionNoteGroupByOutputType[P]>
+            : GetScalarType<T[P], MentorSessionNoteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MentorSessionNoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    callNumber?: boolean
+    notes?: boolean
+    mentorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }, ExtArgs["result"]["mentorSessionNote"]>
+
+  export type MentorSessionNoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    callNumber?: boolean
+    notes?: boolean
+    mentorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }, ExtArgs["result"]["mentorSessionNote"]>
+
+  export type MentorSessionNoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    callNumber?: boolean
+    notes?: boolean
+    mentorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }, ExtArgs["result"]["mentorSessionNote"]>
+
+  export type MentorSessionNoteSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    callNumber?: boolean
+    notes?: boolean
+    mentorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }
+
+  export type MentorSessionNoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "callNumber" | "notes" | "mentorId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["mentorSessionNote"]>
+
+  export type $MentorSessionNotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MentorSessionNote"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      callNumber: number
+      notes: string
+      mentorId: string | null
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+    }, ExtArgs["result"]["mentorSessionNote"]>
+    composites: {}
+  }
+
+  type MentorSessionNoteGetPayload<S extends boolean | null | undefined | MentorSessionNoteDefaultArgs> = $Result.GetResult<Prisma.$MentorSessionNotePayload, S>
+
+  type MentorSessionNoteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MentorSessionNoteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MentorSessionNoteCountAggregateInputType | true
+    }
+
+  export interface MentorSessionNoteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MentorSessionNote'], meta: { name: 'MentorSessionNote' } }
+    /**
+     * Find zero or one MentorSessionNote that matches the filter.
+     * @param {MentorSessionNoteFindUniqueArgs} args - Arguments to find a MentorSessionNote
+     * @example
+     * // Get one MentorSessionNote
+     * const mentorSessionNote = await prisma.mentorSessionNote.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MentorSessionNoteFindUniqueArgs>(args: SelectSubset<T, MentorSessionNoteFindUniqueArgs<ExtArgs>>): Prisma__MentorSessionNoteClient<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MentorSessionNote that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MentorSessionNoteFindUniqueOrThrowArgs} args - Arguments to find a MentorSessionNote
+     * @example
+     * // Get one MentorSessionNote
+     * const mentorSessionNote = await prisma.mentorSessionNote.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MentorSessionNoteFindUniqueOrThrowArgs>(args: SelectSubset<T, MentorSessionNoteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MentorSessionNoteClient<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MentorSessionNote that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorSessionNoteFindFirstArgs} args - Arguments to find a MentorSessionNote
+     * @example
+     * // Get one MentorSessionNote
+     * const mentorSessionNote = await prisma.mentorSessionNote.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MentorSessionNoteFindFirstArgs>(args?: SelectSubset<T, MentorSessionNoteFindFirstArgs<ExtArgs>>): Prisma__MentorSessionNoteClient<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MentorSessionNote that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorSessionNoteFindFirstOrThrowArgs} args - Arguments to find a MentorSessionNote
+     * @example
+     * // Get one MentorSessionNote
+     * const mentorSessionNote = await prisma.mentorSessionNote.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MentorSessionNoteFindFirstOrThrowArgs>(args?: SelectSubset<T, MentorSessionNoteFindFirstOrThrowArgs<ExtArgs>>): Prisma__MentorSessionNoteClient<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MentorSessionNotes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorSessionNoteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MentorSessionNotes
+     * const mentorSessionNotes = await prisma.mentorSessionNote.findMany()
+     * 
+     * // Get first 10 MentorSessionNotes
+     * const mentorSessionNotes = await prisma.mentorSessionNote.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mentorSessionNoteWithIdOnly = await prisma.mentorSessionNote.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MentorSessionNoteFindManyArgs>(args?: SelectSubset<T, MentorSessionNoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MentorSessionNote.
+     * @param {MentorSessionNoteCreateArgs} args - Arguments to create a MentorSessionNote.
+     * @example
+     * // Create one MentorSessionNote
+     * const MentorSessionNote = await prisma.mentorSessionNote.create({
+     *   data: {
+     *     // ... data to create a MentorSessionNote
+     *   }
+     * })
+     * 
+     */
+    create<T extends MentorSessionNoteCreateArgs>(args: SelectSubset<T, MentorSessionNoteCreateArgs<ExtArgs>>): Prisma__MentorSessionNoteClient<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MentorSessionNotes.
+     * @param {MentorSessionNoteCreateManyArgs} args - Arguments to create many MentorSessionNotes.
+     * @example
+     * // Create many MentorSessionNotes
+     * const mentorSessionNote = await prisma.mentorSessionNote.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MentorSessionNoteCreateManyArgs>(args?: SelectSubset<T, MentorSessionNoteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MentorSessionNotes and returns the data saved in the database.
+     * @param {MentorSessionNoteCreateManyAndReturnArgs} args - Arguments to create many MentorSessionNotes.
+     * @example
+     * // Create many MentorSessionNotes
+     * const mentorSessionNote = await prisma.mentorSessionNote.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MentorSessionNotes and only return the `id`
+     * const mentorSessionNoteWithIdOnly = await prisma.mentorSessionNote.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MentorSessionNoteCreateManyAndReturnArgs>(args?: SelectSubset<T, MentorSessionNoteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MentorSessionNote.
+     * @param {MentorSessionNoteDeleteArgs} args - Arguments to delete one MentorSessionNote.
+     * @example
+     * // Delete one MentorSessionNote
+     * const MentorSessionNote = await prisma.mentorSessionNote.delete({
+     *   where: {
+     *     // ... filter to delete one MentorSessionNote
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MentorSessionNoteDeleteArgs>(args: SelectSubset<T, MentorSessionNoteDeleteArgs<ExtArgs>>): Prisma__MentorSessionNoteClient<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MentorSessionNote.
+     * @param {MentorSessionNoteUpdateArgs} args - Arguments to update one MentorSessionNote.
+     * @example
+     * // Update one MentorSessionNote
+     * const mentorSessionNote = await prisma.mentorSessionNote.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MentorSessionNoteUpdateArgs>(args: SelectSubset<T, MentorSessionNoteUpdateArgs<ExtArgs>>): Prisma__MentorSessionNoteClient<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MentorSessionNotes.
+     * @param {MentorSessionNoteDeleteManyArgs} args - Arguments to filter MentorSessionNotes to delete.
+     * @example
+     * // Delete a few MentorSessionNotes
+     * const { count } = await prisma.mentorSessionNote.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MentorSessionNoteDeleteManyArgs>(args?: SelectSubset<T, MentorSessionNoteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MentorSessionNotes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorSessionNoteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MentorSessionNotes
+     * const mentorSessionNote = await prisma.mentorSessionNote.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MentorSessionNoteUpdateManyArgs>(args: SelectSubset<T, MentorSessionNoteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MentorSessionNotes and returns the data updated in the database.
+     * @param {MentorSessionNoteUpdateManyAndReturnArgs} args - Arguments to update many MentorSessionNotes.
+     * @example
+     * // Update many MentorSessionNotes
+     * const mentorSessionNote = await prisma.mentorSessionNote.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MentorSessionNotes and only return the `id`
+     * const mentorSessionNoteWithIdOnly = await prisma.mentorSessionNote.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MentorSessionNoteUpdateManyAndReturnArgs>(args: SelectSubset<T, MentorSessionNoteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MentorSessionNote.
+     * @param {MentorSessionNoteUpsertArgs} args - Arguments to update or create a MentorSessionNote.
+     * @example
+     * // Update or create a MentorSessionNote
+     * const mentorSessionNote = await prisma.mentorSessionNote.upsert({
+     *   create: {
+     *     // ... data to create a MentorSessionNote
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MentorSessionNote we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MentorSessionNoteUpsertArgs>(args: SelectSubset<T, MentorSessionNoteUpsertArgs<ExtArgs>>): Prisma__MentorSessionNoteClient<$Result.GetResult<Prisma.$MentorSessionNotePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MentorSessionNotes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorSessionNoteCountArgs} args - Arguments to filter MentorSessionNotes to count.
+     * @example
+     * // Count the number of MentorSessionNotes
+     * const count = await prisma.mentorSessionNote.count({
+     *   where: {
+     *     // ... the filter for the MentorSessionNotes we want to count
+     *   }
+     * })
+    **/
+    count<T extends MentorSessionNoteCountArgs>(
+      args?: Subset<T, MentorSessionNoteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MentorSessionNoteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MentorSessionNote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorSessionNoteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MentorSessionNoteAggregateArgs>(args: Subset<T, MentorSessionNoteAggregateArgs>): Prisma.PrismaPromise<GetMentorSessionNoteAggregateType<T>>
+
+    /**
+     * Group by MentorSessionNote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MentorSessionNoteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MentorSessionNoteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MentorSessionNoteGroupByArgs['orderBy'] }
+        : { orderBy?: MentorSessionNoteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MentorSessionNoteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMentorSessionNoteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MentorSessionNote model
+   */
+  readonly fields: MentorSessionNoteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MentorSessionNote.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MentorSessionNoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MentorSessionNote model
+   */
+  interface MentorSessionNoteFieldRefs {
+    readonly id: FieldRef<"MentorSessionNote", 'String'>
+    readonly userId: FieldRef<"MentorSessionNote", 'String'>
+    readonly callNumber: FieldRef<"MentorSessionNote", 'Int'>
+    readonly notes: FieldRef<"MentorSessionNote", 'String'>
+    readonly mentorId: FieldRef<"MentorSessionNote", 'String'>
+    readonly createdAt: FieldRef<"MentorSessionNote", 'DateTime'>
+    readonly updatedAt: FieldRef<"MentorSessionNote", 'DateTime'>
+    readonly deletedAt: FieldRef<"MentorSessionNote", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MentorSessionNote findUnique
+   */
+  export type MentorSessionNoteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * Filter, which MentorSessionNote to fetch.
+     */
+    where: MentorSessionNoteWhereUniqueInput
+  }
+
+  /**
+   * MentorSessionNote findUniqueOrThrow
+   */
+  export type MentorSessionNoteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * Filter, which MentorSessionNote to fetch.
+     */
+    where: MentorSessionNoteWhereUniqueInput
+  }
+
+  /**
+   * MentorSessionNote findFirst
+   */
+  export type MentorSessionNoteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * Filter, which MentorSessionNote to fetch.
+     */
+    where?: MentorSessionNoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MentorSessionNotes to fetch.
+     */
+    orderBy?: MentorSessionNoteOrderByWithRelationInput | MentorSessionNoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MentorSessionNotes.
+     */
+    cursor?: MentorSessionNoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MentorSessionNotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MentorSessionNotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MentorSessionNotes.
+     */
+    distinct?: MentorSessionNoteScalarFieldEnum | MentorSessionNoteScalarFieldEnum[]
+  }
+
+  /**
+   * MentorSessionNote findFirstOrThrow
+   */
+  export type MentorSessionNoteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * Filter, which MentorSessionNote to fetch.
+     */
+    where?: MentorSessionNoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MentorSessionNotes to fetch.
+     */
+    orderBy?: MentorSessionNoteOrderByWithRelationInput | MentorSessionNoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MentorSessionNotes.
+     */
+    cursor?: MentorSessionNoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MentorSessionNotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MentorSessionNotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MentorSessionNotes.
+     */
+    distinct?: MentorSessionNoteScalarFieldEnum | MentorSessionNoteScalarFieldEnum[]
+  }
+
+  /**
+   * MentorSessionNote findMany
+   */
+  export type MentorSessionNoteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * Filter, which MentorSessionNotes to fetch.
+     */
+    where?: MentorSessionNoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MentorSessionNotes to fetch.
+     */
+    orderBy?: MentorSessionNoteOrderByWithRelationInput | MentorSessionNoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MentorSessionNotes.
+     */
+    cursor?: MentorSessionNoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MentorSessionNotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MentorSessionNotes.
+     */
+    skip?: number
+    distinct?: MentorSessionNoteScalarFieldEnum | MentorSessionNoteScalarFieldEnum[]
+  }
+
+  /**
+   * MentorSessionNote create
+   */
+  export type MentorSessionNoteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * The data needed to create a MentorSessionNote.
+     */
+    data: XOR<MentorSessionNoteCreateInput, MentorSessionNoteUncheckedCreateInput>
+  }
+
+  /**
+   * MentorSessionNote createMany
+   */
+  export type MentorSessionNoteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MentorSessionNotes.
+     */
+    data: MentorSessionNoteCreateManyInput | MentorSessionNoteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MentorSessionNote createManyAndReturn
+   */
+  export type MentorSessionNoteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * The data used to create many MentorSessionNotes.
+     */
+    data: MentorSessionNoteCreateManyInput | MentorSessionNoteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MentorSessionNote update
+   */
+  export type MentorSessionNoteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * The data needed to update a MentorSessionNote.
+     */
+    data: XOR<MentorSessionNoteUpdateInput, MentorSessionNoteUncheckedUpdateInput>
+    /**
+     * Choose, which MentorSessionNote to update.
+     */
+    where: MentorSessionNoteWhereUniqueInput
+  }
+
+  /**
+   * MentorSessionNote updateMany
+   */
+  export type MentorSessionNoteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MentorSessionNotes.
+     */
+    data: XOR<MentorSessionNoteUpdateManyMutationInput, MentorSessionNoteUncheckedUpdateManyInput>
+    /**
+     * Filter which MentorSessionNotes to update
+     */
+    where?: MentorSessionNoteWhereInput
+    /**
+     * Limit how many MentorSessionNotes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MentorSessionNote updateManyAndReturn
+   */
+  export type MentorSessionNoteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * The data used to update MentorSessionNotes.
+     */
+    data: XOR<MentorSessionNoteUpdateManyMutationInput, MentorSessionNoteUncheckedUpdateManyInput>
+    /**
+     * Filter which MentorSessionNotes to update
+     */
+    where?: MentorSessionNoteWhereInput
+    /**
+     * Limit how many MentorSessionNotes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MentorSessionNote upsert
+   */
+  export type MentorSessionNoteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * The filter to search for the MentorSessionNote to update in case it exists.
+     */
+    where: MentorSessionNoteWhereUniqueInput
+    /**
+     * In case the MentorSessionNote found by the `where` argument doesn't exist, create a new MentorSessionNote with this data.
+     */
+    create: XOR<MentorSessionNoteCreateInput, MentorSessionNoteUncheckedCreateInput>
+    /**
+     * In case the MentorSessionNote was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MentorSessionNoteUpdateInput, MentorSessionNoteUncheckedUpdateInput>
+  }
+
+  /**
+   * MentorSessionNote delete
+   */
+  export type MentorSessionNoteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+    /**
+     * Filter which MentorSessionNote to delete.
+     */
+    where: MentorSessionNoteWhereUniqueInput
+  }
+
+  /**
+   * MentorSessionNote deleteMany
+   */
+  export type MentorSessionNoteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MentorSessionNotes to delete
+     */
+    where?: MentorSessionNoteWhereInput
+    /**
+     * Limit how many MentorSessionNotes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MentorSessionNote without action
+   */
+  export type MentorSessionNoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MentorSessionNote
+     */
+    select?: MentorSessionNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MentorSessionNote
+     */
+    omit?: MentorSessionNoteOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserStatus
+   */
+
+  export type AggregateUserStatus = {
+    _count: UserStatusCountAggregateOutputType | null
+    _min: UserStatusMinAggregateOutputType | null
+    _max: UserStatusMaxAggregateOutputType | null
+  }
+
+  export type UserStatusMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    orientation: boolean | null
+    resumeRebuilding: boolean | null
+    eligibleForFirstMentorCall: boolean | null
+    resumeConfirmed: boolean | null
+    portfolioBuildingAndConfirmed: boolean | null
+    eligibleForSecondMentorCall: boolean | null
+    paymentMade: boolean | null
+    techDistributionAndExtension: boolean | null
+    eligibleForThirdMentorCall: boolean | null
+    cheatSheetBuiltOut: boolean | null
+    hasAppliedEnoughJobs: boolean | null
+    eligibleForFourthMentorCall: boolean | null
+    eligibleForFifthMentorCall: boolean | null
+    fourthMentorCallCompletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+    fifthMentorCallCompletedAt: Date | null
+    firstMentorCallCompletedAt: Date | null
+    secondMentorCallCompletedAt: Date | null
+    thirdMentorCallCompletedAt: Date | null
+    fifthMentorCallGoogleMeetLink: string | null
+    fifthMentorCallScheduledAt: Date | null
+    finalReview: boolean | null
+    firstMentorCallGoogleMeetLink: string | null
+    firstMentorCallScheduledAt: Date | null
+    fourthMentorCallGoogleMeetLink: string | null
+    fourthMentorCallScheduledAt: Date | null
+    secondMentorCallGoogleMeetLink: string | null
+    secondMentorCallScheduledAt: Date | null
+    thirdMentorCallGoogleMeetLink: string | null
+    thirdMentorCallScheduledAt: Date | null
+  }
+
+  export type UserStatusMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    orientation: boolean | null
+    resumeRebuilding: boolean | null
+    eligibleForFirstMentorCall: boolean | null
+    resumeConfirmed: boolean | null
+    portfolioBuildingAndConfirmed: boolean | null
+    eligibleForSecondMentorCall: boolean | null
+    paymentMade: boolean | null
+    techDistributionAndExtension: boolean | null
+    eligibleForThirdMentorCall: boolean | null
+    cheatSheetBuiltOut: boolean | null
+    hasAppliedEnoughJobs: boolean | null
+    eligibleForFourthMentorCall: boolean | null
+    eligibleForFifthMentorCall: boolean | null
+    fourthMentorCallCompletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+    fifthMentorCallCompletedAt: Date | null
+    firstMentorCallCompletedAt: Date | null
+    secondMentorCallCompletedAt: Date | null
+    thirdMentorCallCompletedAt: Date | null
+    fifthMentorCallGoogleMeetLink: string | null
+    fifthMentorCallScheduledAt: Date | null
+    finalReview: boolean | null
+    firstMentorCallGoogleMeetLink: string | null
+    firstMentorCallScheduledAt: Date | null
+    fourthMentorCallGoogleMeetLink: string | null
+    fourthMentorCallScheduledAt: Date | null
+    secondMentorCallGoogleMeetLink: string | null
+    secondMentorCallScheduledAt: Date | null
+    thirdMentorCallGoogleMeetLink: string | null
+    thirdMentorCallScheduledAt: Date | null
+  }
+
+  export type UserStatusCountAggregateOutputType = {
+    id: number
+    userId: number
+    orientation: number
+    resumeRebuilding: number
+    eligibleForFirstMentorCall: number
+    resumeConfirmed: number
+    portfolioBuildingAndConfirmed: number
+    eligibleForSecondMentorCall: number
+    paymentMade: number
+    techDistributionAndExtension: number
+    eligibleForThirdMentorCall: number
+    cheatSheetBuiltOut: number
+    hasAppliedEnoughJobs: number
+    eligibleForFourthMentorCall: number
+    eligibleForFifthMentorCall: number
+    fourthMentorCallCompletedAt: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    fifthMentorCallCompletedAt: number
+    firstMentorCallCompletedAt: number
+    secondMentorCallCompletedAt: number
+    thirdMentorCallCompletedAt: number
+    fifthMentorCallGoogleMeetLink: number
+    fifthMentorCallScheduledAt: number
+    finalReview: number
+    firstMentorCallGoogleMeetLink: number
+    firstMentorCallScheduledAt: number
+    fourthMentorCallGoogleMeetLink: number
+    fourthMentorCallScheduledAt: number
+    secondMentorCallGoogleMeetLink: number
+    secondMentorCallScheduledAt: number
+    thirdMentorCallGoogleMeetLink: number
+    thirdMentorCallScheduledAt: number
+    _all: number
+  }
+
+
+  export type UserStatusMinAggregateInputType = {
+    id?: true
+    userId?: true
+    orientation?: true
+    resumeRebuilding?: true
+    eligibleForFirstMentorCall?: true
+    resumeConfirmed?: true
+    portfolioBuildingAndConfirmed?: true
+    eligibleForSecondMentorCall?: true
+    paymentMade?: true
+    techDistributionAndExtension?: true
+    eligibleForThirdMentorCall?: true
+    cheatSheetBuiltOut?: true
+    hasAppliedEnoughJobs?: true
+    eligibleForFourthMentorCall?: true
+    eligibleForFifthMentorCall?: true
+    fourthMentorCallCompletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    fifthMentorCallCompletedAt?: true
+    firstMentorCallCompletedAt?: true
+    secondMentorCallCompletedAt?: true
+    thirdMentorCallCompletedAt?: true
+    fifthMentorCallGoogleMeetLink?: true
+    fifthMentorCallScheduledAt?: true
+    finalReview?: true
+    firstMentorCallGoogleMeetLink?: true
+    firstMentorCallScheduledAt?: true
+    fourthMentorCallGoogleMeetLink?: true
+    fourthMentorCallScheduledAt?: true
+    secondMentorCallGoogleMeetLink?: true
+    secondMentorCallScheduledAt?: true
+    thirdMentorCallGoogleMeetLink?: true
+    thirdMentorCallScheduledAt?: true
+  }
+
+  export type UserStatusMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    orientation?: true
+    resumeRebuilding?: true
+    eligibleForFirstMentorCall?: true
+    resumeConfirmed?: true
+    portfolioBuildingAndConfirmed?: true
+    eligibleForSecondMentorCall?: true
+    paymentMade?: true
+    techDistributionAndExtension?: true
+    eligibleForThirdMentorCall?: true
+    cheatSheetBuiltOut?: true
+    hasAppliedEnoughJobs?: true
+    eligibleForFourthMentorCall?: true
+    eligibleForFifthMentorCall?: true
+    fourthMentorCallCompletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    fifthMentorCallCompletedAt?: true
+    firstMentorCallCompletedAt?: true
+    secondMentorCallCompletedAt?: true
+    thirdMentorCallCompletedAt?: true
+    fifthMentorCallGoogleMeetLink?: true
+    fifthMentorCallScheduledAt?: true
+    finalReview?: true
+    firstMentorCallGoogleMeetLink?: true
+    firstMentorCallScheduledAt?: true
+    fourthMentorCallGoogleMeetLink?: true
+    fourthMentorCallScheduledAt?: true
+    secondMentorCallGoogleMeetLink?: true
+    secondMentorCallScheduledAt?: true
+    thirdMentorCallGoogleMeetLink?: true
+    thirdMentorCallScheduledAt?: true
+  }
+
+  export type UserStatusCountAggregateInputType = {
+    id?: true
+    userId?: true
+    orientation?: true
+    resumeRebuilding?: true
+    eligibleForFirstMentorCall?: true
+    resumeConfirmed?: true
+    portfolioBuildingAndConfirmed?: true
+    eligibleForSecondMentorCall?: true
+    paymentMade?: true
+    techDistributionAndExtension?: true
+    eligibleForThirdMentorCall?: true
+    cheatSheetBuiltOut?: true
+    hasAppliedEnoughJobs?: true
+    eligibleForFourthMentorCall?: true
+    eligibleForFifthMentorCall?: true
+    fourthMentorCallCompletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    fifthMentorCallCompletedAt?: true
+    firstMentorCallCompletedAt?: true
+    secondMentorCallCompletedAt?: true
+    thirdMentorCallCompletedAt?: true
+    fifthMentorCallGoogleMeetLink?: true
+    fifthMentorCallScheduledAt?: true
+    finalReview?: true
+    firstMentorCallGoogleMeetLink?: true
+    firstMentorCallScheduledAt?: true
+    fourthMentorCallGoogleMeetLink?: true
+    fourthMentorCallScheduledAt?: true
+    secondMentorCallGoogleMeetLink?: true
+    secondMentorCallScheduledAt?: true
+    thirdMentorCallGoogleMeetLink?: true
+    thirdMentorCallScheduledAt?: true
+    _all?: true
+  }
+
+  export type UserStatusAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserStatus to aggregate.
+     */
+    where?: UserStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStatuses to fetch.
+     */
+    orderBy?: UserStatusOrderByWithRelationInput | UserStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserStatuses
+    **/
+    _count?: true | UserStatusCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserStatusMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserStatusMaxAggregateInputType
+  }
+
+  export type GetUserStatusAggregateType<T extends UserStatusAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserStatus]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserStatus[P]>
+      : GetScalarType<T[P], AggregateUserStatus[P]>
+  }
+
+
+
+
+  export type UserStatusGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserStatusWhereInput
+    orderBy?: UserStatusOrderByWithAggregationInput | UserStatusOrderByWithAggregationInput[]
+    by: UserStatusScalarFieldEnum[] | UserStatusScalarFieldEnum
+    having?: UserStatusScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserStatusCountAggregateInputType | true
+    _min?: UserStatusMinAggregateInputType
+    _max?: UserStatusMaxAggregateInputType
+  }
+
+  export type UserStatusGroupByOutputType = {
+    id: string
+    userId: string
+    orientation: boolean
+    resumeRebuilding: boolean
+    eligibleForFirstMentorCall: boolean
+    resumeConfirmed: boolean
+    portfolioBuildingAndConfirmed: boolean
+    eligibleForSecondMentorCall: boolean
+    paymentMade: boolean
+    techDistributionAndExtension: boolean
+    eligibleForThirdMentorCall: boolean
+    cheatSheetBuiltOut: boolean
+    hasAppliedEnoughJobs: boolean
+    eligibleForFourthMentorCall: boolean
+    eligibleForFifthMentorCall: boolean
+    fourthMentorCallCompletedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    fifthMentorCallCompletedAt: Date | null
+    firstMentorCallCompletedAt: Date | null
+    secondMentorCallCompletedAt: Date | null
+    thirdMentorCallCompletedAt: Date | null
+    fifthMentorCallGoogleMeetLink: string | null
+    fifthMentorCallScheduledAt: Date | null
+    finalReview: boolean
+    firstMentorCallGoogleMeetLink: string | null
+    firstMentorCallScheduledAt: Date | null
+    fourthMentorCallGoogleMeetLink: string | null
+    fourthMentorCallScheduledAt: Date | null
+    secondMentorCallGoogleMeetLink: string | null
+    secondMentorCallScheduledAt: Date | null
+    thirdMentorCallGoogleMeetLink: string | null
+    thirdMentorCallScheduledAt: Date | null
+    _count: UserStatusCountAggregateOutputType | null
+    _min: UserStatusMinAggregateOutputType | null
+    _max: UserStatusMaxAggregateOutputType | null
+  }
+
+  type GetUserStatusGroupByPayload<T extends UserStatusGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserStatusGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserStatusGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserStatusGroupByOutputType[P]>
+            : GetScalarType<T[P], UserStatusGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserStatusSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    orientation?: boolean
+    resumeRebuilding?: boolean
+    eligibleForFirstMentorCall?: boolean
+    resumeConfirmed?: boolean
+    portfolioBuildingAndConfirmed?: boolean
+    eligibleForSecondMentorCall?: boolean
+    paymentMade?: boolean
+    techDistributionAndExtension?: boolean
+    eligibleForThirdMentorCall?: boolean
+    cheatSheetBuiltOut?: boolean
+    hasAppliedEnoughJobs?: boolean
+    eligibleForFourthMentorCall?: boolean
+    eligibleForFifthMentorCall?: boolean
+    fourthMentorCallCompletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    fifthMentorCallCompletedAt?: boolean
+    firstMentorCallCompletedAt?: boolean
+    secondMentorCallCompletedAt?: boolean
+    thirdMentorCallCompletedAt?: boolean
+    fifthMentorCallGoogleMeetLink?: boolean
+    fifthMentorCallScheduledAt?: boolean
+    finalReview?: boolean
+    firstMentorCallGoogleMeetLink?: boolean
+    firstMentorCallScheduledAt?: boolean
+    fourthMentorCallGoogleMeetLink?: boolean
+    fourthMentorCallScheduledAt?: boolean
+    secondMentorCallGoogleMeetLink?: boolean
+    secondMentorCallScheduledAt?: boolean
+    thirdMentorCallGoogleMeetLink?: boolean
+    thirdMentorCallScheduledAt?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userStatus"]>
+
+  export type UserStatusSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    orientation?: boolean
+    resumeRebuilding?: boolean
+    eligibleForFirstMentorCall?: boolean
+    resumeConfirmed?: boolean
+    portfolioBuildingAndConfirmed?: boolean
+    eligibleForSecondMentorCall?: boolean
+    paymentMade?: boolean
+    techDistributionAndExtension?: boolean
+    eligibleForThirdMentorCall?: boolean
+    cheatSheetBuiltOut?: boolean
+    hasAppliedEnoughJobs?: boolean
+    eligibleForFourthMentorCall?: boolean
+    eligibleForFifthMentorCall?: boolean
+    fourthMentorCallCompletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    fifthMentorCallCompletedAt?: boolean
+    firstMentorCallCompletedAt?: boolean
+    secondMentorCallCompletedAt?: boolean
+    thirdMentorCallCompletedAt?: boolean
+    fifthMentorCallGoogleMeetLink?: boolean
+    fifthMentorCallScheduledAt?: boolean
+    finalReview?: boolean
+    firstMentorCallGoogleMeetLink?: boolean
+    firstMentorCallScheduledAt?: boolean
+    fourthMentorCallGoogleMeetLink?: boolean
+    fourthMentorCallScheduledAt?: boolean
+    secondMentorCallGoogleMeetLink?: boolean
+    secondMentorCallScheduledAt?: boolean
+    thirdMentorCallGoogleMeetLink?: boolean
+    thirdMentorCallScheduledAt?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userStatus"]>
+
+  export type UserStatusSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    orientation?: boolean
+    resumeRebuilding?: boolean
+    eligibleForFirstMentorCall?: boolean
+    resumeConfirmed?: boolean
+    portfolioBuildingAndConfirmed?: boolean
+    eligibleForSecondMentorCall?: boolean
+    paymentMade?: boolean
+    techDistributionAndExtension?: boolean
+    eligibleForThirdMentorCall?: boolean
+    cheatSheetBuiltOut?: boolean
+    hasAppliedEnoughJobs?: boolean
+    eligibleForFourthMentorCall?: boolean
+    eligibleForFifthMentorCall?: boolean
+    fourthMentorCallCompletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    fifthMentorCallCompletedAt?: boolean
+    firstMentorCallCompletedAt?: boolean
+    secondMentorCallCompletedAt?: boolean
+    thirdMentorCallCompletedAt?: boolean
+    fifthMentorCallGoogleMeetLink?: boolean
+    fifthMentorCallScheduledAt?: boolean
+    finalReview?: boolean
+    firstMentorCallGoogleMeetLink?: boolean
+    firstMentorCallScheduledAt?: boolean
+    fourthMentorCallGoogleMeetLink?: boolean
+    fourthMentorCallScheduledAt?: boolean
+    secondMentorCallGoogleMeetLink?: boolean
+    secondMentorCallScheduledAt?: boolean
+    thirdMentorCallGoogleMeetLink?: boolean
+    thirdMentorCallScheduledAt?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userStatus"]>
+
+  export type UserStatusSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    orientation?: boolean
+    resumeRebuilding?: boolean
+    eligibleForFirstMentorCall?: boolean
+    resumeConfirmed?: boolean
+    portfolioBuildingAndConfirmed?: boolean
+    eligibleForSecondMentorCall?: boolean
+    paymentMade?: boolean
+    techDistributionAndExtension?: boolean
+    eligibleForThirdMentorCall?: boolean
+    cheatSheetBuiltOut?: boolean
+    hasAppliedEnoughJobs?: boolean
+    eligibleForFourthMentorCall?: boolean
+    eligibleForFifthMentorCall?: boolean
+    fourthMentorCallCompletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    fifthMentorCallCompletedAt?: boolean
+    firstMentorCallCompletedAt?: boolean
+    secondMentorCallCompletedAt?: boolean
+    thirdMentorCallCompletedAt?: boolean
+    fifthMentorCallGoogleMeetLink?: boolean
+    fifthMentorCallScheduledAt?: boolean
+    finalReview?: boolean
+    firstMentorCallGoogleMeetLink?: boolean
+    firstMentorCallScheduledAt?: boolean
+    fourthMentorCallGoogleMeetLink?: boolean
+    fourthMentorCallScheduledAt?: boolean
+    secondMentorCallGoogleMeetLink?: boolean
+    secondMentorCallScheduledAt?: boolean
+    thirdMentorCallGoogleMeetLink?: boolean
+    thirdMentorCallScheduledAt?: boolean
+  }
+
+  export type UserStatusOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "orientation" | "resumeRebuilding" | "eligibleForFirstMentorCall" | "resumeConfirmed" | "portfolioBuildingAndConfirmed" | "eligibleForSecondMentorCall" | "paymentMade" | "techDistributionAndExtension" | "eligibleForThirdMentorCall" | "cheatSheetBuiltOut" | "hasAppliedEnoughJobs" | "eligibleForFourthMentorCall" | "eligibleForFifthMentorCall" | "fourthMentorCallCompletedAt" | "createdAt" | "updatedAt" | "deletedAt" | "fifthMentorCallCompletedAt" | "firstMentorCallCompletedAt" | "secondMentorCallCompletedAt" | "thirdMentorCallCompletedAt" | "fifthMentorCallGoogleMeetLink" | "fifthMentorCallScheduledAt" | "finalReview" | "firstMentorCallGoogleMeetLink" | "firstMentorCallScheduledAt" | "fourthMentorCallGoogleMeetLink" | "fourthMentorCallScheduledAt" | "secondMentorCallGoogleMeetLink" | "secondMentorCallScheduledAt" | "thirdMentorCallGoogleMeetLink" | "thirdMentorCallScheduledAt", ExtArgs["result"]["userStatus"]>
+  export type UserStatusInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserStatusIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserStatusIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserStatusPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserStatus"
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      orientation: boolean
+      resumeRebuilding: boolean
+      eligibleForFirstMentorCall: boolean
+      resumeConfirmed: boolean
+      portfolioBuildingAndConfirmed: boolean
+      eligibleForSecondMentorCall: boolean
+      paymentMade: boolean
+      techDistributionAndExtension: boolean
+      eligibleForThirdMentorCall: boolean
+      cheatSheetBuiltOut: boolean
+      hasAppliedEnoughJobs: boolean
+      eligibleForFourthMentorCall: boolean
+      eligibleForFifthMentorCall: boolean
+      fourthMentorCallCompletedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+      fifthMentorCallCompletedAt: Date | null
+      firstMentorCallCompletedAt: Date | null
+      secondMentorCallCompletedAt: Date | null
+      thirdMentorCallCompletedAt: Date | null
+      fifthMentorCallGoogleMeetLink: string | null
+      fifthMentorCallScheduledAt: Date | null
+      finalReview: boolean
+      firstMentorCallGoogleMeetLink: string | null
+      firstMentorCallScheduledAt: Date | null
+      fourthMentorCallGoogleMeetLink: string | null
+      fourthMentorCallScheduledAt: Date | null
+      secondMentorCallGoogleMeetLink: string | null
+      secondMentorCallScheduledAt: Date | null
+      thirdMentorCallGoogleMeetLink: string | null
+      thirdMentorCallScheduledAt: Date | null
+    }, ExtArgs["result"]["userStatus"]>
+    composites: {}
+  }
+
+  type UserStatusGetPayload<S extends boolean | null | undefined | UserStatusDefaultArgs> = $Result.GetResult<Prisma.$UserStatusPayload, S>
+
+  type UserStatusCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserStatusFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserStatusCountAggregateInputType | true
+    }
+
+  export interface UserStatusDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserStatus'], meta: { name: 'UserStatus' } }
+    /**
+     * Find zero or one UserStatus that matches the filter.
+     * @param {UserStatusFindUniqueArgs} args - Arguments to find a UserStatus
+     * @example
+     * // Get one UserStatus
+     * const userStatus = await prisma.userStatus.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserStatusFindUniqueArgs>(args: SelectSubset<T, UserStatusFindUniqueArgs<ExtArgs>>): Prisma__UserStatusClient<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserStatus that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserStatusFindUniqueOrThrowArgs} args - Arguments to find a UserStatus
+     * @example
+     * // Get one UserStatus
+     * const userStatus = await prisma.userStatus.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserStatusFindUniqueOrThrowArgs>(args: SelectSubset<T, UserStatusFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserStatusClient<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserStatus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatusFindFirstArgs} args - Arguments to find a UserStatus
+     * @example
+     * // Get one UserStatus
+     * const userStatus = await prisma.userStatus.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserStatusFindFirstArgs>(args?: SelectSubset<T, UserStatusFindFirstArgs<ExtArgs>>): Prisma__UserStatusClient<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserStatus that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatusFindFirstOrThrowArgs} args - Arguments to find a UserStatus
+     * @example
+     * // Get one UserStatus
+     * const userStatus = await prisma.userStatus.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserStatusFindFirstOrThrowArgs>(args?: SelectSubset<T, UserStatusFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserStatusClient<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserStatuses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatusFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserStatuses
+     * const userStatuses = await prisma.userStatus.findMany()
+     * 
+     * // Get first 10 UserStatuses
+     * const userStatuses = await prisma.userStatus.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userStatusWithIdOnly = await prisma.userStatus.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserStatusFindManyArgs>(args?: SelectSubset<T, UserStatusFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserStatus.
+     * @param {UserStatusCreateArgs} args - Arguments to create a UserStatus.
+     * @example
+     * // Create one UserStatus
+     * const UserStatus = await prisma.userStatus.create({
+     *   data: {
+     *     // ... data to create a UserStatus
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserStatusCreateArgs>(args: SelectSubset<T, UserStatusCreateArgs<ExtArgs>>): Prisma__UserStatusClient<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserStatuses.
+     * @param {UserStatusCreateManyArgs} args - Arguments to create many UserStatuses.
+     * @example
+     * // Create many UserStatuses
+     * const userStatus = await prisma.userStatus.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserStatusCreateManyArgs>(args?: SelectSubset<T, UserStatusCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserStatuses and returns the data saved in the database.
+     * @param {UserStatusCreateManyAndReturnArgs} args - Arguments to create many UserStatuses.
+     * @example
+     * // Create many UserStatuses
+     * const userStatus = await prisma.userStatus.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserStatuses and only return the `id`
+     * const userStatusWithIdOnly = await prisma.userStatus.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserStatusCreateManyAndReturnArgs>(args?: SelectSubset<T, UserStatusCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserStatus.
+     * @param {UserStatusDeleteArgs} args - Arguments to delete one UserStatus.
+     * @example
+     * // Delete one UserStatus
+     * const UserStatus = await prisma.userStatus.delete({
+     *   where: {
+     *     // ... filter to delete one UserStatus
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserStatusDeleteArgs>(args: SelectSubset<T, UserStatusDeleteArgs<ExtArgs>>): Prisma__UserStatusClient<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserStatus.
+     * @param {UserStatusUpdateArgs} args - Arguments to update one UserStatus.
+     * @example
+     * // Update one UserStatus
+     * const userStatus = await prisma.userStatus.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserStatusUpdateArgs>(args: SelectSubset<T, UserStatusUpdateArgs<ExtArgs>>): Prisma__UserStatusClient<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserStatuses.
+     * @param {UserStatusDeleteManyArgs} args - Arguments to filter UserStatuses to delete.
+     * @example
+     * // Delete a few UserStatuses
+     * const { count } = await prisma.userStatus.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserStatusDeleteManyArgs>(args?: SelectSubset<T, UserStatusDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserStatuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatusUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserStatuses
+     * const userStatus = await prisma.userStatus.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserStatusUpdateManyArgs>(args: SelectSubset<T, UserStatusUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserStatuses and returns the data updated in the database.
+     * @param {UserStatusUpdateManyAndReturnArgs} args - Arguments to update many UserStatuses.
+     * @example
+     * // Update many UserStatuses
+     * const userStatus = await prisma.userStatus.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserStatuses and only return the `id`
+     * const userStatusWithIdOnly = await prisma.userStatus.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserStatusUpdateManyAndReturnArgs>(args: SelectSubset<T, UserStatusUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserStatus.
+     * @param {UserStatusUpsertArgs} args - Arguments to update or create a UserStatus.
+     * @example
+     * // Update or create a UserStatus
+     * const userStatus = await prisma.userStatus.upsert({
+     *   create: {
+     *     // ... data to create a UserStatus
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserStatus we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserStatusUpsertArgs>(args: SelectSubset<T, UserStatusUpsertArgs<ExtArgs>>): Prisma__UserStatusClient<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserStatuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatusCountArgs} args - Arguments to filter UserStatuses to count.
+     * @example
+     * // Count the number of UserStatuses
+     * const count = await prisma.userStatus.count({
+     *   where: {
+     *     // ... the filter for the UserStatuses we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserStatusCountArgs>(
+      args?: Subset<T, UserStatusCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserStatusCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserStatus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatusAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserStatusAggregateArgs>(args: Subset<T, UserStatusAggregateArgs>): Prisma.PrismaPromise<GetUserStatusAggregateType<T>>
+
+    /**
+     * Group by UserStatus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatusGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserStatusGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserStatusGroupByArgs['orderBy'] }
+        : { orderBy?: UserStatusGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserStatusGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserStatusGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserStatus model
+   */
+  readonly fields: UserStatusFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserStatus.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserStatusClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserStatus model
+   */
+  interface UserStatusFieldRefs {
+    readonly id: FieldRef<"UserStatus", 'String'>
+    readonly userId: FieldRef<"UserStatus", 'String'>
+    readonly orientation: FieldRef<"UserStatus", 'Boolean'>
+    readonly resumeRebuilding: FieldRef<"UserStatus", 'Boolean'>
+    readonly eligibleForFirstMentorCall: FieldRef<"UserStatus", 'Boolean'>
+    readonly resumeConfirmed: FieldRef<"UserStatus", 'Boolean'>
+    readonly portfolioBuildingAndConfirmed: FieldRef<"UserStatus", 'Boolean'>
+    readonly eligibleForSecondMentorCall: FieldRef<"UserStatus", 'Boolean'>
+    readonly paymentMade: FieldRef<"UserStatus", 'Boolean'>
+    readonly techDistributionAndExtension: FieldRef<"UserStatus", 'Boolean'>
+    readonly eligibleForThirdMentorCall: FieldRef<"UserStatus", 'Boolean'>
+    readonly cheatSheetBuiltOut: FieldRef<"UserStatus", 'Boolean'>
+    readonly hasAppliedEnoughJobs: FieldRef<"UserStatus", 'Boolean'>
+    readonly eligibleForFourthMentorCall: FieldRef<"UserStatus", 'Boolean'>
+    readonly eligibleForFifthMentorCall: FieldRef<"UserStatus", 'Boolean'>
+    readonly fourthMentorCallCompletedAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly createdAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly deletedAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly fifthMentorCallCompletedAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly firstMentorCallCompletedAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly secondMentorCallCompletedAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly thirdMentorCallCompletedAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly fifthMentorCallGoogleMeetLink: FieldRef<"UserStatus", 'String'>
+    readonly fifthMentorCallScheduledAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly finalReview: FieldRef<"UserStatus", 'Boolean'>
+    readonly firstMentorCallGoogleMeetLink: FieldRef<"UserStatus", 'String'>
+    readonly firstMentorCallScheduledAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly fourthMentorCallGoogleMeetLink: FieldRef<"UserStatus", 'String'>
+    readonly fourthMentorCallScheduledAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly secondMentorCallGoogleMeetLink: FieldRef<"UserStatus", 'String'>
+    readonly secondMentorCallScheduledAt: FieldRef<"UserStatus", 'DateTime'>
+    readonly thirdMentorCallGoogleMeetLink: FieldRef<"UserStatus", 'String'>
+    readonly thirdMentorCallScheduledAt: FieldRef<"UserStatus", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserStatus findUnique
+   */
+  export type UserStatusFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStatus to fetch.
+     */
+    where: UserStatusWhereUniqueInput
+  }
+
+  /**
+   * UserStatus findUniqueOrThrow
+   */
+  export type UserStatusFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStatus to fetch.
+     */
+    where: UserStatusWhereUniqueInput
+  }
+
+  /**
+   * UserStatus findFirst
+   */
+  export type UserStatusFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStatus to fetch.
+     */
+    where?: UserStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStatuses to fetch.
+     */
+    orderBy?: UserStatusOrderByWithRelationInput | UserStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserStatuses.
+     */
+    cursor?: UserStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserStatuses.
+     */
+    distinct?: UserStatusScalarFieldEnum | UserStatusScalarFieldEnum[]
+  }
+
+  /**
+   * UserStatus findFirstOrThrow
+   */
+  export type UserStatusFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStatus to fetch.
+     */
+    where?: UserStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStatuses to fetch.
+     */
+    orderBy?: UserStatusOrderByWithRelationInput | UserStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserStatuses.
+     */
+    cursor?: UserStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserStatuses.
+     */
+    distinct?: UserStatusScalarFieldEnum | UserStatusScalarFieldEnum[]
+  }
+
+  /**
+   * UserStatus findMany
+   */
+  export type UserStatusFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStatuses to fetch.
+     */
+    where?: UserStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStatuses to fetch.
+     */
+    orderBy?: UserStatusOrderByWithRelationInput | UserStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserStatuses.
+     */
+    cursor?: UserStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStatuses.
+     */
+    skip?: number
+    distinct?: UserStatusScalarFieldEnum | UserStatusScalarFieldEnum[]
+  }
+
+  /**
+   * UserStatus create
+   */
+  export type UserStatusCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserStatus.
+     */
+    data: XOR<UserStatusCreateInput, UserStatusUncheckedCreateInput>
+  }
+
+  /**
+   * UserStatus createMany
+   */
+  export type UserStatusCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserStatuses.
+     */
+    data: UserStatusCreateManyInput | UserStatusCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserStatus createManyAndReturn
+   */
+  export type UserStatusCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserStatuses.
+     */
+    data: UserStatusCreateManyInput | UserStatusCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserStatus update
+   */
+  export type UserStatusUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserStatus.
+     */
+    data: XOR<UserStatusUpdateInput, UserStatusUncheckedUpdateInput>
+    /**
+     * Choose, which UserStatus to update.
+     */
+    where: UserStatusWhereUniqueInput
+  }
+
+  /**
+   * UserStatus updateMany
+   */
+  export type UserStatusUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserStatuses.
+     */
+    data: XOR<UserStatusUpdateManyMutationInput, UserStatusUncheckedUpdateManyInput>
+    /**
+     * Filter which UserStatuses to update
+     */
+    where?: UserStatusWhereInput
+    /**
+     * Limit how many UserStatuses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserStatus updateManyAndReturn
+   */
+  export type UserStatusUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * The data used to update UserStatuses.
+     */
+    data: XOR<UserStatusUpdateManyMutationInput, UserStatusUncheckedUpdateManyInput>
+    /**
+     * Filter which UserStatuses to update
+     */
+    where?: UserStatusWhereInput
+    /**
+     * Limit how many UserStatuses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserStatus upsert
+   */
+  export type UserStatusUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserStatus to update in case it exists.
+     */
+    where: UserStatusWhereUniqueInput
+    /**
+     * In case the UserStatus found by the `where` argument doesn't exist, create a new UserStatus with this data.
+     */
+    create: XOR<UserStatusCreateInput, UserStatusUncheckedCreateInput>
+    /**
+     * In case the UserStatus was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserStatusUpdateInput, UserStatusUncheckedUpdateInput>
+  }
+
+  /**
+   * UserStatus delete
+   */
+  export type UserStatusDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+    /**
+     * Filter which UserStatus to delete.
+     */
+    where: UserStatusWhereUniqueInput
+  }
+
+  /**
+   * UserStatus deleteMany
+   */
+  export type UserStatusDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserStatuses to delete
+     */
+    where?: UserStatusWhereInput
+    /**
+     * Limit how many UserStatuses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserStatus without action
+   */
+  export type UserStatusDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStatus
+     */
+    select?: UserStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStatus
+     */
+    omit?: UserStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatusInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5613,7 +9805,11 @@ export namespace Prisma {
     email: 'email',
     fullName: 'fullName',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    goalPerDay: 'goalPerDay',
+    mentorId: 'mentorId',
+    deletedAt: 'deletedAt',
+    verifiedByAdmin: 'verifiedByAdmin'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -5626,7 +9822,8 @@ export namespace Prisma {
     userId: 'userId',
     createdAt: 'createdAt',
     lastUsedAt: 'lastUsedAt',
-    isActive: 'isActive'
+    isActive: 'isActive',
+    deletedAt: 'deletedAt'
   };
 
   export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
@@ -5644,7 +9841,8 @@ export namespace Prisma {
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    type: 'type'
+    type: 'type',
+    deletedAt: 'deletedAt'
   };
 
   export type AppliedJobScalarFieldEnum = (typeof AppliedJobScalarFieldEnum)[keyof typeof AppliedJobScalarFieldEnum]
@@ -5655,10 +9853,86 @@ export namespace Prisma {
     userId: 'userId',
     weeks: 'weeks',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
   };
 
   export type ProgressScalarFieldEnum = (typeof ProgressScalarFieldEnum)[keyof typeof ProgressScalarFieldEnum]
+
+
+  export const AdminMentorScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    password: 'password',
+    name: 'name',
+    picture: 'picture',
+    expertise: 'expertise',
+    background: 'background',
+    availability: 'availability',
+    isAdmin: 'isAdmin',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
+    company: 'company',
+    role: 'role',
+    verifiedByAdmin: 'verifiedByAdmin'
+  };
+
+  export type AdminMentorScalarFieldEnum = (typeof AdminMentorScalarFieldEnum)[keyof typeof AdminMentorScalarFieldEnum]
+
+
+  export const MentorSessionNoteScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    callNumber: 'callNumber',
+    notes: 'notes',
+    mentorId: 'mentorId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
+  };
+
+  export type MentorSessionNoteScalarFieldEnum = (typeof MentorSessionNoteScalarFieldEnum)[keyof typeof MentorSessionNoteScalarFieldEnum]
+
+
+  export const UserStatusScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    orientation: 'orientation',
+    resumeRebuilding: 'resumeRebuilding',
+    eligibleForFirstMentorCall: 'eligibleForFirstMentorCall',
+    resumeConfirmed: 'resumeConfirmed',
+    portfolioBuildingAndConfirmed: 'portfolioBuildingAndConfirmed',
+    eligibleForSecondMentorCall: 'eligibleForSecondMentorCall',
+    paymentMade: 'paymentMade',
+    techDistributionAndExtension: 'techDistributionAndExtension',
+    eligibleForThirdMentorCall: 'eligibleForThirdMentorCall',
+    cheatSheetBuiltOut: 'cheatSheetBuiltOut',
+    hasAppliedEnoughJobs: 'hasAppliedEnoughJobs',
+    eligibleForFourthMentorCall: 'eligibleForFourthMentorCall',
+    eligibleForFifthMentorCall: 'eligibleForFifthMentorCall',
+    fourthMentorCallCompletedAt: 'fourthMentorCallCompletedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
+    fifthMentorCallCompletedAt: 'fifthMentorCallCompletedAt',
+    firstMentorCallCompletedAt: 'firstMentorCallCompletedAt',
+    secondMentorCallCompletedAt: 'secondMentorCallCompletedAt',
+    thirdMentorCallCompletedAt: 'thirdMentorCallCompletedAt',
+    fifthMentorCallGoogleMeetLink: 'fifthMentorCallGoogleMeetLink',
+    fifthMentorCallScheduledAt: 'fifthMentorCallScheduledAt',
+    finalReview: 'finalReview',
+    firstMentorCallGoogleMeetLink: 'firstMentorCallGoogleMeetLink',
+    firstMentorCallScheduledAt: 'firstMentorCallScheduledAt',
+    fourthMentorCallGoogleMeetLink: 'fourthMentorCallGoogleMeetLink',
+    fourthMentorCallScheduledAt: 'fourthMentorCallScheduledAt',
+    secondMentorCallGoogleMeetLink: 'secondMentorCallGoogleMeetLink',
+    secondMentorCallScheduledAt: 'secondMentorCallScheduledAt',
+    thirdMentorCallGoogleMeetLink: 'thirdMentorCallGoogleMeetLink',
+    thirdMentorCallScheduledAt: 'thirdMentorCallScheduledAt'
+  };
+
+  export type UserStatusScalarFieldEnum = (typeof UserStatusScalarFieldEnum)[keyof typeof UserStatusScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5735,6 +10009,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -5756,16 +10044,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'Float[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -5782,9 +10070,15 @@ export namespace Prisma {
     fullName?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    goalPerDay?: IntFilter<"User"> | number
+    mentorId?: StringNullableFilter<"User"> | string | null
+    deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    verifiedByAdmin?: BoolFilter<"User"> | boolean
     apiKeys?: ApiKeyListRelationFilter
     appliedJobs?: AppliedJobListRelationFilter
     Progress?: XOR<ProgressNullableScalarRelationFilter, ProgressWhereInput> | null
+    AdminMentor?: XOR<AdminMentorNullableScalarRelationFilter, AdminMentorWhereInput> | null
+    UserStatus?: XOR<UserStatusNullableScalarRelationFilter, UserStatusWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5794,9 +10088,15 @@ export namespace Prisma {
     fullName?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    goalPerDay?: SortOrder
+    mentorId?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    verifiedByAdmin?: SortOrder
     apiKeys?: ApiKeyOrderByRelationAggregateInput
     appliedJobs?: AppliedJobOrderByRelationAggregateInput
     Progress?: ProgressOrderByWithRelationInput
+    AdminMentor?: AdminMentorOrderByWithRelationInput
+    UserStatus?: UserStatusOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5809,9 +10109,15 @@ export namespace Prisma {
     fullName?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    goalPerDay?: IntFilter<"User"> | number
+    mentorId?: StringNullableFilter<"User"> | string | null
+    deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    verifiedByAdmin?: BoolFilter<"User"> | boolean
     apiKeys?: ApiKeyListRelationFilter
     appliedJobs?: AppliedJobListRelationFilter
     Progress?: XOR<ProgressNullableScalarRelationFilter, ProgressWhereInput> | null
+    AdminMentor?: XOR<AdminMentorNullableScalarRelationFilter, AdminMentorWhereInput> | null
+    UserStatus?: XOR<UserStatusNullableScalarRelationFilter, UserStatusWhereInput> | null
   }, "id" | "firebaseUid" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -5821,9 +10127,15 @@ export namespace Prisma {
     fullName?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    goalPerDay?: SortOrder
+    mentorId?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    verifiedByAdmin?: SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -5836,6 +10148,10 @@ export namespace Prisma {
     fullName?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    goalPerDay?: IntWithAggregatesFilter<"User"> | number
+    mentorId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    verifiedByAdmin?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type ApiKeyWhereInput = {
@@ -5849,6 +10165,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ApiKey"> | Date | string
     lastUsedAt?: DateTimeNullableFilter<"ApiKey"> | Date | string | null
     isActive?: BoolFilter<"ApiKey"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ApiKey"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -5860,6 +10177,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     lastUsedAt?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -5874,6 +10192,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ApiKey"> | Date | string
     lastUsedAt?: DateTimeNullableFilter<"ApiKey"> | Date | string | null
     isActive?: BoolFilter<"ApiKey"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ApiKey"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "key">
 
@@ -5885,6 +10204,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     lastUsedAt?: SortOrderInput | SortOrder
     isActive?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     _count?: ApiKeyCountOrderByAggregateInput
     _max?: ApiKeyMaxOrderByAggregateInput
     _min?: ApiKeyMinOrderByAggregateInput
@@ -5901,6 +10221,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ApiKey"> | Date | string
     lastUsedAt?: DateTimeNullableWithAggregatesFilter<"ApiKey"> | Date | string | null
     isActive?: BoolWithAggregatesFilter<"ApiKey"> | boolean
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ApiKey"> | Date | string | null
   }
 
   export type AppliedJobWhereInput = {
@@ -5919,6 +10240,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AppliedJob"> | Date | string
     updatedAt?: DateTimeFilter<"AppliedJob"> | Date | string
     type?: StringFilter<"AppliedJob"> | string
+    deletedAt?: DateTimeNullableFilter<"AppliedJob"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -5935,12 +10257,12 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     type?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type AppliedJobWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    userId_url?: AppliedJobUserIdUrlCompoundUniqueInput
     AND?: AppliedJobWhereInput | AppliedJobWhereInput[]
     OR?: AppliedJobWhereInput[]
     NOT?: AppliedJobWhereInput | AppliedJobWhereInput[]
@@ -5955,8 +10277,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AppliedJob"> | Date | string
     updatedAt?: DateTimeFilter<"AppliedJob"> | Date | string
     type?: StringFilter<"AppliedJob"> | string
+    deletedAt?: DateTimeNullableFilter<"AppliedJob"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "userId_url">
+  }, "id">
 
   export type AppliedJobOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5971,6 +10294,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     type?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     _count?: AppliedJobCountOrderByAggregateInput
     _max?: AppliedJobMaxOrderByAggregateInput
     _min?: AppliedJobMinOrderByAggregateInput
@@ -5992,6 +10316,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"AppliedJob"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AppliedJob"> | Date | string
     type?: StringWithAggregatesFilter<"AppliedJob"> | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"AppliedJob"> | Date | string | null
   }
 
   export type ProgressWhereInput = {
@@ -6003,6 +10328,7 @@ export namespace Prisma {
     weeks?: JsonFilter<"Progress">
     createdAt?: DateTimeFilter<"Progress"> | Date | string
     updatedAt?: DateTimeFilter<"Progress"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Progress"> | Date | string | null
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -6012,6 +10338,7 @@ export namespace Prisma {
     weeks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     User?: UserOrderByWithRelationInput
   }
 
@@ -6024,6 +10351,7 @@ export namespace Prisma {
     weeks?: JsonFilter<"Progress">
     createdAt?: DateTimeFilter<"Progress"> | Date | string
     updatedAt?: DateTimeFilter<"Progress"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Progress"> | Date | string | null
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
@@ -6033,6 +10361,7 @@ export namespace Prisma {
     weeks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     _count?: ProgressCountOrderByAggregateInput
     _max?: ProgressMaxOrderByAggregateInput
     _min?: ProgressMinOrderByAggregateInput
@@ -6047,6 +10376,382 @@ export namespace Prisma {
     weeks?: JsonWithAggregatesFilter<"Progress">
     createdAt?: DateTimeWithAggregatesFilter<"Progress"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Progress"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Progress"> | Date | string | null
+  }
+
+  export type AdminMentorWhereInput = {
+    AND?: AdminMentorWhereInput | AdminMentorWhereInput[]
+    OR?: AdminMentorWhereInput[]
+    NOT?: AdminMentorWhereInput | AdminMentorWhereInput[]
+    id?: StringFilter<"AdminMentor"> | string
+    email?: StringFilter<"AdminMentor"> | string
+    password?: StringFilter<"AdminMentor"> | string
+    name?: StringFilter<"AdminMentor"> | string
+    picture?: StringNullableFilter<"AdminMentor"> | string | null
+    expertise?: StringNullableFilter<"AdminMentor"> | string | null
+    background?: StringNullableFilter<"AdminMentor"> | string | null
+    availability?: StringNullableFilter<"AdminMentor"> | string | null
+    isAdmin?: BoolFilter<"AdminMentor"> | boolean
+    createdAt?: DateTimeFilter<"AdminMentor"> | Date | string
+    updatedAt?: DateTimeFilter<"AdminMentor"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"AdminMentor"> | Date | string | null
+    company?: StringNullableFilter<"AdminMentor"> | string | null
+    role?: StringNullableFilter<"AdminMentor"> | string | null
+    verifiedByAdmin?: BoolFilter<"AdminMentor"> | boolean
+    User?: UserListRelationFilter
+  }
+
+  export type AdminMentorOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    name?: SortOrder
+    picture?: SortOrderInput | SortOrder
+    expertise?: SortOrderInput | SortOrder
+    background?: SortOrderInput | SortOrder
+    availability?: SortOrderInput | SortOrder
+    isAdmin?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    company?: SortOrderInput | SortOrder
+    role?: SortOrderInput | SortOrder
+    verifiedByAdmin?: SortOrder
+    User?: UserOrderByRelationAggregateInput
+  }
+
+  export type AdminMentorWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    AND?: AdminMentorWhereInput | AdminMentorWhereInput[]
+    OR?: AdminMentorWhereInput[]
+    NOT?: AdminMentorWhereInput | AdminMentorWhereInput[]
+    password?: StringFilter<"AdminMentor"> | string
+    name?: StringFilter<"AdminMentor"> | string
+    picture?: StringNullableFilter<"AdminMentor"> | string | null
+    expertise?: StringNullableFilter<"AdminMentor"> | string | null
+    background?: StringNullableFilter<"AdminMentor"> | string | null
+    availability?: StringNullableFilter<"AdminMentor"> | string | null
+    isAdmin?: BoolFilter<"AdminMentor"> | boolean
+    createdAt?: DateTimeFilter<"AdminMentor"> | Date | string
+    updatedAt?: DateTimeFilter<"AdminMentor"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"AdminMentor"> | Date | string | null
+    company?: StringNullableFilter<"AdminMentor"> | string | null
+    role?: StringNullableFilter<"AdminMentor"> | string | null
+    verifiedByAdmin?: BoolFilter<"AdminMentor"> | boolean
+    User?: UserListRelationFilter
+  }, "id" | "email">
+
+  export type AdminMentorOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    name?: SortOrder
+    picture?: SortOrderInput | SortOrder
+    expertise?: SortOrderInput | SortOrder
+    background?: SortOrderInput | SortOrder
+    availability?: SortOrderInput | SortOrder
+    isAdmin?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    company?: SortOrderInput | SortOrder
+    role?: SortOrderInput | SortOrder
+    verifiedByAdmin?: SortOrder
+    _count?: AdminMentorCountOrderByAggregateInput
+    _max?: AdminMentorMaxOrderByAggregateInput
+    _min?: AdminMentorMinOrderByAggregateInput
+  }
+
+  export type AdminMentorScalarWhereWithAggregatesInput = {
+    AND?: AdminMentorScalarWhereWithAggregatesInput | AdminMentorScalarWhereWithAggregatesInput[]
+    OR?: AdminMentorScalarWhereWithAggregatesInput[]
+    NOT?: AdminMentorScalarWhereWithAggregatesInput | AdminMentorScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AdminMentor"> | string
+    email?: StringWithAggregatesFilter<"AdminMentor"> | string
+    password?: StringWithAggregatesFilter<"AdminMentor"> | string
+    name?: StringWithAggregatesFilter<"AdminMentor"> | string
+    picture?: StringNullableWithAggregatesFilter<"AdminMentor"> | string | null
+    expertise?: StringNullableWithAggregatesFilter<"AdminMentor"> | string | null
+    background?: StringNullableWithAggregatesFilter<"AdminMentor"> | string | null
+    availability?: StringNullableWithAggregatesFilter<"AdminMentor"> | string | null
+    isAdmin?: BoolWithAggregatesFilter<"AdminMentor"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"AdminMentor"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AdminMentor"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"AdminMentor"> | Date | string | null
+    company?: StringNullableWithAggregatesFilter<"AdminMentor"> | string | null
+    role?: StringNullableWithAggregatesFilter<"AdminMentor"> | string | null
+    verifiedByAdmin?: BoolWithAggregatesFilter<"AdminMentor"> | boolean
+  }
+
+  export type MentorSessionNoteWhereInput = {
+    AND?: MentorSessionNoteWhereInput | MentorSessionNoteWhereInput[]
+    OR?: MentorSessionNoteWhereInput[]
+    NOT?: MentorSessionNoteWhereInput | MentorSessionNoteWhereInput[]
+    id?: StringFilter<"MentorSessionNote"> | string
+    userId?: StringFilter<"MentorSessionNote"> | string
+    callNumber?: IntFilter<"MentorSessionNote"> | number
+    notes?: StringFilter<"MentorSessionNote"> | string
+    mentorId?: StringNullableFilter<"MentorSessionNote"> | string | null
+    createdAt?: DateTimeFilter<"MentorSessionNote"> | Date | string
+    updatedAt?: DateTimeFilter<"MentorSessionNote"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"MentorSessionNote"> | Date | string | null
+  }
+
+  export type MentorSessionNoteOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    callNumber?: SortOrder
+    notes?: SortOrder
+    mentorId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+  }
+
+  export type MentorSessionNoteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_callNumber?: MentorSessionNoteUserIdCallNumberCompoundUniqueInput
+    AND?: MentorSessionNoteWhereInput | MentorSessionNoteWhereInput[]
+    OR?: MentorSessionNoteWhereInput[]
+    NOT?: MentorSessionNoteWhereInput | MentorSessionNoteWhereInput[]
+    userId?: StringFilter<"MentorSessionNote"> | string
+    callNumber?: IntFilter<"MentorSessionNote"> | number
+    notes?: StringFilter<"MentorSessionNote"> | string
+    mentorId?: StringNullableFilter<"MentorSessionNote"> | string | null
+    createdAt?: DateTimeFilter<"MentorSessionNote"> | Date | string
+    updatedAt?: DateTimeFilter<"MentorSessionNote"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"MentorSessionNote"> | Date | string | null
+  }, "id" | "userId_callNumber">
+
+  export type MentorSessionNoteOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    callNumber?: SortOrder
+    notes?: SortOrder
+    mentorId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    _count?: MentorSessionNoteCountOrderByAggregateInput
+    _avg?: MentorSessionNoteAvgOrderByAggregateInput
+    _max?: MentorSessionNoteMaxOrderByAggregateInput
+    _min?: MentorSessionNoteMinOrderByAggregateInput
+    _sum?: MentorSessionNoteSumOrderByAggregateInput
+  }
+
+  export type MentorSessionNoteScalarWhereWithAggregatesInput = {
+    AND?: MentorSessionNoteScalarWhereWithAggregatesInput | MentorSessionNoteScalarWhereWithAggregatesInput[]
+    OR?: MentorSessionNoteScalarWhereWithAggregatesInput[]
+    NOT?: MentorSessionNoteScalarWhereWithAggregatesInput | MentorSessionNoteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MentorSessionNote"> | string
+    userId?: StringWithAggregatesFilter<"MentorSessionNote"> | string
+    callNumber?: IntWithAggregatesFilter<"MentorSessionNote"> | number
+    notes?: StringWithAggregatesFilter<"MentorSessionNote"> | string
+    mentorId?: StringNullableWithAggregatesFilter<"MentorSessionNote"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"MentorSessionNote"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MentorSessionNote"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"MentorSessionNote"> | Date | string | null
+  }
+
+  export type UserStatusWhereInput = {
+    AND?: UserStatusWhereInput | UserStatusWhereInput[]
+    OR?: UserStatusWhereInput[]
+    NOT?: UserStatusWhereInput | UserStatusWhereInput[]
+    id?: StringFilter<"UserStatus"> | string
+    userId?: StringFilter<"UserStatus"> | string
+    orientation?: BoolFilter<"UserStatus"> | boolean
+    resumeRebuilding?: BoolFilter<"UserStatus"> | boolean
+    eligibleForFirstMentorCall?: BoolFilter<"UserStatus"> | boolean
+    resumeConfirmed?: BoolFilter<"UserStatus"> | boolean
+    portfolioBuildingAndConfirmed?: BoolFilter<"UserStatus"> | boolean
+    eligibleForSecondMentorCall?: BoolFilter<"UserStatus"> | boolean
+    paymentMade?: BoolFilter<"UserStatus"> | boolean
+    techDistributionAndExtension?: BoolFilter<"UserStatus"> | boolean
+    eligibleForThirdMentorCall?: BoolFilter<"UserStatus"> | boolean
+    cheatSheetBuiltOut?: BoolFilter<"UserStatus"> | boolean
+    hasAppliedEnoughJobs?: BoolFilter<"UserStatus"> | boolean
+    eligibleForFourthMentorCall?: BoolFilter<"UserStatus"> | boolean
+    eligibleForFifthMentorCall?: BoolFilter<"UserStatus"> | boolean
+    fourthMentorCallCompletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    createdAt?: DateTimeFilter<"UserStatus"> | Date | string
+    updatedAt?: DateTimeFilter<"UserStatus"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    fifthMentorCallCompletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    firstMentorCallCompletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    secondMentorCallCompletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    thirdMentorCallCompletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    fifthMentorCallGoogleMeetLink?: StringNullableFilter<"UserStatus"> | string | null
+    fifthMentorCallScheduledAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    finalReview?: BoolFilter<"UserStatus"> | boolean
+    firstMentorCallGoogleMeetLink?: StringNullableFilter<"UserStatus"> | string | null
+    firstMentorCallScheduledAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    fourthMentorCallGoogleMeetLink?: StringNullableFilter<"UserStatus"> | string | null
+    fourthMentorCallScheduledAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    secondMentorCallGoogleMeetLink?: StringNullableFilter<"UserStatus"> | string | null
+    secondMentorCallScheduledAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    thirdMentorCallGoogleMeetLink?: StringNullableFilter<"UserStatus"> | string | null
+    thirdMentorCallScheduledAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    User?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserStatusOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orientation?: SortOrder
+    resumeRebuilding?: SortOrder
+    eligibleForFirstMentorCall?: SortOrder
+    resumeConfirmed?: SortOrder
+    portfolioBuildingAndConfirmed?: SortOrder
+    eligibleForSecondMentorCall?: SortOrder
+    paymentMade?: SortOrder
+    techDistributionAndExtension?: SortOrder
+    eligibleForThirdMentorCall?: SortOrder
+    cheatSheetBuiltOut?: SortOrder
+    hasAppliedEnoughJobs?: SortOrder
+    eligibleForFourthMentorCall?: SortOrder
+    eligibleForFifthMentorCall?: SortOrder
+    fourthMentorCallCompletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    fifthMentorCallCompletedAt?: SortOrderInput | SortOrder
+    firstMentorCallCompletedAt?: SortOrderInput | SortOrder
+    secondMentorCallCompletedAt?: SortOrderInput | SortOrder
+    thirdMentorCallCompletedAt?: SortOrderInput | SortOrder
+    fifthMentorCallGoogleMeetLink?: SortOrderInput | SortOrder
+    fifthMentorCallScheduledAt?: SortOrderInput | SortOrder
+    finalReview?: SortOrder
+    firstMentorCallGoogleMeetLink?: SortOrderInput | SortOrder
+    firstMentorCallScheduledAt?: SortOrderInput | SortOrder
+    fourthMentorCallGoogleMeetLink?: SortOrderInput | SortOrder
+    fourthMentorCallScheduledAt?: SortOrderInput | SortOrder
+    secondMentorCallGoogleMeetLink?: SortOrderInput | SortOrder
+    secondMentorCallScheduledAt?: SortOrderInput | SortOrder
+    thirdMentorCallGoogleMeetLink?: SortOrderInput | SortOrder
+    thirdMentorCallScheduledAt?: SortOrderInput | SortOrder
+    User?: UserOrderByWithRelationInput
+  }
+
+  export type UserStatusWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: UserStatusWhereInput | UserStatusWhereInput[]
+    OR?: UserStatusWhereInput[]
+    NOT?: UserStatusWhereInput | UserStatusWhereInput[]
+    orientation?: BoolFilter<"UserStatus"> | boolean
+    resumeRebuilding?: BoolFilter<"UserStatus"> | boolean
+    eligibleForFirstMentorCall?: BoolFilter<"UserStatus"> | boolean
+    resumeConfirmed?: BoolFilter<"UserStatus"> | boolean
+    portfolioBuildingAndConfirmed?: BoolFilter<"UserStatus"> | boolean
+    eligibleForSecondMentorCall?: BoolFilter<"UserStatus"> | boolean
+    paymentMade?: BoolFilter<"UserStatus"> | boolean
+    techDistributionAndExtension?: BoolFilter<"UserStatus"> | boolean
+    eligibleForThirdMentorCall?: BoolFilter<"UserStatus"> | boolean
+    cheatSheetBuiltOut?: BoolFilter<"UserStatus"> | boolean
+    hasAppliedEnoughJobs?: BoolFilter<"UserStatus"> | boolean
+    eligibleForFourthMentorCall?: BoolFilter<"UserStatus"> | boolean
+    eligibleForFifthMentorCall?: BoolFilter<"UserStatus"> | boolean
+    fourthMentorCallCompletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    createdAt?: DateTimeFilter<"UserStatus"> | Date | string
+    updatedAt?: DateTimeFilter<"UserStatus"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    fifthMentorCallCompletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    firstMentorCallCompletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    secondMentorCallCompletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    thirdMentorCallCompletedAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    fifthMentorCallGoogleMeetLink?: StringNullableFilter<"UserStatus"> | string | null
+    fifthMentorCallScheduledAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    finalReview?: BoolFilter<"UserStatus"> | boolean
+    firstMentorCallGoogleMeetLink?: StringNullableFilter<"UserStatus"> | string | null
+    firstMentorCallScheduledAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    fourthMentorCallGoogleMeetLink?: StringNullableFilter<"UserStatus"> | string | null
+    fourthMentorCallScheduledAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    secondMentorCallGoogleMeetLink?: StringNullableFilter<"UserStatus"> | string | null
+    secondMentorCallScheduledAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    thirdMentorCallGoogleMeetLink?: StringNullableFilter<"UserStatus"> | string | null
+    thirdMentorCallScheduledAt?: DateTimeNullableFilter<"UserStatus"> | Date | string | null
+    User?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type UserStatusOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orientation?: SortOrder
+    resumeRebuilding?: SortOrder
+    eligibleForFirstMentorCall?: SortOrder
+    resumeConfirmed?: SortOrder
+    portfolioBuildingAndConfirmed?: SortOrder
+    eligibleForSecondMentorCall?: SortOrder
+    paymentMade?: SortOrder
+    techDistributionAndExtension?: SortOrder
+    eligibleForThirdMentorCall?: SortOrder
+    cheatSheetBuiltOut?: SortOrder
+    hasAppliedEnoughJobs?: SortOrder
+    eligibleForFourthMentorCall?: SortOrder
+    eligibleForFifthMentorCall?: SortOrder
+    fourthMentorCallCompletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    fifthMentorCallCompletedAt?: SortOrderInput | SortOrder
+    firstMentorCallCompletedAt?: SortOrderInput | SortOrder
+    secondMentorCallCompletedAt?: SortOrderInput | SortOrder
+    thirdMentorCallCompletedAt?: SortOrderInput | SortOrder
+    fifthMentorCallGoogleMeetLink?: SortOrderInput | SortOrder
+    fifthMentorCallScheduledAt?: SortOrderInput | SortOrder
+    finalReview?: SortOrder
+    firstMentorCallGoogleMeetLink?: SortOrderInput | SortOrder
+    firstMentorCallScheduledAt?: SortOrderInput | SortOrder
+    fourthMentorCallGoogleMeetLink?: SortOrderInput | SortOrder
+    fourthMentorCallScheduledAt?: SortOrderInput | SortOrder
+    secondMentorCallGoogleMeetLink?: SortOrderInput | SortOrder
+    secondMentorCallScheduledAt?: SortOrderInput | SortOrder
+    thirdMentorCallGoogleMeetLink?: SortOrderInput | SortOrder
+    thirdMentorCallScheduledAt?: SortOrderInput | SortOrder
+    _count?: UserStatusCountOrderByAggregateInput
+    _max?: UserStatusMaxOrderByAggregateInput
+    _min?: UserStatusMinOrderByAggregateInput
+  }
+
+  export type UserStatusScalarWhereWithAggregatesInput = {
+    AND?: UserStatusScalarWhereWithAggregatesInput | UserStatusScalarWhereWithAggregatesInput[]
+    OR?: UserStatusScalarWhereWithAggregatesInput[]
+    NOT?: UserStatusScalarWhereWithAggregatesInput | UserStatusScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserStatus"> | string
+    userId?: StringWithAggregatesFilter<"UserStatus"> | string
+    orientation?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    resumeRebuilding?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    eligibleForFirstMentorCall?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    resumeConfirmed?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    portfolioBuildingAndConfirmed?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    eligibleForSecondMentorCall?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    paymentMade?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    techDistributionAndExtension?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    eligibleForThirdMentorCall?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    cheatSheetBuiltOut?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    hasAppliedEnoughJobs?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    eligibleForFourthMentorCall?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    eligibleForFifthMentorCall?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    fourthMentorCallCompletedAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"UserStatus"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserStatus"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
+    fifthMentorCallCompletedAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
+    firstMentorCallCompletedAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
+    secondMentorCallCompletedAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
+    thirdMentorCallCompletedAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
+    fifthMentorCallGoogleMeetLink?: StringNullableWithAggregatesFilter<"UserStatus"> | string | null
+    fifthMentorCallScheduledAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
+    finalReview?: BoolWithAggregatesFilter<"UserStatus"> | boolean
+    firstMentorCallGoogleMeetLink?: StringNullableWithAggregatesFilter<"UserStatus"> | string | null
+    firstMentorCallScheduledAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
+    fourthMentorCallGoogleMeetLink?: StringNullableWithAggregatesFilter<"UserStatus"> | string | null
+    fourthMentorCallScheduledAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
+    secondMentorCallGoogleMeetLink?: StringNullableWithAggregatesFilter<"UserStatus"> | string | null
+    secondMentorCallScheduledAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
+    thirdMentorCallGoogleMeetLink?: StringNullableWithAggregatesFilter<"UserStatus"> | string | null
+    thirdMentorCallScheduledAt?: DateTimeNullableWithAggregatesFilter<"UserStatus"> | Date | string | null
   }
 
   export type UserCreateInput = {
@@ -6056,9 +10761,14 @@ export namespace Prisma {
     fullName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    goalPerDay?: number
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     appliedJobs?: AppliedJobCreateNestedManyWithoutUserInput
     Progress?: ProgressCreateNestedOneWithoutUserInput
+    AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
+    UserStatus?: UserStatusCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6068,9 +10778,14 @@ export namespace Prisma {
     fullName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    goalPerDay?: number
+    mentorId?: string | null
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     appliedJobs?: AppliedJobUncheckedCreateNestedManyWithoutUserInput
     Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
+    UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6080,9 +10795,14 @@ export namespace Prisma {
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     appliedJobs?: AppliedJobUpdateManyWithoutUserNestedInput
     Progress?: ProgressUpdateOneWithoutUserNestedInput
+    AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
+    UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6092,9 +10812,14 @@ export namespace Prisma {
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    mentorId?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     appliedJobs?: AppliedJobUncheckedUpdateManyWithoutUserNestedInput
     Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
+    UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6104,6 +10829,10 @@ export namespace Prisma {
     fullName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    goalPerDay?: number
+    mentorId?: string | null
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
@@ -6113,6 +10842,9 @@ export namespace Prisma {
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -6122,6 +10854,10 @@ export namespace Prisma {
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    mentorId?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ApiKeyCreateInput = {
@@ -6131,6 +10867,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastUsedAt?: Date | string | null
     isActive?: boolean
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutApiKeysInput
   }
 
@@ -6142,6 +10879,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastUsedAt?: Date | string | null
     isActive?: boolean
+    deletedAt?: Date | string | null
   }
 
   export type ApiKeyUpdateInput = {
@@ -6151,6 +10889,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutApiKeysNestedInput
   }
 
@@ -6162,6 +10901,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ApiKeyCreateManyInput = {
@@ -6172,6 +10912,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastUsedAt?: Date | string | null
     isActive?: boolean
+    deletedAt?: Date | string | null
   }
 
   export type ApiKeyUpdateManyMutationInput = {
@@ -6181,6 +10922,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ApiKeyUncheckedUpdateManyInput = {
@@ -6191,6 +10933,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppliedJobCreateInput = {
@@ -6205,6 +10948,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     type?: string
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutAppliedJobsInput
   }
 
@@ -6221,6 +10965,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     type?: string
+    deletedAt?: Date | string | null
   }
 
   export type AppliedJobUpdateInput = {
@@ -6235,6 +10980,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutAppliedJobsNestedInput
   }
 
@@ -6251,6 +10997,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppliedJobCreateManyInput = {
@@ -6266,6 +11013,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     type?: string
+    deletedAt?: Date | string | null
   }
 
   export type AppliedJobUpdateManyMutationInput = {
@@ -6280,6 +11028,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppliedJobUncheckedUpdateManyInput = {
@@ -6295,6 +11044,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProgressCreateInput = {
@@ -6302,6 +11052,7 @@ export namespace Prisma {
     weeks: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt: Date | string
+    deletedAt?: Date | string | null
     User: UserCreateNestedOneWithoutProgressInput
   }
 
@@ -6311,6 +11062,7 @@ export namespace Prisma {
     weeks: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type ProgressUpdateInput = {
@@ -6318,6 +11070,7 @@ export namespace Prisma {
     weeks?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     User?: UserUpdateOneRequiredWithoutProgressNestedInput
   }
 
@@ -6327,6 +11080,7 @@ export namespace Prisma {
     weeks?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProgressCreateManyInput = {
@@ -6335,6 +11089,7 @@ export namespace Prisma {
     weeks: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type ProgressUpdateManyMutationInput = {
@@ -6342,6 +11097,7 @@ export namespace Prisma {
     weeks?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProgressUncheckedUpdateManyInput = {
@@ -6350,6 +11106,472 @@ export namespace Prisma {
     weeks?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AdminMentorCreateInput = {
+    id: string
+    email: string
+    password: string
+    name: string
+    picture?: string | null
+    expertise?: string | null
+    background?: string | null
+    availability?: string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+    company?: string | null
+    role?: string | null
+    verifiedByAdmin?: boolean
+    User?: UserCreateNestedManyWithoutAdminMentorInput
+  }
+
+  export type AdminMentorUncheckedCreateInput = {
+    id: string
+    email: string
+    password: string
+    name: string
+    picture?: string | null
+    expertise?: string | null
+    background?: string | null
+    availability?: string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+    company?: string | null
+    role?: string | null
+    verifiedByAdmin?: boolean
+    User?: UserUncheckedCreateNestedManyWithoutAdminMentorInput
+  }
+
+  export type AdminMentorUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    expertise?: NullableStringFieldUpdateOperationsInput | string | null
+    background?: NullableStringFieldUpdateOperationsInput | string | null
+    availability?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
+    User?: UserUpdateManyWithoutAdminMentorNestedInput
+  }
+
+  export type AdminMentorUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    expertise?: NullableStringFieldUpdateOperationsInput | string | null
+    background?: NullableStringFieldUpdateOperationsInput | string | null
+    availability?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
+    User?: UserUncheckedUpdateManyWithoutAdminMentorNestedInput
+  }
+
+  export type AdminMentorCreateManyInput = {
+    id: string
+    email: string
+    password: string
+    name: string
+    picture?: string | null
+    expertise?: string | null
+    background?: string | null
+    availability?: string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+    company?: string | null
+    role?: string | null
+    verifiedByAdmin?: boolean
+  }
+
+  export type AdminMentorUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    expertise?: NullableStringFieldUpdateOperationsInput | string | null
+    background?: NullableStringFieldUpdateOperationsInput | string | null
+    availability?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AdminMentorUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    expertise?: NullableStringFieldUpdateOperationsInput | string | null
+    background?: NullableStringFieldUpdateOperationsInput | string | null
+    availability?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MentorSessionNoteCreateInput = {
+    id: string
+    userId: string
+    callNumber: number
+    notes?: string
+    mentorId?: string | null
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type MentorSessionNoteUncheckedCreateInput = {
+    id: string
+    userId: string
+    callNumber: number
+    notes?: string
+    mentorId?: string | null
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type MentorSessionNoteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    callNumber?: IntFieldUpdateOperationsInput | number
+    notes?: StringFieldUpdateOperationsInput | string
+    mentorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MentorSessionNoteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    callNumber?: IntFieldUpdateOperationsInput | number
+    notes?: StringFieldUpdateOperationsInput | string
+    mentorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MentorSessionNoteCreateManyInput = {
+    id: string
+    userId: string
+    callNumber: number
+    notes?: string
+    mentorId?: string | null
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type MentorSessionNoteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    callNumber?: IntFieldUpdateOperationsInput | number
+    notes?: StringFieldUpdateOperationsInput | string
+    mentorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MentorSessionNoteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    callNumber?: IntFieldUpdateOperationsInput | number
+    notes?: StringFieldUpdateOperationsInput | string
+    mentorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UserStatusCreateInput = {
+    id: string
+    orientation?: boolean
+    resumeRebuilding?: boolean
+    eligibleForFirstMentorCall?: boolean
+    resumeConfirmed?: boolean
+    portfolioBuildingAndConfirmed?: boolean
+    eligibleForSecondMentorCall?: boolean
+    paymentMade?: boolean
+    techDistributionAndExtension?: boolean
+    eligibleForThirdMentorCall?: boolean
+    cheatSheetBuiltOut?: boolean
+    hasAppliedEnoughJobs?: boolean
+    eligibleForFourthMentorCall?: boolean
+    eligibleForFifthMentorCall?: boolean
+    fourthMentorCallCompletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+    fifthMentorCallCompletedAt?: Date | string | null
+    firstMentorCallCompletedAt?: Date | string | null
+    secondMentorCallCompletedAt?: Date | string | null
+    thirdMentorCallCompletedAt?: Date | string | null
+    fifthMentorCallGoogleMeetLink?: string | null
+    fifthMentorCallScheduledAt?: Date | string | null
+    finalReview?: boolean
+    firstMentorCallGoogleMeetLink?: string | null
+    firstMentorCallScheduledAt?: Date | string | null
+    fourthMentorCallGoogleMeetLink?: string | null
+    fourthMentorCallScheduledAt?: Date | string | null
+    secondMentorCallGoogleMeetLink?: string | null
+    secondMentorCallScheduledAt?: Date | string | null
+    thirdMentorCallGoogleMeetLink?: string | null
+    thirdMentorCallScheduledAt?: Date | string | null
+    User: UserCreateNestedOneWithoutUserStatusInput
+  }
+
+  export type UserStatusUncheckedCreateInput = {
+    id: string
+    userId: string
+    orientation?: boolean
+    resumeRebuilding?: boolean
+    eligibleForFirstMentorCall?: boolean
+    resumeConfirmed?: boolean
+    portfolioBuildingAndConfirmed?: boolean
+    eligibleForSecondMentorCall?: boolean
+    paymentMade?: boolean
+    techDistributionAndExtension?: boolean
+    eligibleForThirdMentorCall?: boolean
+    cheatSheetBuiltOut?: boolean
+    hasAppliedEnoughJobs?: boolean
+    eligibleForFourthMentorCall?: boolean
+    eligibleForFifthMentorCall?: boolean
+    fourthMentorCallCompletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+    fifthMentorCallCompletedAt?: Date | string | null
+    firstMentorCallCompletedAt?: Date | string | null
+    secondMentorCallCompletedAt?: Date | string | null
+    thirdMentorCallCompletedAt?: Date | string | null
+    fifthMentorCallGoogleMeetLink?: string | null
+    fifthMentorCallScheduledAt?: Date | string | null
+    finalReview?: boolean
+    firstMentorCallGoogleMeetLink?: string | null
+    firstMentorCallScheduledAt?: Date | string | null
+    fourthMentorCallGoogleMeetLink?: string | null
+    fourthMentorCallScheduledAt?: Date | string | null
+    secondMentorCallGoogleMeetLink?: string | null
+    secondMentorCallScheduledAt?: Date | string | null
+    thirdMentorCallGoogleMeetLink?: string | null
+    thirdMentorCallScheduledAt?: Date | string | null
+  }
+
+  export type UserStatusUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orientation?: BoolFieldUpdateOperationsInput | boolean
+    resumeRebuilding?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFirstMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    resumeConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    portfolioBuildingAndConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForSecondMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    paymentMade?: BoolFieldUpdateOperationsInput | boolean
+    techDistributionAndExtension?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForThirdMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    cheatSheetBuiltOut?: BoolFieldUpdateOperationsInput | boolean
+    hasAppliedEnoughJobs?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFourthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFifthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    fourthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fifthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finalReview?: BoolFieldUpdateOperationsInput | boolean
+    firstMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    firstMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fourthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fourthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    secondMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    thirdMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    User?: UserUpdateOneRequiredWithoutUserStatusNestedInput
+  }
+
+  export type UserStatusUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    orientation?: BoolFieldUpdateOperationsInput | boolean
+    resumeRebuilding?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFirstMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    resumeConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    portfolioBuildingAndConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForSecondMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    paymentMade?: BoolFieldUpdateOperationsInput | boolean
+    techDistributionAndExtension?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForThirdMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    cheatSheetBuiltOut?: BoolFieldUpdateOperationsInput | boolean
+    hasAppliedEnoughJobs?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFourthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFifthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    fourthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fifthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finalReview?: BoolFieldUpdateOperationsInput | boolean
+    firstMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    firstMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fourthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fourthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    secondMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    thirdMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UserStatusCreateManyInput = {
+    id: string
+    userId: string
+    orientation?: boolean
+    resumeRebuilding?: boolean
+    eligibleForFirstMentorCall?: boolean
+    resumeConfirmed?: boolean
+    portfolioBuildingAndConfirmed?: boolean
+    eligibleForSecondMentorCall?: boolean
+    paymentMade?: boolean
+    techDistributionAndExtension?: boolean
+    eligibleForThirdMentorCall?: boolean
+    cheatSheetBuiltOut?: boolean
+    hasAppliedEnoughJobs?: boolean
+    eligibleForFourthMentorCall?: boolean
+    eligibleForFifthMentorCall?: boolean
+    fourthMentorCallCompletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+    fifthMentorCallCompletedAt?: Date | string | null
+    firstMentorCallCompletedAt?: Date | string | null
+    secondMentorCallCompletedAt?: Date | string | null
+    thirdMentorCallCompletedAt?: Date | string | null
+    fifthMentorCallGoogleMeetLink?: string | null
+    fifthMentorCallScheduledAt?: Date | string | null
+    finalReview?: boolean
+    firstMentorCallGoogleMeetLink?: string | null
+    firstMentorCallScheduledAt?: Date | string | null
+    fourthMentorCallGoogleMeetLink?: string | null
+    fourthMentorCallScheduledAt?: Date | string | null
+    secondMentorCallGoogleMeetLink?: string | null
+    secondMentorCallScheduledAt?: Date | string | null
+    thirdMentorCallGoogleMeetLink?: string | null
+    thirdMentorCallScheduledAt?: Date | string | null
+  }
+
+  export type UserStatusUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orientation?: BoolFieldUpdateOperationsInput | boolean
+    resumeRebuilding?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFirstMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    resumeConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    portfolioBuildingAndConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForSecondMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    paymentMade?: BoolFieldUpdateOperationsInput | boolean
+    techDistributionAndExtension?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForThirdMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    cheatSheetBuiltOut?: BoolFieldUpdateOperationsInput | boolean
+    hasAppliedEnoughJobs?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFourthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFifthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    fourthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fifthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finalReview?: BoolFieldUpdateOperationsInput | boolean
+    firstMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    firstMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fourthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fourthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    secondMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    thirdMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UserStatusUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    orientation?: BoolFieldUpdateOperationsInput | boolean
+    resumeRebuilding?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFirstMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    resumeConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    portfolioBuildingAndConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForSecondMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    paymentMade?: BoolFieldUpdateOperationsInput | boolean
+    techDistributionAndExtension?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForThirdMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    cheatSheetBuiltOut?: BoolFieldUpdateOperationsInput | boolean
+    hasAppliedEnoughJobs?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFourthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFifthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    fourthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fifthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finalReview?: BoolFieldUpdateOperationsInput | boolean
+    firstMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    firstMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fourthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fourthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    secondMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    thirdMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6393,6 +11615,33 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type ApiKeyListRelationFilter = {
     every?: ApiKeyWhereInput
     some?: ApiKeyWhereInput
@@ -6408,6 +11657,16 @@ export namespace Prisma {
   export type ProgressNullableScalarRelationFilter = {
     is?: ProgressWhereInput | null
     isNot?: ProgressWhereInput | null
+  }
+
+  export type AdminMentorNullableScalarRelationFilter = {
+    is?: AdminMentorWhereInput | null
+    isNot?: AdminMentorWhereInput | null
+  }
+
+  export type UserStatusNullableScalarRelationFilter = {
+    is?: UserStatusWhereInput | null
+    isNot?: UserStatusWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -6430,6 +11689,14 @@ export namespace Prisma {
     fullName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    goalPerDay?: SortOrder
+    mentorId?: SortOrder
+    deletedAt?: SortOrder
+    verifiedByAdmin?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    goalPerDay?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -6439,6 +11706,10 @@ export namespace Prisma {
     fullName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    goalPerDay?: SortOrder
+    mentorId?: SortOrder
+    deletedAt?: SortOrder
+    verifiedByAdmin?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -6448,6 +11719,14 @@ export namespace Prisma {
     fullName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    goalPerDay?: SortOrder
+    mentorId?: SortOrder
+    deletedAt?: SortOrder
+    verifiedByAdmin?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    goalPerDay?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -6500,55 +11779,20 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
-  export type ApiKeyCountOrderByAggregateInput = {
-    id?: SortOrder
-    key?: SortOrder
-    name?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    lastUsedAt?: SortOrder
-    isActive?: SortOrder
-  }
-
-  export type ApiKeyMaxOrderByAggregateInput = {
-    id?: SortOrder
-    key?: SortOrder
-    name?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    lastUsedAt?: SortOrder
-    isActive?: SortOrder
-  }
-
-  export type ApiKeyMinOrderByAggregateInput = {
-    id?: SortOrder
-    key?: SortOrder
-    name?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    lastUsedAt?: SortOrder
-    isActive?: SortOrder
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6573,9 +11817,42 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type AppliedJobUserIdUrlCompoundUniqueInput = {
-    userId: string
-    url: string
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type ApiKeyCountOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+    isActive?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type ApiKeyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+    isActive?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type ApiKeyMinOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+    isActive?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type AppliedJobCountOrderByAggregateInput = {
@@ -6591,6 +11868,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     type?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type AppliedJobMaxOrderByAggregateInput = {
@@ -6606,6 +11884,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     type?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type AppliedJobMinOrderByAggregateInput = {
@@ -6621,6 +11900,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     type?: SortOrder
+    deletedAt?: SortOrder
   }
   export type JsonFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -6652,6 +11932,7 @@ export namespace Prisma {
     weeks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type ProgressMaxOrderByAggregateInput = {
@@ -6659,6 +11940,7 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type ProgressMinOrderByAggregateInput = {
@@ -6666,6 +11948,7 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
   }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -6694,6 +11977,227 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AdminMentorCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    name?: SortOrder
+    picture?: SortOrder
+    expertise?: SortOrder
+    background?: SortOrder
+    availability?: SortOrder
+    isAdmin?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    company?: SortOrder
+    role?: SortOrder
+    verifiedByAdmin?: SortOrder
+  }
+
+  export type AdminMentorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    name?: SortOrder
+    picture?: SortOrder
+    expertise?: SortOrder
+    background?: SortOrder
+    availability?: SortOrder
+    isAdmin?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    company?: SortOrder
+    role?: SortOrder
+    verifiedByAdmin?: SortOrder
+  }
+
+  export type AdminMentorMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    name?: SortOrder
+    picture?: SortOrder
+    expertise?: SortOrder
+    background?: SortOrder
+    availability?: SortOrder
+    isAdmin?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    company?: SortOrder
+    role?: SortOrder
+    verifiedByAdmin?: SortOrder
+  }
+
+  export type MentorSessionNoteUserIdCallNumberCompoundUniqueInput = {
+    userId: string
+    callNumber: number
+  }
+
+  export type MentorSessionNoteCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    callNumber?: SortOrder
+    notes?: SortOrder
+    mentorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type MentorSessionNoteAvgOrderByAggregateInput = {
+    callNumber?: SortOrder
+  }
+
+  export type MentorSessionNoteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    callNumber?: SortOrder
+    notes?: SortOrder
+    mentorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type MentorSessionNoteMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    callNumber?: SortOrder
+    notes?: SortOrder
+    mentorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type MentorSessionNoteSumOrderByAggregateInput = {
+    callNumber?: SortOrder
+  }
+
+  export type UserStatusCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orientation?: SortOrder
+    resumeRebuilding?: SortOrder
+    eligibleForFirstMentorCall?: SortOrder
+    resumeConfirmed?: SortOrder
+    portfolioBuildingAndConfirmed?: SortOrder
+    eligibleForSecondMentorCall?: SortOrder
+    paymentMade?: SortOrder
+    techDistributionAndExtension?: SortOrder
+    eligibleForThirdMentorCall?: SortOrder
+    cheatSheetBuiltOut?: SortOrder
+    hasAppliedEnoughJobs?: SortOrder
+    eligibleForFourthMentorCall?: SortOrder
+    eligibleForFifthMentorCall?: SortOrder
+    fourthMentorCallCompletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    fifthMentorCallCompletedAt?: SortOrder
+    firstMentorCallCompletedAt?: SortOrder
+    secondMentorCallCompletedAt?: SortOrder
+    thirdMentorCallCompletedAt?: SortOrder
+    fifthMentorCallGoogleMeetLink?: SortOrder
+    fifthMentorCallScheduledAt?: SortOrder
+    finalReview?: SortOrder
+    firstMentorCallGoogleMeetLink?: SortOrder
+    firstMentorCallScheduledAt?: SortOrder
+    fourthMentorCallGoogleMeetLink?: SortOrder
+    fourthMentorCallScheduledAt?: SortOrder
+    secondMentorCallGoogleMeetLink?: SortOrder
+    secondMentorCallScheduledAt?: SortOrder
+    thirdMentorCallGoogleMeetLink?: SortOrder
+    thirdMentorCallScheduledAt?: SortOrder
+  }
+
+  export type UserStatusMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orientation?: SortOrder
+    resumeRebuilding?: SortOrder
+    eligibleForFirstMentorCall?: SortOrder
+    resumeConfirmed?: SortOrder
+    portfolioBuildingAndConfirmed?: SortOrder
+    eligibleForSecondMentorCall?: SortOrder
+    paymentMade?: SortOrder
+    techDistributionAndExtension?: SortOrder
+    eligibleForThirdMentorCall?: SortOrder
+    cheatSheetBuiltOut?: SortOrder
+    hasAppliedEnoughJobs?: SortOrder
+    eligibleForFourthMentorCall?: SortOrder
+    eligibleForFifthMentorCall?: SortOrder
+    fourthMentorCallCompletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    fifthMentorCallCompletedAt?: SortOrder
+    firstMentorCallCompletedAt?: SortOrder
+    secondMentorCallCompletedAt?: SortOrder
+    thirdMentorCallCompletedAt?: SortOrder
+    fifthMentorCallGoogleMeetLink?: SortOrder
+    fifthMentorCallScheduledAt?: SortOrder
+    finalReview?: SortOrder
+    firstMentorCallGoogleMeetLink?: SortOrder
+    firstMentorCallScheduledAt?: SortOrder
+    fourthMentorCallGoogleMeetLink?: SortOrder
+    fourthMentorCallScheduledAt?: SortOrder
+    secondMentorCallGoogleMeetLink?: SortOrder
+    secondMentorCallScheduledAt?: SortOrder
+    thirdMentorCallGoogleMeetLink?: SortOrder
+    thirdMentorCallScheduledAt?: SortOrder
+  }
+
+  export type UserStatusMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orientation?: SortOrder
+    resumeRebuilding?: SortOrder
+    eligibleForFirstMentorCall?: SortOrder
+    resumeConfirmed?: SortOrder
+    portfolioBuildingAndConfirmed?: SortOrder
+    eligibleForSecondMentorCall?: SortOrder
+    paymentMade?: SortOrder
+    techDistributionAndExtension?: SortOrder
+    eligibleForThirdMentorCall?: SortOrder
+    cheatSheetBuiltOut?: SortOrder
+    hasAppliedEnoughJobs?: SortOrder
+    eligibleForFourthMentorCall?: SortOrder
+    eligibleForFifthMentorCall?: SortOrder
+    fourthMentorCallCompletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    fifthMentorCallCompletedAt?: SortOrder
+    firstMentorCallCompletedAt?: SortOrder
+    secondMentorCallCompletedAt?: SortOrder
+    thirdMentorCallCompletedAt?: SortOrder
+    fifthMentorCallGoogleMeetLink?: SortOrder
+    fifthMentorCallScheduledAt?: SortOrder
+    finalReview?: SortOrder
+    firstMentorCallGoogleMeetLink?: SortOrder
+    firstMentorCallScheduledAt?: SortOrder
+    fourthMentorCallGoogleMeetLink?: SortOrder
+    fourthMentorCallScheduledAt?: SortOrder
+    secondMentorCallGoogleMeetLink?: SortOrder
+    secondMentorCallScheduledAt?: SortOrder
+    thirdMentorCallGoogleMeetLink?: SortOrder
+    thirdMentorCallScheduledAt?: SortOrder
+  }
+
   export type ApiKeyCreateNestedManyWithoutUserInput = {
     create?: XOR<ApiKeyCreateWithoutUserInput, ApiKeyUncheckedCreateWithoutUserInput> | ApiKeyCreateWithoutUserInput[] | ApiKeyUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ApiKeyCreateOrConnectWithoutUserInput | ApiKeyCreateOrConnectWithoutUserInput[]
@@ -6712,6 +12216,18 @@ export namespace Prisma {
     create?: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput>
     connectOrCreate?: ProgressCreateOrConnectWithoutUserInput
     connect?: ProgressWhereUniqueInput
+  }
+
+  export type AdminMentorCreateNestedOneWithoutUserInput = {
+    create?: XOR<AdminMentorCreateWithoutUserInput, AdminMentorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AdminMentorCreateOrConnectWithoutUserInput
+    connect?: AdminMentorWhereUniqueInput
+  }
+
+  export type UserStatusCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserStatusCreateWithoutUserInput, UserStatusUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserStatusCreateOrConnectWithoutUserInput
+    connect?: UserStatusWhereUniqueInput
   }
 
   export type ApiKeyUncheckedCreateNestedManyWithoutUserInput = {
@@ -6734,6 +12250,12 @@ export namespace Prisma {
     connect?: ProgressWhereUniqueInput
   }
 
+  export type UserStatusUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserStatusCreateWithoutUserInput, UserStatusUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserStatusCreateOrConnectWithoutUserInput
+    connect?: UserStatusWhereUniqueInput
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -6744,6 +12266,22 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type ApiKeyUpdateManyWithoutUserNestedInput = {
@@ -6784,6 +12322,26 @@ export namespace Prisma {
     update?: XOR<XOR<ProgressUpdateToOneWithWhereWithoutUserInput, ProgressUpdateWithoutUserInput>, ProgressUncheckedUpdateWithoutUserInput>
   }
 
+  export type AdminMentorUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AdminMentorCreateWithoutUserInput, AdminMentorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AdminMentorCreateOrConnectWithoutUserInput
+    upsert?: AdminMentorUpsertWithoutUserInput
+    disconnect?: AdminMentorWhereInput | boolean
+    delete?: AdminMentorWhereInput | boolean
+    connect?: AdminMentorWhereUniqueInput
+    update?: XOR<XOR<AdminMentorUpdateToOneWithWhereWithoutUserInput, AdminMentorUpdateWithoutUserInput>, AdminMentorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserStatusUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserStatusCreateWithoutUserInput, UserStatusUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserStatusCreateOrConnectWithoutUserInput
+    upsert?: UserStatusUpsertWithoutUserInput
+    disconnect?: UserStatusWhereInput | boolean
+    delete?: UserStatusWhereInput | boolean
+    connect?: UserStatusWhereUniqueInput
+    update?: XOR<XOR<UserStatusUpdateToOneWithWhereWithoutUserInput, UserStatusUpdateWithoutUserInput>, UserStatusUncheckedUpdateWithoutUserInput>
+  }
+
   export type ApiKeyUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ApiKeyCreateWithoutUserInput, ApiKeyUncheckedCreateWithoutUserInput> | ApiKeyCreateWithoutUserInput[] | ApiKeyUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ApiKeyCreateOrConnectWithoutUserInput | ApiKeyCreateOrConnectWithoutUserInput[]
@@ -6822,18 +12380,20 @@ export namespace Prisma {
     update?: XOR<XOR<ProgressUpdateToOneWithWhereWithoutUserInput, ProgressUpdateWithoutUserInput>, ProgressUncheckedUpdateWithoutUserInput>
   }
 
+  export type UserStatusUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserStatusCreateWithoutUserInput, UserStatusUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserStatusCreateOrConnectWithoutUserInput
+    upsert?: UserStatusUpsertWithoutUserInput
+    disconnect?: UserStatusWhereInput | boolean
+    delete?: UserStatusWhereInput | boolean
+    connect?: UserStatusWhereUniqueInput
+    update?: XOR<XOR<UserStatusUpdateToOneWithWhereWithoutUserInput, UserStatusUpdateWithoutUserInput>, UserStatusUncheckedUpdateWithoutUserInput>
+  }
+
   export type UserCreateNestedOneWithoutApiKeysInput = {
     create?: XOR<UserCreateWithoutApiKeysInput, UserUncheckedCreateWithoutApiKeysInput>
     connectOrCreate?: UserCreateOrConnectWithoutApiKeysInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutApiKeysNestedInput = {
@@ -6870,6 +12430,62 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutProgressInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProgressInput, UserUpdateWithoutProgressInput>, UserUncheckedUpdateWithoutProgressInput>
+  }
+
+  export type UserCreateNestedManyWithoutAdminMentorInput = {
+    create?: XOR<UserCreateWithoutAdminMentorInput, UserUncheckedCreateWithoutAdminMentorInput> | UserCreateWithoutAdminMentorInput[] | UserUncheckedCreateWithoutAdminMentorInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutAdminMentorInput | UserCreateOrConnectWithoutAdminMentorInput[]
+    createMany?: UserCreateManyAdminMentorInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutAdminMentorInput = {
+    create?: XOR<UserCreateWithoutAdminMentorInput, UserUncheckedCreateWithoutAdminMentorInput> | UserCreateWithoutAdminMentorInput[] | UserUncheckedCreateWithoutAdminMentorInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutAdminMentorInput | UserCreateOrConnectWithoutAdminMentorInput[]
+    createMany?: UserCreateManyAdminMentorInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUpdateManyWithoutAdminMentorNestedInput = {
+    create?: XOR<UserCreateWithoutAdminMentorInput, UserUncheckedCreateWithoutAdminMentorInput> | UserCreateWithoutAdminMentorInput[] | UserUncheckedCreateWithoutAdminMentorInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutAdminMentorInput | UserCreateOrConnectWithoutAdminMentorInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutAdminMentorInput | UserUpsertWithWhereUniqueWithoutAdminMentorInput[]
+    createMany?: UserCreateManyAdminMentorInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutAdminMentorInput | UserUpdateWithWhereUniqueWithoutAdminMentorInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutAdminMentorInput | UserUpdateManyWithWhereWithoutAdminMentorInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutAdminMentorNestedInput = {
+    create?: XOR<UserCreateWithoutAdminMentorInput, UserUncheckedCreateWithoutAdminMentorInput> | UserCreateWithoutAdminMentorInput[] | UserUncheckedCreateWithoutAdminMentorInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutAdminMentorInput | UserCreateOrConnectWithoutAdminMentorInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutAdminMentorInput | UserUpsertWithWhereUniqueWithoutAdminMentorInput[]
+    createMany?: UserCreateManyAdminMentorInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutAdminMentorInput | UserUpdateWithWhereUniqueWithoutAdminMentorInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutAdminMentorInput | UserUpdateManyWithWhereWithoutAdminMentorInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutUserStatusInput = {
+    create?: XOR<UserCreateWithoutUserStatusInput, UserUncheckedCreateWithoutUserStatusInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserStatusInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUserStatusNestedInput = {
+    create?: XOR<UserCreateWithoutUserStatusInput, UserUncheckedCreateWithoutUserStatusInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserStatusInput
+    upsert?: UserUpsertWithoutUserStatusInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserStatusInput, UserUpdateWithoutUserStatusInput>, UserUncheckedUpdateWithoutUserStatusInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6911,6 +12527,33 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6926,17 +12569,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6981,20 +12613,31 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -7049,6 +12692,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastUsedAt?: Date | string | null
     isActive?: boolean
+    deletedAt?: Date | string | null
   }
 
   export type ApiKeyUncheckedCreateWithoutUserInput = {
@@ -7058,6 +12702,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastUsedAt?: Date | string | null
     isActive?: boolean
+    deletedAt?: Date | string | null
   }
 
   export type ApiKeyCreateOrConnectWithoutUserInput = {
@@ -7082,6 +12727,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     type?: string
+    deletedAt?: Date | string | null
   }
 
   export type AppliedJobUncheckedCreateWithoutUserInput = {
@@ -7096,6 +12742,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     type?: string
+    deletedAt?: Date | string | null
   }
 
   export type AppliedJobCreateOrConnectWithoutUserInput = {
@@ -7113,6 +12760,7 @@ export namespace Prisma {
     weeks: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type ProgressUncheckedCreateWithoutUserInput = {
@@ -7120,11 +12768,130 @@ export namespace Prisma {
     weeks: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type ProgressCreateOrConnectWithoutUserInput = {
     where: ProgressWhereUniqueInput
     create: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdminMentorCreateWithoutUserInput = {
+    id: string
+    email: string
+    password: string
+    name: string
+    picture?: string | null
+    expertise?: string | null
+    background?: string | null
+    availability?: string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+    company?: string | null
+    role?: string | null
+    verifiedByAdmin?: boolean
+  }
+
+  export type AdminMentorUncheckedCreateWithoutUserInput = {
+    id: string
+    email: string
+    password: string
+    name: string
+    picture?: string | null
+    expertise?: string | null
+    background?: string | null
+    availability?: string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+    company?: string | null
+    role?: string | null
+    verifiedByAdmin?: boolean
+  }
+
+  export type AdminMentorCreateOrConnectWithoutUserInput = {
+    where: AdminMentorWhereUniqueInput
+    create: XOR<AdminMentorCreateWithoutUserInput, AdminMentorUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserStatusCreateWithoutUserInput = {
+    id: string
+    orientation?: boolean
+    resumeRebuilding?: boolean
+    eligibleForFirstMentorCall?: boolean
+    resumeConfirmed?: boolean
+    portfolioBuildingAndConfirmed?: boolean
+    eligibleForSecondMentorCall?: boolean
+    paymentMade?: boolean
+    techDistributionAndExtension?: boolean
+    eligibleForThirdMentorCall?: boolean
+    cheatSheetBuiltOut?: boolean
+    hasAppliedEnoughJobs?: boolean
+    eligibleForFourthMentorCall?: boolean
+    eligibleForFifthMentorCall?: boolean
+    fourthMentorCallCompletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+    fifthMentorCallCompletedAt?: Date | string | null
+    firstMentorCallCompletedAt?: Date | string | null
+    secondMentorCallCompletedAt?: Date | string | null
+    thirdMentorCallCompletedAt?: Date | string | null
+    fifthMentorCallGoogleMeetLink?: string | null
+    fifthMentorCallScheduledAt?: Date | string | null
+    finalReview?: boolean
+    firstMentorCallGoogleMeetLink?: string | null
+    firstMentorCallScheduledAt?: Date | string | null
+    fourthMentorCallGoogleMeetLink?: string | null
+    fourthMentorCallScheduledAt?: Date | string | null
+    secondMentorCallGoogleMeetLink?: string | null
+    secondMentorCallScheduledAt?: Date | string | null
+    thirdMentorCallGoogleMeetLink?: string | null
+    thirdMentorCallScheduledAt?: Date | string | null
+  }
+
+  export type UserStatusUncheckedCreateWithoutUserInput = {
+    id: string
+    orientation?: boolean
+    resumeRebuilding?: boolean
+    eligibleForFirstMentorCall?: boolean
+    resumeConfirmed?: boolean
+    portfolioBuildingAndConfirmed?: boolean
+    eligibleForSecondMentorCall?: boolean
+    paymentMade?: boolean
+    techDistributionAndExtension?: boolean
+    eligibleForThirdMentorCall?: boolean
+    cheatSheetBuiltOut?: boolean
+    hasAppliedEnoughJobs?: boolean
+    eligibleForFourthMentorCall?: boolean
+    eligibleForFifthMentorCall?: boolean
+    fourthMentorCallCompletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt: Date | string
+    deletedAt?: Date | string | null
+    fifthMentorCallCompletedAt?: Date | string | null
+    firstMentorCallCompletedAt?: Date | string | null
+    secondMentorCallCompletedAt?: Date | string | null
+    thirdMentorCallCompletedAt?: Date | string | null
+    fifthMentorCallGoogleMeetLink?: string | null
+    fifthMentorCallScheduledAt?: Date | string | null
+    finalReview?: boolean
+    firstMentorCallGoogleMeetLink?: string | null
+    firstMentorCallScheduledAt?: Date | string | null
+    fourthMentorCallGoogleMeetLink?: string | null
+    fourthMentorCallScheduledAt?: Date | string | null
+    secondMentorCallGoogleMeetLink?: string | null
+    secondMentorCallScheduledAt?: Date | string | null
+    thirdMentorCallGoogleMeetLink?: string | null
+    thirdMentorCallScheduledAt?: Date | string | null
+  }
+
+  export type UserStatusCreateOrConnectWithoutUserInput = {
+    where: UserStatusWhereUniqueInput
+    create: XOR<UserStatusCreateWithoutUserInput, UserStatusUncheckedCreateWithoutUserInput>
   }
 
   export type ApiKeyUpsertWithWhereUniqueWithoutUserInput = {
@@ -7154,6 +12921,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ApiKey"> | Date | string
     lastUsedAt?: DateTimeNullableFilter<"ApiKey"> | Date | string | null
     isActive?: BoolFilter<"ApiKey"> | boolean
+    deletedAt?: DateTimeNullableFilter<"ApiKey"> | Date | string | null
   }
 
   export type AppliedJobUpsertWithWhereUniqueWithoutUserInput = {
@@ -7188,6 +12956,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AppliedJob"> | Date | string
     updatedAt?: DateTimeFilter<"AppliedJob"> | Date | string
     type?: StringFilter<"AppliedJob"> | string
+    deletedAt?: DateTimeNullableFilter<"AppliedJob"> | Date | string | null
   }
 
   export type ProgressUpsertWithoutUserInput = {
@@ -7206,6 +12975,7 @@ export namespace Prisma {
     weeks?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProgressUncheckedUpdateWithoutUserInput = {
@@ -7213,6 +12983,137 @@ export namespace Prisma {
     weeks?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AdminMentorUpsertWithoutUserInput = {
+    update: XOR<AdminMentorUpdateWithoutUserInput, AdminMentorUncheckedUpdateWithoutUserInput>
+    create: XOR<AdminMentorCreateWithoutUserInput, AdminMentorUncheckedCreateWithoutUserInput>
+    where?: AdminMentorWhereInput
+  }
+
+  export type AdminMentorUpdateToOneWithWhereWithoutUserInput = {
+    where?: AdminMentorWhereInput
+    data: XOR<AdminMentorUpdateWithoutUserInput, AdminMentorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AdminMentorUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    expertise?: NullableStringFieldUpdateOperationsInput | string | null
+    background?: NullableStringFieldUpdateOperationsInput | string | null
+    availability?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AdminMentorUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    expertise?: NullableStringFieldUpdateOperationsInput | string | null
+    background?: NullableStringFieldUpdateOperationsInput | string | null
+    availability?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserStatusUpsertWithoutUserInput = {
+    update: XOR<UserStatusUpdateWithoutUserInput, UserStatusUncheckedUpdateWithoutUserInput>
+    create: XOR<UserStatusCreateWithoutUserInput, UserStatusUncheckedCreateWithoutUserInput>
+    where?: UserStatusWhereInput
+  }
+
+  export type UserStatusUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserStatusWhereInput
+    data: XOR<UserStatusUpdateWithoutUserInput, UserStatusUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserStatusUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orientation?: BoolFieldUpdateOperationsInput | boolean
+    resumeRebuilding?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFirstMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    resumeConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    portfolioBuildingAndConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForSecondMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    paymentMade?: BoolFieldUpdateOperationsInput | boolean
+    techDistributionAndExtension?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForThirdMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    cheatSheetBuiltOut?: BoolFieldUpdateOperationsInput | boolean
+    hasAppliedEnoughJobs?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFourthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFifthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    fourthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fifthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finalReview?: BoolFieldUpdateOperationsInput | boolean
+    firstMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    firstMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fourthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fourthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    secondMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    thirdMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UserStatusUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orientation?: BoolFieldUpdateOperationsInput | boolean
+    resumeRebuilding?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFirstMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    resumeConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    portfolioBuildingAndConfirmed?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForSecondMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    paymentMade?: BoolFieldUpdateOperationsInput | boolean
+    techDistributionAndExtension?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForThirdMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    cheatSheetBuiltOut?: BoolFieldUpdateOperationsInput | boolean
+    hasAppliedEnoughJobs?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFourthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    eligibleForFifthMentorCall?: BoolFieldUpdateOperationsInput | boolean
+    fourthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallCompletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fifthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fifthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finalReview?: BoolFieldUpdateOperationsInput | boolean
+    firstMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    firstMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fourthMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    fourthMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    secondMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    secondMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    thirdMentorCallGoogleMeetLink?: NullableStringFieldUpdateOperationsInput | string | null
+    thirdMentorCallScheduledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserCreateWithoutApiKeysInput = {
@@ -7222,8 +13123,13 @@ export namespace Prisma {
     fullName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    goalPerDay?: number
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
     appliedJobs?: AppliedJobCreateNestedManyWithoutUserInput
     Progress?: ProgressCreateNestedOneWithoutUserInput
+    AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
+    UserStatus?: UserStatusCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutApiKeysInput = {
@@ -7233,8 +13139,13 @@ export namespace Prisma {
     fullName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    goalPerDay?: number
+    mentorId?: string | null
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
     appliedJobs?: AppliedJobUncheckedCreateNestedManyWithoutUserInput
     Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
+    UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutApiKeysInput = {
@@ -7260,8 +13171,13 @@ export namespace Prisma {
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
     appliedJobs?: AppliedJobUpdateManyWithoutUserNestedInput
     Progress?: ProgressUpdateOneWithoutUserNestedInput
+    AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
+    UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApiKeysInput = {
@@ -7271,8 +13187,13 @@ export namespace Prisma {
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    mentorId?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
     appliedJobs?: AppliedJobUncheckedUpdateManyWithoutUserNestedInput
     Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
+    UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAppliedJobsInput = {
@@ -7282,8 +13203,13 @@ export namespace Prisma {
     fullName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    goalPerDay?: number
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     Progress?: ProgressCreateNestedOneWithoutUserInput
+    AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
+    UserStatus?: UserStatusCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAppliedJobsInput = {
@@ -7293,8 +13219,13 @@ export namespace Prisma {
     fullName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    goalPerDay?: number
+    mentorId?: string | null
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
+    UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAppliedJobsInput = {
@@ -7320,8 +13251,13 @@ export namespace Prisma {
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     Progress?: ProgressUpdateOneWithoutUserNestedInput
+    AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
+    UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAppliedJobsInput = {
@@ -7331,8 +13267,13 @@ export namespace Prisma {
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    mentorId?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
+    UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProgressInput = {
@@ -7342,8 +13283,13 @@ export namespace Prisma {
     fullName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    goalPerDay?: number
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     appliedJobs?: AppliedJobCreateNestedManyWithoutUserInput
+    AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
+    UserStatus?: UserStatusCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProgressInput = {
@@ -7353,8 +13299,13 @@ export namespace Prisma {
     fullName?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    goalPerDay?: number
+    mentorId?: string | null
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     appliedJobs?: AppliedJobUncheckedCreateNestedManyWithoutUserInput
+    UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProgressInput = {
@@ -7380,8 +13331,13 @@ export namespace Prisma {
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     appliedJobs?: AppliedJobUpdateManyWithoutUserNestedInput
+    AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
+    UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProgressInput = {
@@ -7391,8 +13347,167 @@ export namespace Prisma {
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    mentorId?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     appliedJobs?: AppliedJobUncheckedUpdateManyWithoutUserNestedInput
+    UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutAdminMentorInput = {
+    id?: string
+    firebaseUid: string
+    email: string
+    fullName?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    goalPerDay?: number
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
+    apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
+    appliedJobs?: AppliedJobCreateNestedManyWithoutUserInput
+    Progress?: ProgressCreateNestedOneWithoutUserInput
+    UserStatus?: UserStatusCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAdminMentorInput = {
+    id?: string
+    firebaseUid: string
+    email: string
+    fullName?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    goalPerDay?: number
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
+    appliedJobs?: AppliedJobUncheckedCreateNestedManyWithoutUserInput
+    Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
+    UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAdminMentorInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAdminMentorInput, UserUncheckedCreateWithoutAdminMentorInput>
+  }
+
+  export type UserCreateManyAdminMentorInputEnvelope = {
+    data: UserCreateManyAdminMentorInput | UserCreateManyAdminMentorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutAdminMentorInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutAdminMentorInput, UserUncheckedUpdateWithoutAdminMentorInput>
+    create: XOR<UserCreateWithoutAdminMentorInput, UserUncheckedCreateWithoutAdminMentorInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutAdminMentorInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutAdminMentorInput, UserUncheckedUpdateWithoutAdminMentorInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutAdminMentorInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutAdminMentorInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    id?: StringFilter<"User"> | string
+    firebaseUid?: StringFilter<"User"> | string
+    email?: StringFilter<"User"> | string
+    fullName?: StringNullableFilter<"User"> | string | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+    goalPerDay?: IntFilter<"User"> | number
+    mentorId?: StringNullableFilter<"User"> | string | null
+    deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    verifiedByAdmin?: BoolFilter<"User"> | boolean
+  }
+
+  export type UserCreateWithoutUserStatusInput = {
+    id?: string
+    firebaseUid: string
+    email: string
+    fullName?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    goalPerDay?: number
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
+    apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
+    appliedJobs?: AppliedJobCreateNestedManyWithoutUserInput
+    Progress?: ProgressCreateNestedOneWithoutUserInput
+    AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUserStatusInput = {
+    id?: string
+    firebaseUid: string
+    email: string
+    fullName?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    goalPerDay?: number
+    mentorId?: string | null
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
+    appliedJobs?: AppliedJobUncheckedCreateNestedManyWithoutUserInput
+    Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUserStatusInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUserStatusInput, UserUncheckedCreateWithoutUserStatusInput>
+  }
+
+  export type UserUpsertWithoutUserStatusInput = {
+    update: XOR<UserUpdateWithoutUserStatusInput, UserUncheckedUpdateWithoutUserStatusInput>
+    create: XOR<UserCreateWithoutUserStatusInput, UserUncheckedCreateWithoutUserStatusInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUserStatusInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUserStatusInput, UserUncheckedUpdateWithoutUserStatusInput>
+  }
+
+  export type UserUpdateWithoutUserStatusInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firebaseUid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
+    apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
+    appliedJobs?: AppliedJobUpdateManyWithoutUserNestedInput
+    Progress?: ProgressUpdateOneWithoutUserNestedInput
+    AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUserStatusInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firebaseUid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    mentorId?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+    appliedJobs?: AppliedJobUncheckedUpdateManyWithoutUserNestedInput
+    Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ApiKeyCreateManyUserInput = {
@@ -7402,6 +13517,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastUsedAt?: Date | string | null
     isActive?: boolean
+    deletedAt?: Date | string | null
   }
 
   export type AppliedJobCreateManyUserInput = {
@@ -7416,6 +13532,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     type?: string
+    deletedAt?: Date | string | null
   }
 
   export type ApiKeyUpdateWithoutUserInput = {
@@ -7425,6 +13542,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ApiKeyUncheckedUpdateWithoutUserInput = {
@@ -7434,6 +13552,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ApiKeyUncheckedUpdateManyWithoutUserInput = {
@@ -7443,6 +13562,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppliedJobUpdateWithoutUserInput = {
@@ -7457,6 +13577,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppliedJobUncheckedUpdateWithoutUserInput = {
@@ -7471,6 +13592,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppliedJobUncheckedUpdateManyWithoutUserInput = {
@@ -7485,6 +13607,63 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UserCreateManyAdminMentorInput = {
+    id?: string
+    firebaseUid: string
+    email: string
+    fullName?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    goalPerDay?: number
+    deletedAt?: Date | string | null
+    verifiedByAdmin?: boolean
+  }
+
+  export type UserUpdateWithoutAdminMentorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firebaseUid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
+    apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
+    appliedJobs?: AppliedJobUpdateManyWithoutUserNestedInput
+    Progress?: ProgressUpdateOneWithoutUserNestedInput
+    UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAdminMentorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firebaseUid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+    appliedJobs?: AppliedJobUncheckedUpdateManyWithoutUserNestedInput
+    Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
+    UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutAdminMentorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firebaseUid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    goalPerDay?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedByAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
 

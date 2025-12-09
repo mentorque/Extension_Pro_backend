@@ -126,7 +126,11 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   fullName: 'fullName',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  goalPerDay: 'goalPerDay',
+  mentorId: 'mentorId',
+  deletedAt: 'deletedAt',
+  verifiedByAdmin: 'verifiedByAdmin'
 };
 
 exports.Prisma.ApiKeyScalarFieldEnum = {
@@ -136,7 +140,8 @@ exports.Prisma.ApiKeyScalarFieldEnum = {
   userId: 'userId',
   createdAt: 'createdAt',
   lastUsedAt: 'lastUsedAt',
-  isActive: 'isActive'
+  isActive: 'isActive',
+  deletedAt: 'deletedAt'
 };
 
 exports.Prisma.AppliedJobScalarFieldEnum = {
@@ -151,7 +156,8 @@ exports.Prisma.AppliedJobScalarFieldEnum = {
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  type: 'type'
+  type: 'type',
+  deletedAt: 'deletedAt'
 };
 
 exports.Prisma.ProgressScalarFieldEnum = {
@@ -159,7 +165,74 @@ exports.Prisma.ProgressScalarFieldEnum = {
   userId: 'userId',
   weeks: 'weeks',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.AdminMentorScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  name: 'name',
+  picture: 'picture',
+  expertise: 'expertise',
+  background: 'background',
+  availability: 'availability',
+  isAdmin: 'isAdmin',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  company: 'company',
+  role: 'role',
+  verifiedByAdmin: 'verifiedByAdmin'
+};
+
+exports.Prisma.MentorSessionNoteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  callNumber: 'callNumber',
+  notes: 'notes',
+  mentorId: 'mentorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.UserStatusScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  orientation: 'orientation',
+  resumeRebuilding: 'resumeRebuilding',
+  eligibleForFirstMentorCall: 'eligibleForFirstMentorCall',
+  resumeConfirmed: 'resumeConfirmed',
+  portfolioBuildingAndConfirmed: 'portfolioBuildingAndConfirmed',
+  eligibleForSecondMentorCall: 'eligibleForSecondMentorCall',
+  paymentMade: 'paymentMade',
+  techDistributionAndExtension: 'techDistributionAndExtension',
+  eligibleForThirdMentorCall: 'eligibleForThirdMentorCall',
+  cheatSheetBuiltOut: 'cheatSheetBuiltOut',
+  hasAppliedEnoughJobs: 'hasAppliedEnoughJobs',
+  eligibleForFourthMentorCall: 'eligibleForFourthMentorCall',
+  eligibleForFifthMentorCall: 'eligibleForFifthMentorCall',
+  fourthMentorCallCompletedAt: 'fourthMentorCallCompletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  fifthMentorCallCompletedAt: 'fifthMentorCallCompletedAt',
+  firstMentorCallCompletedAt: 'firstMentorCallCompletedAt',
+  secondMentorCallCompletedAt: 'secondMentorCallCompletedAt',
+  thirdMentorCallCompletedAt: 'thirdMentorCallCompletedAt',
+  fifthMentorCallGoogleMeetLink: 'fifthMentorCallGoogleMeetLink',
+  fifthMentorCallScheduledAt: 'fifthMentorCallScheduledAt',
+  finalReview: 'finalReview',
+  firstMentorCallGoogleMeetLink: 'firstMentorCallGoogleMeetLink',
+  firstMentorCallScheduledAt: 'firstMentorCallScheduledAt',
+  fourthMentorCallGoogleMeetLink: 'fourthMentorCallGoogleMeetLink',
+  fourthMentorCallScheduledAt: 'fourthMentorCallScheduledAt',
+  secondMentorCallGoogleMeetLink: 'secondMentorCallGoogleMeetLink',
+  secondMentorCallScheduledAt: 'secondMentorCallScheduledAt',
+  thirdMentorCallGoogleMeetLink: 'thirdMentorCallGoogleMeetLink',
+  thirdMentorCallScheduledAt: 'thirdMentorCallScheduledAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -192,7 +265,10 @@ exports.Prisma.ModelName = {
   User: 'User',
   ApiKey: 'ApiKey',
   AppliedJob: 'AppliedJob',
-  Progress: 'Progress'
+  Progress: 'Progress',
+  AdminMentor: 'AdminMentor',
+  MentorSessionNote: 'MentorSessionNote',
+  UserStatus: 'UserStatus'
 };
 
 /**

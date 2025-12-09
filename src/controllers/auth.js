@@ -62,6 +62,35 @@ const validateApiKeyPublic = async (req, res) => {
       });
     }
 
+    // Check if API key is deleted
+    if (apiKeyRecord.deletedAt) {
+      console.log(`[AUTH_PUBLIC] API key deleted for user: ${apiKeyRecord.user.email}`);
+      return res.status(403).json({
+        success: false,
+        message: 'API key is inactive'
+      });
+    }
+
+    // Check if user is deleted
+    if (apiKeyRecord.user.deletedAt) {
+      console.log(`[AUTH_PUBLIC] User deleted: ${apiKeyRecord.user.email}`);
+      return res.status(403).json({
+        success: false,
+        errorCode: 'USER_DELETED',
+        message: 'Your account has been deleted. Please contact support for assistance.'
+      });
+    }
+
+    // Check if user is verified
+    if (!apiKeyRecord.user.verifiedByAdmin) {
+      console.log(`[AUTH_PUBLIC] User not verified: ${apiKeyRecord.user.email}`);
+      return res.status(403).json({
+        success: false,
+        errorCode: 'USER_NOT_VERIFIED',
+        message: 'Your account is pending verification. Please wait for admin approval before using the extension.'
+      });
+    }
+
     console.log(`[AUTH_PUBLIC] API key validation successful for user: ${apiKeyRecord.user.email}`);
 
     // Update lastUsedAt

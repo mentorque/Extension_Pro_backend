@@ -41,6 +41,35 @@ const authenticateApiKey = async (req, res, next) => {
       return res.status(403).json({ success: false, message: 'API key is inactive' });
     }
 
+    // Check if API key is deleted
+    if (apiKeyRecord.deletedAt) {
+      const duration = Date.now() - startTime;
+      console.log(`[AUTH] ${req.method} ${req.path} - API key deleted for user: ${apiKeyRecord.user.email} (${duration}ms)`);
+      return res.status(403).json({ success: false, message: 'API key is inactive' });
+    }
+
+    // Check if user is deleted
+    if (apiKeyRecord.user.deletedAt) {
+      const duration = Date.now() - startTime;
+      console.log(`[AUTH] ${req.method} ${req.path} - User deleted: ${apiKeyRecord.user.email} (${duration}ms)`);
+      return res.status(403).json({ 
+        success: false, 
+        errorCode: 'USER_DELETED',
+        message: 'Your account has been deleted. Please contact support for assistance.' 
+      });
+    }
+
+    // Check if user is verified
+    if (!apiKeyRecord.user.verifiedByAdmin) {
+      const duration = Date.now() - startTime;
+      console.log(`[AUTH] ${req.method} ${req.path} - User not verified: ${apiKeyRecord.user.email} (${duration}ms)`);
+      return res.status(403).json({ 
+        success: false, 
+        errorCode: 'USER_NOT_VERIFIED',
+        message: 'Your account is pending verification. Please wait for admin approval before using the extension.' 
+      });
+    }
+
     // Update lastUsedAt
     await prisma.apiKey.update({
       where: { id: apiKeyRecord.id },
