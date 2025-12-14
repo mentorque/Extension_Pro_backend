@@ -33,12 +33,15 @@ const validateApiKeyPublic = async (req, res) => {
       });
     }
 
-    console.log(`[AUTH_PUBLIC] Validating API key: ${apiKey.substring(0, 8)}...`);
+    // Trim the API key to handle any whitespace issues
+    const trimmedApiKey = apiKey.trim();
+    
+    console.log(`[AUTH_PUBLIC] Validating API key: ${trimmedApiKey.substring(0, 8)}... (length: ${trimmedApiKey.length})`);
     
     // Query ApiKey model using 'key' field
     const apiKeyRecord = await prisma.apiKey.findUnique({
       where: { 
-        key: apiKey 
+        key: trimmedApiKey 
       },
       include: {
         user: true

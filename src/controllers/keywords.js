@@ -1,9 +1,8 @@
 // src/controllers/keywords.js
 const path = require('path');
 const fs = require('fs');
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { generateContentWithFallback } = require('../utils/geminiClient');
 const { keywordExtraction } = require('../utils/prompts.json');
-const { gemini_flash } = require('../utils/llms.json');
 
 const SKILLS_SCHEMA = fs.readFileSync(path.join(__dirname, '../schemas/keywords.md'), 'utf8');
 const SYSTEM_PROMPT = keywordExtraction;
@@ -50,14 +49,6 @@ const generateKeywords = async (req, res, next) => {
     });
     
     const { jobDescription, skills } = req.body;
-    const apiKey = process.env.GEMINI_API_KEY;
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: gemini_flash });
-
-    if (!apiKey) {
-      console.error('[KEYWORDS] Missing GEMINI_API_KEY');
-      return res.status(500).json({ error: 'Server configuration error: API key is missing.' });
-    }
 
     if (!jobDescription || !skills) {
       console.error('[KEYWORDS] Missing required fields:', {
@@ -72,8 +63,7 @@ const generateKeywords = async (req, res, next) => {
     const skillsString = JSON.stringify(skills);
     const fullPrompt = `${SYSTEM_PROMPT}\n Job Description:\n${jobDescription}\n\nCurrent Skills:\n${skillsString}\n\nResponse Format:${SKILLS_SCHEMA}`;
 
-    const aiResult = await model.generateContent(fullPrompt);
-    const response = aiResult.response;
+    const response = await generateContentWithFallback(fullPrompt, 'KEYWORDS');
     const text = response.text();
 
     const extractedResult = extractJSONFromString(text);

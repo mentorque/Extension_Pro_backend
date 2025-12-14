@@ -1,8 +1,7 @@
 const path = require('path');
 const fs = require('fs');
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { generateContentWithFallback } = require('../utils/geminiClient');
 const { coverLetter } = require('../utils/prompts.json');
-const { gemini_flash } = require('../utils/llms.json');
 
 const SYSTEM_PROMPT = coverLetter;
 const COVERLETTER_SCHEMA = fs.readFileSync(path.join(__dirname, '../schemas/coverletter.md'), 'utf8');
@@ -37,14 +36,6 @@ const generateCoverLetter = async (req, res, next) => {
     });
     
     const { jobDescription, resume } = req.body;
-    const apiKey = process.env.GEMINI_API_KEY;
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: gemini_flash });
-
-    if (!apiKey) {
-      console.error('[COVERLETTER] Missing GEMINI_API_KEY');
-      return res.status(500).json({ error: 'Server configuration error: API key is missing.' });
-    }
 
     if (!jobDescription || !resume) {
       console.error('[COVERLETTER] Missing required fields:', {
@@ -58,8 +49,7 @@ const generateCoverLetter = async (req, res, next) => {
     const resumeString = JSON.stringify(resume);
     const fullPrompt = `${SYSTEM_PROMPT}\n Job Description:\n${jobDescription}\n\nresume:\n${resumeString}\n\nResponse Format:${COVERLETTER_SCHEMA}`;
 
-    const aiResult = await model.generateContent(fullPrompt);
-    const response = aiResult.response;
+    const response = await generateContentWithFallback(fullPrompt, 'COVERLETTER');
     const text = response.text();
     
     console.log('AI Response Text:', text); // Debug log
