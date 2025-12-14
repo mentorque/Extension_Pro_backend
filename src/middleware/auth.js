@@ -14,12 +14,15 @@ const authenticateApiKey = async (req, res, next) => {
       return res.status(401).json({ success: false, message: 'API key is required' });
     }
 
-    console.log(`[AUTH] ${req.method} ${req.path} - Looking up API key: ${apiKey.substring(0, 8)}...`);
+    // Trim the API key to handle any whitespace issues
+    const trimmedApiKey = apiKey.trim();
+    
+    console.log(`[AUTH] ${req.method} ${req.path} - Looking up API key: ${trimmedApiKey.substring(0, 8)}... (length: ${trimmedApiKey.length})`);
     
     // Query ApiKey model using 'key' field
     const apiKeyRecord = await prisma.apiKey.findUnique({
       where: { 
-        key: apiKey 
+        key: trimmedApiKey 
       },
       include: {
         user: true

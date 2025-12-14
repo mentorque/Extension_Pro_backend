@@ -1,9 +1,8 @@
 // src/controllers/uploadResume.js
 const path = require('path');
 const fs = require('fs');
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { generateContentWithFallback } = require('../utils/geminiClient');
 const { resumeParser } = require('../utils/prompts.json');
-const { gemini_flash } = require('../utils/llms.json');
 
 const SYSTEM_PROMPT = resumeParser;
 const EXPERIENCE_SCHEMA = fs.readFileSync(path.join(__dirname, '../schemas/experience.md'), 'utf8');
@@ -36,14 +35,6 @@ const uploadResume = async (req, res, next) => {
       bodyKeys: Object.keys(req.body || {}),
     });
 
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      console.error('[uploadResume] Missing GEMINI_API_KEY');
-      return res.status(500).json({ error: 'Server configuration error: API key is missing.' });
-    }
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: gemini_flash });
-
     let resumeText = '';
 
     if (typeof req.body?.resumeText === 'string') {
@@ -62,8 +53,7 @@ const uploadResume = async (req, res, next) => {
     const fullPrompt = `${SYSTEM_PROMPT}\n Candidate resume: ${resumeText}\n Experience Schema: ${EXPERIENCE_SCHEMA} and arrange all information in this format Resume Schema: ${RESUME_SCHEMA}`;
     console.log('[uploadResume] Prompt length:', fullPrompt.length);
 
-    const result = await model.generateContent(fullPrompt);
-    const response = result.response;
+    const response = await generateContentWithFallback(fullPrompt, 'UPLOAD_RESUME');
     const text = response.text();
     console.log('[uploadResume] Model response length:', text?.length || 0);
 
