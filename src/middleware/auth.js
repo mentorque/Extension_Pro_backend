@@ -86,12 +86,45 @@ const authenticateApiKey = async (req, res, next) => {
     next();
   } catch (error) {
     const duration = Date.now() - startTime;
+    
+    // Check for Prisma/database connection errors
+    const isDatabaseError = error.code && (
+      error.code.startsWith('P1') || // Prisma connection errors (P1001, P1008, etc.)
+      error.code === 'ECONNREFUSED' ||
+      error.code === 'ETIMEDOUT' ||
+      error.code === 'ENOTFOUND' ||
+      error.name === 'PrismaClientKnownRequestError' ||
+      error.name === 'PrismaClientInitializationError'
+    );
+    
+    if (isDatabaseError) {
+      console.error(`[AUTH] ${req.method} ${req.path} - Database connection error (${duration}ms):`, {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+        stack: error.stack
+      });
+      return res.status(503).json({ 
+        success: false, 
+        errorCode: 'DATABASE_ERROR',
+        message: 'Database connection error. Please try again in a moment.' 
+      });
+    }
+    
+    // Log other errors
     console.error(`[AUTH] ${req.method} ${req.path} - Authentication error (${duration}ms):`, {
       message: error.message,
       stack: error.stack,
-      code: error.code
+      code: error.code,
+      name: error.name
     });
-    return res.status(500).json({ success: false, message: 'Authentication failed' });
+    
+    // Don't expose internal errors - return generic message
+    return res.status(500).json({ 
+      success: false, 
+      errorCode: 'AUTH_ERROR',
+      message: 'Authentication service temporarily unavailable. Please try again.' 
+    });
   }
 };
 

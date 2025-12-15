@@ -142,9 +142,28 @@ app.use((err, req, res, next) => {
 
   const msg = err.message || 'An unexpected error occurred';
 
-  if (msg.includes('API key')) {
-    console.log(`[ERROR] API key error for ${req.method} ${req.path}`);
+  // Only treat as "Invalid API key" if it's explicitly about an invalid key
+  // Don't convert database errors or other system errors to "Invalid API key"
+  if (msg.includes('Invalid API key') || msg === 'API key is required') {
+    console.log(`[ERROR] API key validation error for ${req.method} ${req.path}`);
     return res.status(401).json({ error: 'Invalid API key', message: msg });
+  }
+  
+  // Check for database connection errors
+  if (err.code && (
+    err.code.startsWith('P1') || // Prisma connection errors
+    err.code === 'ECONNREFUSED' ||
+    err.code === 'ETIMEDOUT' ||
+    err.code === 'ENOTFOUND' ||
+    err.name === 'PrismaClientKnownRequestError' ||
+    err.name === 'PrismaClientInitializationError'
+  )) {
+    console.log(`[ERROR] Database connection error for ${req.method} ${req.path}`);
+    return res.status(503).json({ 
+      error: 'Service temporarily unavailable', 
+      errorCode: 'DATABASE_ERROR',
+      message: 'Database connection error. Please try again in a moment.' 
+    });
   }
 
   if (msg.includes('quota') || msg.includes('rate limit')) {

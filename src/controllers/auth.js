@@ -112,10 +112,40 @@ const validateApiKeyPublic = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Public API key validation error:', error);
+    // Check for Prisma/database connection errors
+    const isDatabaseError = error.code && (
+      error.code.startsWith('P1') || // Prisma connection errors (P1001, P1008, etc.)
+      error.code === 'ECONNREFUSED' ||
+      error.code === 'ETIMEDOUT' ||
+      error.code === 'ENOTFOUND' ||
+      error.name === 'PrismaClientKnownRequestError' ||
+      error.name === 'PrismaClientInitializationError'
+    );
+    
+    if (isDatabaseError) {
+      console.error('Public API key validation - Database connection error:', {
+        message: error.message,
+        code: error.code,
+        name: error.name
+      });
+      return res.status(503).json({
+        success: false,
+        errorCode: 'DATABASE_ERROR',
+        message: 'Database connection error. Please try again in a moment.'
+      });
+    }
+    
+    console.error('Public API key validation error:', {
+      message: error.message,
+      code: error.code,
+      name: error.name,
+      stack: error.stack
+    });
+    
     return res.status(500).json({
       success: false,
-      message: 'Failed to validate API key'
+      errorCode: 'VALIDATION_ERROR',
+      message: 'Failed to validate API key. Please try again.'
     });
   }
 };
