@@ -27,20 +27,25 @@ async function notifySlack(errorData) {
   }
 
   try {
-    // Create concise, skimmable message (1-2 lines max)
-    const service = errorData.service || 'UNKNOWN';
-    const errorCode = errorData.errorCode || `HTTP_${errorData.statusCode}`;
-    const message = errorData.errorMessage || errorData.message || 'Unknown error';
+    // Create user-friendly, easy-to-understand message for non-technical folks
+    const service = errorData.service || 'Unknown Service';
+    const errorCode = errorData.errorCode || `Error ${errorData.statusCode}`;
+    const message = errorData.errorMessage || errorData.message || 'An error occurred';
     
-    // Truncate message if too long (keep it skimmable - max 80 chars for main line)
-    const shortMessage = message.length > 80 ? message.substring(0, 77) + '...' : message;
+    // Truncate message if too long (keep it readable)
+    const shortMessage = message.length > 100 ? message.substring(0, 97) + '...' : message;
     
-    // Use user email if available, otherwise use user ID
-    const userInfo = errorData.userEmail || (errorData.userId ? errorData.userId.substring(0, 12) : 'N/A');
+    // Use user email if available, otherwise show friendly message
+    let userInfo = 'Not yet logged in';
+    if (errorData.userEmail) {
+      userInfo = errorData.userEmail;
+    } else if (errorData.userId) {
+      userInfo = `User ID: ${errorData.userId.substring(0, 12)}...`;
+    }
     
-    // Create compact Slack message - single line format for easy skimming
+    // Create user-friendly Slack message that non-technical people can understand
     const slackMessage = {
-      text: `🚨 *${service}* | ${errorCode} | ${shortMessage} | User: ${userInfo} | Path: ${(errorData.path || 'N/A').substring(0, 30)}`
+      text: `🚨 *${service} Error*\n\n*What happened:* ${shortMessage}\n*User:* ${userInfo}\n*Where:* ${errorData.path || 'Unknown endpoint'}\n\n*Technical Details:* ${errorCode} (Status: ${errorData.statusCode})`
     };
 
     // Send to Slack (non-blocking, fire and forget)
