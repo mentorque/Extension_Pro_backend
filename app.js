@@ -150,14 +150,17 @@ app.use((err, req, res, next) => {
   }
   
   // Check for database connection errors
-  if (err.code && (
-    err.code.startsWith('P1') || // Prisma connection errors
-    err.code === 'ECONNREFUSED' ||
-    err.code === 'ETIMEDOUT' ||
-    err.code === 'ENOTFOUND' ||
+  if (
+    (err.code && (
+      err.code.startsWith('P1') || // Prisma connection errors
+      err.code === 'ECONNREFUSED' ||
+      err.code === 'ETIMEDOUT' ||
+      err.code === 'ENOTFOUND'
+    )) ||
     err.name === 'PrismaClientKnownRequestError' ||
-    err.name === 'PrismaClientInitializationError'
-  )) {
+    err.name === 'PrismaClientInitializationError' ||
+    err.name === 'PrismaClientUnknownRequestError'
+  ) {
     console.log(`[ERROR] Database connection error for ${req.method} ${req.path}`);
     return res.status(503).json({ 
       error: 'Service temporarily unavailable', 

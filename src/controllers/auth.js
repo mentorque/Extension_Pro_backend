@@ -4,6 +4,14 @@ const prisma = require('../utils/prismaClient');
 const validateApiKey = async (req, res) => {
   try {
     // req.user is set by authenticateApiKey middleware
+    if (!req.user) {
+      console.error('[AUTH] validateApiKey called but req.user is missing');
+      return res.status(401).json({
+        success: false,
+        message: 'Authentication required'
+      });
+    }
+    
     return res.status(200).json({
       success: true,
       message: 'API key is valid',
@@ -15,9 +23,32 @@ const validateApiKey = async (req, res) => {
     });
   } catch (error) {
     console.error('Validate API key error:', error);
+    
+    // Check for database errors
+    const isDatabaseError = (
+      (error.code && (
+        error.code.startsWith('P1') ||
+        error.code === 'ECONNREFUSED' ||
+        error.code === 'ETIMEDOUT' ||
+        error.code === 'ENOTFOUND'
+      )) ||
+      error.name === 'PrismaClientKnownRequestError' ||
+      error.name === 'PrismaClientInitializationError' ||
+      error.name === 'PrismaClientUnknownRequestError'
+    );
+    
+    if (isDatabaseError) {
+      return res.status(503).json({
+        success: false,
+        errorCode: 'DATABASE_ERROR',
+        message: 'Database connection error. Please try again in a moment.'
+      });
+    }
+    
     return res.status(500).json({
       success: false,
-      message: 'Failed to validate API key'
+      errorCode: 'VALIDATION_ERROR',
+      message: 'Failed to validate API key. Please try again.'
     });
   }
 };
@@ -53,6 +84,16 @@ const validateApiKeyPublic = async (req, res) => {
       return res.status(401).json({
         success: false,
         message: 'Invalid API key'
+      });
+    }
+
+    // Safety check: ensure user relation exists
+    if (!apiKeyRecord.user) {
+      console.error(`[AUTH_PUBLIC] API key found but user relation is missing`);
+      return res.status(500).json({
+        success: false,
+        errorCode: 'DATA_ERROR',
+        message: 'Invalid API key configuration. Please contact support.'
       });
     }
 
@@ -96,11 +137,16 @@ const validateApiKeyPublic = async (req, res) => {
 
     console.log(`[AUTH_PUBLIC] API key validation successful for user: ${apiKeyRecord.user.email}`);
 
-    // Update lastUsedAt
-    await prisma.apiKey.update({
-      where: { id: apiKeyRecord.id },
-      data: { lastUsedAt: new Date() }
-    });
+    // Update lastUsedAt (non-blocking - don't fail validation if this fails)
+    try {
+      await prisma.apiKey.update({
+        where: { id: apiKeyRecord.id },
+        data: { lastUsedAt: new Date() }
+      });
+    } catch (updateError) {
+      // Log but don't fail validation if lastUsedAt update fails
+      console.warn(`[AUTH_PUBLIC] Failed to update lastUsedAt for API key ${apiKeyRecord.id}:`, updateError.message);
+    }
 
     return res.status(200).json({
       success: true,
@@ -113,13 +159,16 @@ const validateApiKeyPublic = async (req, res) => {
     });
   } catch (error) {
     // Check for Prisma/database connection errors
-    const isDatabaseError = error.code && (
-      error.code.startsWith('P1') || // Prisma connection errors (P1001, P1008, etc.)
-      error.code === 'ECONNREFUSED' ||
-      error.code === 'ETIMEDOUT' ||
-      error.code === 'ENOTFOUND' ||
+    const isDatabaseError = (
+      (error.code && (
+        error.code.startsWith('P1') || // Prisma connection errors (P1001, P1008, etc.)
+        error.code === 'ECONNREFUSED' ||
+        error.code === 'ETIMEDOUT' ||
+        error.code === 'ENOTFOUND'
+      )) ||
       error.name === 'PrismaClientKnownRequestError' ||
-      error.name === 'PrismaClientInitializationError'
+      error.name === 'PrismaClientInitializationError' ||
+      error.name === 'PrismaClientUnknownRequestError'
     );
     
     if (isDatabaseError) {

@@ -35,6 +35,17 @@ const authenticateApiKey = async (req, res, next) => {
       return res.status(401).json({ success: false, message: 'Invalid API key' });
     }
 
+    // Safety check: ensure user relation exists
+    if (!apiKeyRecord.user) {
+      const duration = Date.now() - startTime;
+      console.error(`[AUTH] ${req.method} ${req.path} - API key found but user relation is missing (${duration}ms)`);
+      return res.status(500).json({ 
+        success: false, 
+        errorCode: 'DATA_ERROR',
+        message: 'Invalid API key configuration. Please contact support.' 
+      });
+    }
+
     console.log(`[AUTH] ${req.method} ${req.path} - API key found for user: ${apiKeyRecord.user.email}`);
 
     // Use 'isActive' field (boolean)
@@ -73,11 +84,16 @@ const authenticateApiKey = async (req, res, next) => {
       });
     }
 
-    // Update lastUsedAt
-    await prisma.apiKey.update({
-      where: { id: apiKeyRecord.id },
-      data: { lastUsedAt: new Date() }
-    });
+    // Update lastUsedAt (non-blocking - don't fail auth if this fails)
+    try {
+      await prisma.apiKey.update({
+        where: { id: apiKeyRecord.id },
+        data: { lastUsedAt: new Date() }
+      });
+    } catch (updateError) {
+      // Log but don't fail authentication if lastUsedAt update fails
+      console.warn(`[AUTH] Failed to update lastUsedAt for API key ${apiKeyRecord.id}:`, updateError.message);
+    }
 
     const duration = Date.now() - startTime;
     console.log(`[AUTH] ${req.method} ${req.path} - Authentication successful for user: ${apiKeyRecord.user.email} (${duration}ms)`);
@@ -88,13 +104,16 @@ const authenticateApiKey = async (req, res, next) => {
     const duration = Date.now() - startTime;
     
     // Check for Prisma/database connection errors
-    const isDatabaseError = error.code && (
-      error.code.startsWith('P1') || // Prisma connection errors (P1001, P1008, etc.)
-      error.code === 'ECONNREFUSED' ||
-      error.code === 'ETIMEDOUT' ||
-      error.code === 'ENOTFOUND' ||
+    const isDatabaseError = (
+      (error.code && (
+        error.code.startsWith('P1') || // Prisma connection errors (P1001, P1008, etc.)
+        error.code === 'ECONNREFUSED' ||
+        error.code === 'ETIMEDOUT' ||
+        error.code === 'ENOTFOUND'
+      )) ||
       error.name === 'PrismaClientKnownRequestError' ||
-      error.name === 'PrismaClientInitializationError'
+      error.name === 'PrismaClientInitializationError' ||
+      error.name === 'PrismaClientUnknownRequestError'
     );
     
     if (isDatabaseError) {
