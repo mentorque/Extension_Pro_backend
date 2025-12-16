@@ -1,5 +1,6 @@
 // src/middleware/fileUpload.js
 const multer = require('multer');
+const { AppError, ERROR_CODES } = require('../utils/errors');
 
 const fileUploadConfig = multer({
   storage: multer.memoryStorage(),
@@ -8,7 +9,12 @@ const fileUploadConfig = multer({
     if (file.mimetype === 'application/pdf') {
       cb(null, true);
     } else {
-      cb(new Error('Only PDFs are allowed'), false);
+      const error = new AppError(
+        ERROR_CODES.INVALID_FILE_TYPE,
+        'Only PDF files are allowed',
+        400
+      );
+      cb(error, false);
     }
   }
 });

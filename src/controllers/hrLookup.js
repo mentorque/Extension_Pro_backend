@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { ValidationError, AppError, ERROR_CODES, asyncHandler } = require('../utils/errors');
 
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const GOOGLE_CSE_ID = process.env.GOOGLE_CSE_ID;
@@ -100,10 +101,11 @@ function toCsv(rows) {
 async function hrLookup(req, res) {
   try {
     if (!GOOGLE_API_KEY || !GOOGLE_CSE_ID) {
-      return res.status(500).json({
-        error: 'Server not configured',
-        message: 'Missing GOOGLE_API_KEY or GOOGLE_CSE_ID',
-      });
+      throw new AppError(
+        ERROR_CODES.CONFIGURATION_ERROR,
+        'Server not configured. Missing GOOGLE_API_KEY or GOOGLE_CSE_ID',
+        500
+      );
     }
 
     const companiesRaw = Array.isArray(req.body?.companies) ? req.body.companies : [];
@@ -111,7 +113,7 @@ async function hrLookup(req, res) {
     const location = typeof req.body?.location === 'string' ? req.body.location : '';
 
     if (companies.length === 0) {
-      return res.status(400).json({ error: 'No companies provided' });
+      throw new ValidationError('No companies provided. Please provide at least one company name.');
     }
 
     const results = [];
@@ -153,13 +155,15 @@ async function hrLookup(req, res) {
       return res.status(200).send(csv);
     }
 
-    return res.status(200).json(results);
+    return res.status(200).json({ success: true, results });
   } catch (error) {
     console.error('hrLookup error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    throw error; // Let the centralized error handler deal with it
   }
 }
 
-module.exports = { hrLookup };
+const hrLookupHandler = asyncHandler(hrLookup);
+
+module.exports = { hrLookup: hrLookupHandler };
 
 

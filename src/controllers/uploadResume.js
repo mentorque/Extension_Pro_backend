@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { generateContentWithFallback } = require('../utils/geminiClient');
 const { resumeParser } = require('../utils/prompts.json');
+const { ValidationError, asyncHandler } = require('../utils/errors');
 
 const SYSTEM_PROMPT = resumeParser;
 const EXPERIENCE_SCHEMA = fs.readFileSync(path.join(__dirname, '../schemas/experience.md'), 'utf8');
@@ -15,18 +16,18 @@ function extractJSONFromString(input) {
     try {
       return JSON.parse(jsonMatch[1]);
     } catch (err) {
-      throw new Error("Found a JSON block, but it contained invalid JSON.");
+      throw new ValidationError("Found a JSON block, but it contained invalid JSON.");
     }
   }
 
   try {
     return JSON.parse(input);
   } catch (err) {
-    throw new Error("Could not find a valid JSON object in the model's response.");
+    throw new ValidationError("Could not find a valid JSON object in the model's response.");
   }
 }
 
-const uploadResume = async (req, res, next) => {
+const uploadResume = asyncHandler(async (req, res) => {
   const startedAt = Date.now();
   try {
     console.log('[uploadResume] Incoming request', {
@@ -42,12 +43,12 @@ const uploadResume = async (req, res, next) => {
       console.log('[uploadResume] Using resumeText from JSON body, length:', resumeText.length);
     } else {
       console.warn('[uploadResume] No resumeText provided');
-      return res.status(400).json({ error: 'No resume provided. Please provide resumeText.' });
+      throw new ValidationError('No resume provided. Please provide resumeText.');
     }
 
     if (!resumeText || resumeText.trim().length === 0) {
       console.warn('[uploadResume] Empty resume text after extraction');
-      return res.status(400).json({ error: 'Empty resume text' });
+      throw new ValidationError('Empty resume text. Please provide valid resume content.');
     }
 
     const fullPrompt = `${SYSTEM_PROMPT}\n Candidate resume: ${resumeText}\n Experience Schema: ${EXPERIENCE_SCHEMA} and arrange all information in this format Resume Schema: ${RESUME_SCHEMA}`;
@@ -60,14 +61,10 @@ const uploadResume = async (req, res, next) => {
     const extractedResult = extractJSONFromString(text);
     console.log('[uploadResume] Parsed result keys:', Object.keys(extractedResult || {}));
 
-    res.json({ result: extractedResult });
-
-  } catch (error) {
-    console.error('[uploadResume] Unhandled error:', error?.message, error);
-    next(error);
+    res.json({ success: true, result: extractedResult });
   } finally {
     console.log('[uploadResume] Completed in ms:', Date.now() - startedAt);
   }
-};
+});
 
 module.exports = { uploadResume };

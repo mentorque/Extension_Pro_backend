@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const routes = require('./src/routes');
+const { auditLogMiddleware } = require('./src/middleware/auditLog');
 
 const app = express();
 
@@ -75,6 +76,10 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.text({ type: 'text/plain', limit: '10mb' }));
 
+// Audit logging middleware - captures all requests and responses
+// Placed after body parsing but before routes to capture all API calls
+app.use(auditLogMiddleware);
+
 // Public health check (no auth)
 app.get('/health', (req, res) => {
   res.status(200).json({ 
@@ -98,14 +103,19 @@ app.get('/api/health', (req, res) => {
 // Routes - CHANGED THIS LINE
 app.use('/api', routes);
 
+// Import unified error handling
+const { sendErrorResponse, normalizeError, ERROR_CODES } = require('./src/utils/errors');
+
 // File upload & validation error handling
 app.use((err, req, res, next) => {
+  // Handle multer file size errors
   if (err.code === 'LIMIT_FILE_SIZE') {
-    return res.status(413).json({ error: 'File too large (max 5MB)' });
+    return sendErrorResponse(res, err);
   }
 
-  if (err.message === 'Only PDFs are allowed') {
-    return res.status(400).json({ error: 'Invalid file type' });
+  // Handle file type validation errors (from fileUpload middleware)
+  if (err.errorCode === 'INVALID_FILE_TYPE' || err.message === 'Only PDFs are allowed') {
+    return sendErrorResponse(res, err);
   }
 
   next(err);
@@ -132,79 +142,24 @@ app.use((err, req, res, next) => {
     } : { hasBody: false }
   };
 
+  // Normalize and log the error
+  const normalizedError = normalizeError(err);
+  
   console.error(`[ERROR] ${timestamp} - ${req.method} ${req.path}:`, {
-    message: err.message,
+    errorCode: normalizedError.errorCode,
+    message: normalizedError.message,
+    statusCode: normalizedError.statusCode,
     stack: err.stack,
-    code: err.code,
-    name: err.name,
+    originalError: {
+      name: err.name,
+      code: err.code,
+      message: err.message
+    },
     request: requestInfo
   });
 
-  const msg = err.message || 'An unexpected error occurred';
-
-  // Only treat as "Invalid API key" if it's explicitly about an invalid key
-  // Don't convert database errors or other system errors to "Invalid API key"
-  if (msg.includes('Invalid API key') || msg === 'API key is required') {
-    console.log(`[ERROR] API key validation error for ${req.method} ${req.path}`);
-    return res.status(401).json({ error: 'Invalid API key', message: msg });
-  }
-  
-  // Check for database connection errors
-  if (
-    (err.code && (
-      err.code.startsWith('P1') || // Prisma connection errors
-      err.code === 'ECONNREFUSED' ||
-      err.code === 'ETIMEDOUT' ||
-      err.code === 'ENOTFOUND'
-    )) ||
-    err.name === 'PrismaClientKnownRequestError' ||
-    err.name === 'PrismaClientInitializationError' ||
-    err.name === 'PrismaClientUnknownRequestError'
-  ) {
-    console.log(`[ERROR] Database connection error for ${req.method} ${req.path}`);
-    return res.status(503).json({ 
-      error: 'Service temporarily unavailable', 
-      errorCode: 'DATABASE_ERROR',
-      message: 'Database connection error. Please try again in a moment.' 
-    });
-  }
-
-  // Check for quota/rate limit errors - must come before generic 500 error
-  if (msg.includes('quota') || msg.includes('rate limit') || msg.includes('resource exhausted')) {
-    console.log(`[ERROR] Rate limit/quota error for ${req.method} ${req.path}`);
-    // Extract the actual error message, or use a user-friendly one
-    const quotaMessage = msg.toLowerCase().includes('quota exceeded') 
-      ? 'Quota exceeded. Please try again later.'
-      : msg.toLowerCase().includes('rate limit')
-      ? 'Rate limit exceeded. Please wait a moment.'
-      : msg.toLowerCase().includes('resource exhausted')
-      ? 'Resource exhausted. Please try again later.'
-      : msg; // Use original message if it's already user-friendly
-    
-    return res.status(429).json({ 
-      error: 'Quota exceeded',
-      errorCode: 'QUOTA_EXCEEDED',
-      message: quotaMessage 
-    });
-  }
-
-  if (err.code === 'P2002') {
-    console.log(`[ERROR] Database unique constraint violation for ${req.method} ${req.path}`);
-    return res.status(409).json({ error: 'Duplicate entry', message: 'A record with this information already exists' });
-  }
-
-  if (err.code === 'P2025') {
-    console.log(`[ERROR] Database record not found for ${req.method} ${req.path}`);
-    return res.status(404).json({ error: 'Record not found', message: 'The requested record could not be found' });
-  }
-
-  console.log(`[ERROR] Unhandled error for ${req.method} ${req.path}:`, {
-    errorType: 'unhandled',
-    message: msg,
-    code: err.code
-  });
-
-  res.status(500).json({ error: 'Internal server error', message: msg });
+  // Send standardized error response
+  return sendErrorResponse(res, normalizedError);
 });
 
 module.exports = app;

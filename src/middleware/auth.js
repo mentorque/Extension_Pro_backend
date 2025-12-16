@@ -1,6 +1,8 @@
 // src/middleware/auth.js
 const prisma = require('../utils/prismaClient');
 
+const { AuthenticationError, DatabaseError, sendErrorResponse, normalizeError } = require('../utils/errors');
+
 const authenticateApiKey = async (req, res, next) => {
   const startTime = Date.now();
   const apiKey = req.headers['x-api-key'];
@@ -103,34 +105,7 @@ const authenticateApiKey = async (req, res, next) => {
   } catch (error) {
     const duration = Date.now() - startTime;
     
-    // Check for Prisma/database connection errors
-    const isDatabaseError = (
-      (error.code && (
-        error.code.startsWith('P1') || // Prisma connection errors (P1001, P1008, etc.)
-        error.code === 'ECONNREFUSED' ||
-        error.code === 'ETIMEDOUT' ||
-        error.code === 'ENOTFOUND'
-      )) ||
-      error.name === 'PrismaClientKnownRequestError' ||
-      error.name === 'PrismaClientInitializationError' ||
-      error.name === 'PrismaClientUnknownRequestError'
-    );
-    
-    if (isDatabaseError) {
-      console.error(`[AUTH] ${req.method} ${req.path} - Database connection error (${duration}ms):`, {
-        message: error.message,
-        code: error.code,
-        name: error.name,
-        stack: error.stack
-      });
-      return res.status(503).json({ 
-        success: false, 
-        errorCode: 'DATABASE_ERROR',
-        message: 'Database connection error. Please try again in a moment.' 
-      });
-    }
-    
-    // Log other errors
+    // Log error
     console.error(`[AUTH] ${req.method} ${req.path} - Authentication error (${duration}ms):`, {
       message: error.message,
       stack: error.stack,
@@ -138,12 +113,8 @@ const authenticateApiKey = async (req, res, next) => {
       name: error.name
     });
     
-    // Don't expose internal errors - return generic message
-    return res.status(500).json({ 
-      success: false, 
-      errorCode: 'AUTH_ERROR',
-      message: 'Authentication service temporarily unavailable. Please try again.' 
-    });
+    // Normalize and send error response
+    return sendErrorResponse(res, error);
   }
 };
 

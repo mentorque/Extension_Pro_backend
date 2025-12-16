@@ -1,6 +1,7 @@
 // backend/src/utils/geminiClient.js
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { gemini_flash } = require('./llms.json');
+const { AppError, QuotaError, ERROR_CODES } = require('./errors');
 
 /**
  * Get all available Gemini API keys (primary + fallbacks)
@@ -65,7 +66,11 @@ async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN') {
   const apiKeys = getApiKeys();
   
   if (apiKeys.length === 0) {
-    throw new Error('No Gemini API keys configured. Please set GEMINI_API_KEY in environment variables.');
+    throw new AppError(
+      ERROR_CODES.CONFIGURATION_ERROR,
+      'No Gemini API keys configured. Please set GEMINI_API_KEY in environment variables.',
+      500
+    );
   }
   
   let lastError = null;
@@ -108,12 +113,31 @@ async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN') {
       }
       
       // If it's not a quota error or it's the last key, throw the error
+      // Normalize the error if it's not already an AppError
+      if (!(error instanceof AppError) && !(error instanceof QuotaError)) {
+        if (isQuota) {
+          throw new QuotaError('AI service quota exceeded. Please try again later.');
+        } else {
+          throw new AppError(
+            ERROR_CODES.AI_SERVICE_ERROR,
+            error.message || 'AI service error occurred',
+            502
+          );
+        }
+      }
       throw error;
     }
   }
   
   // If we've exhausted all keys, throw the last error
-  throw lastError || new Error('All API keys failed');
+  if (lastError) {
+    throw lastError;
+  }
+  throw new AppError(
+    ERROR_CODES.AI_SERVICE_ERROR,
+    'All AI API keys failed. Please try again later.',
+    502
+  );
 }
 
 module.exports = {
