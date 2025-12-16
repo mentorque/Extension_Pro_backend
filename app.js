@@ -105,7 +105,6 @@ app.use('/api', routes);
 
 // Import unified error handling
 const { sendErrorResponse, normalizeError, ERROR_CODES } = require('./src/utils/errors');
-const { notifySlack } = require('./src/utils/slackNotifier');
 
 // File upload & validation error handling
 app.use((err, req, res, next) => {
@@ -159,24 +158,8 @@ app.use((err, req, res, next) => {
     request: requestInfo
   });
 
-  // Send Slack notification for errors that need developer attention
-  // This is async and won't block the response
-  const errorData = {
-    service: req.path.replace('/api/', '').toUpperCase() || 'UNKNOWN',
-    errorCode: normalizedError.errorCode,
-    errorMessage: normalizedError.message,
-    statusCode: normalizedError.statusCode,
-    userId: req.user?.id || null,
-    path: req.path,
-    message: normalizedError.message
-  };
-  
-  // Notify Slack asynchronously (won't block response)
-  setImmediate(() => {
-    notifySlack(errorData).catch(() => {
-      // Already handled in notifySlack
-    });
-  });
+  // Note: Slack notifications are handled by audit log middleware
+  // to avoid duplicate notifications and ensure we have complete data
 
   // Send standardized error response
   return sendErrorResponse(res, normalizedError);

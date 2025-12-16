@@ -35,9 +35,12 @@ async function notifySlack(errorData) {
     // Truncate message if too long (keep it skimmable - max 80 chars for main line)
     const shortMessage = message.length > 80 ? message.substring(0, 77) + '...' : message;
     
+    // Use user email if available, otherwise use user ID
+    const userInfo = errorData.userEmail || (errorData.userId ? errorData.userId.substring(0, 12) : 'N/A');
+    
     // Create compact Slack message - single line format for easy skimming
     const slackMessage = {
-      text: `🚨 *${service}* | ${errorCode} | ${shortMessage} | User: ${errorData.userId ? errorData.userId.substring(0, 12) : 'N/A'} | Path: ${(errorData.path || 'N/A').substring(0, 30)}`
+      text: `🚨 *${service}* | ${errorCode} | ${shortMessage} | User: ${userInfo} | Path: ${(errorData.path || 'N/A').substring(0, 30)}`
     };
 
     // Send to Slack (non-blocking, fire and forget)
@@ -69,6 +72,7 @@ async function notifySlackFromAuditLog(auditLogData) {
     errorMessage: auditLogData.errorMessage,
     statusCode: auditLogData.statusCode,
     userId: auditLogData.userId,
+    userEmail: auditLogData.userEmail, // Pass user email through
     path: auditLogData.path,
     message: auditLogData.errorMessage
   };

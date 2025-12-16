@@ -144,8 +144,9 @@ function auditLogMiddleware(req, res, next) {
   res.on('finish', () => {
     const responseTime = Date.now() - startTime;
     
-    // Extract user ID from request (set by auth middleware)
+    // Extract user ID and email from request (set by auth middleware)
     const userId = req.user?.id || null;
+    const userEmail = req.user?.email || null;
     
     // Extract service name
     const service = extractServiceName(req.path);
@@ -202,6 +203,7 @@ function auditLogMiddleware(req, res, next) {
     // Prepare audit log data
     const auditLogData = {
       userId: userId,
+      userEmail: userEmail, // Include user email for Slack notifications
       service: service,
       method: req.method,
       path: req.path,
