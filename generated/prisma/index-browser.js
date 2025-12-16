@@ -235,12 +235,36 @@ exports.Prisma.UserStatusScalarFieldEnum = {
   thirdMentorCallScheduledAt: 'thirdMentorCallScheduledAt'
 };
 
+exports.Prisma.AuditLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  service: 'service',
+  method: 'method',
+  path: 'path',
+  statusCode: 'statusCode',
+  errorCode: 'errorCode',
+  errorMessage: 'errorMessage',
+  requestBody: 'requestBody',
+  responseBody: 'responseBody',
+  requestHeaders: 'requestHeaders',
+  responseTime: 'responseTime',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt',
+  deletedAt: 'deletedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
 };
 
 exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull
 };
 
@@ -268,7 +292,8 @@ exports.Prisma.ModelName = {
   Progress: 'Progress',
   AdminMentor: 'AdminMentor',
   MentorSessionNote: 'MentorSessionNote',
-  UserStatus: 'UserStatus'
+  UserStatus: 'UserStatus',
+  AuditLog: 'AuditLog'
 };
 
 /**

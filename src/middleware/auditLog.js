@@ -1,5 +1,6 @@
 // src/middleware/auditLog.js
 const prisma = require('../utils/prismaClient');
+const { notifySlackFromAuditLog } = require('../utils/slackNotifier');
 
 /**
  * Sanitize sensitive data from objects
@@ -218,10 +219,19 @@ function auditLogMiddleware(req, res, next) {
     // Create audit log asynchronously (non-blocking)
     // Use setImmediate to ensure it doesn't block the response
     setImmediate(() => {
-      createAuditLog(auditLogData).catch(err => {
-        // Already handled in createAuditLog, but catch here too for safety
-        console.error('[AUDIT_LOG] Unhandled error in audit logging:', err.message);
-      });
+      createAuditLog(auditLogData)
+        .then(() => {
+          // Send Slack notification for errors that need developer attention
+          if (auditLogData.errorCode || auditLogData.statusCode >= 500) {
+            notifySlackFromAuditLog(auditLogData).catch(err => {
+              // Don't log - already handled in notifySlackFromAuditLog
+            });
+          }
+        })
+        .catch(err => {
+          // Already handled in createAuditLog, but catch here too for safety
+          console.error('[AUDIT_LOG] Unhandled error in audit logging:', err.message);
+        });
     });
   });
 

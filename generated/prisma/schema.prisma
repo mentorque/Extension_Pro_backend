@@ -165,3 +165,31 @@ model UserStatus {
   @@index([deletedAt])
   @@index([userId])
 }
+
+model AuditLog {
+  id             String    @id @default(cuid())
+  userId         String? // Nullable for unauthenticated requests
+  service        String // API endpoint/service name (e.g., '/api/chat', '/api/coverletter')
+  method         String // HTTP method (GET, POST, etc.)
+  path           String // Request path
+  statusCode     Int // HTTP status code
+  errorCode      String? // Error code if error occurred
+  errorMessage   String? // Error message if error occurred
+  requestBody    Json? // Request body (sanitized)
+  responseBody   Json? // Response body (sanitized)
+  requestHeaders Json? // Request headers (sanitized, no sensitive data)
+  responseTime   Int // Response time in milliseconds
+  ipAddress      String? // Client IP address
+  userAgent      String? // User agent string
+  createdAt      DateTime  @default(now())
+  deletedAt      DateTime?
+
+  @@index([userId])
+  @@index([service])
+  @@index([statusCode])
+  @@index([errorCode])
+  @@index([createdAt])
+  @@index([deletedAt])
+  @@index([userId, createdAt])
+  @@index([service, createdAt])
+}
