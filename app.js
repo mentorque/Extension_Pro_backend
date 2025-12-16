@@ -169,9 +169,23 @@ app.use((err, req, res, next) => {
     });
   }
 
-  if (msg.includes('quota') || msg.includes('rate limit')) {
-    console.log(`[ERROR] Rate limit error for ${req.method} ${req.path}`);
-    return res.status(429).json({ error: 'Rate limit exceeded', message: msg });
+  // Check for quota/rate limit errors - must come before generic 500 error
+  if (msg.includes('quota') || msg.includes('rate limit') || msg.includes('resource exhausted')) {
+    console.log(`[ERROR] Rate limit/quota error for ${req.method} ${req.path}`);
+    // Extract the actual error message, or use a user-friendly one
+    const quotaMessage = msg.toLowerCase().includes('quota exceeded') 
+      ? 'Quota exceeded. Please try again later.'
+      : msg.toLowerCase().includes('rate limit')
+      ? 'Rate limit exceeded. Please wait a moment.'
+      : msg.toLowerCase().includes('resource exhausted')
+      ? 'Resource exhausted. Please try again later.'
+      : msg; // Use original message if it's already user-friendly
+    
+    return res.status(429).json({ 
+      error: 'Quota exceeded',
+      errorCode: 'QUOTA_EXCEEDED',
+      message: quotaMessage 
+    });
   }
 
   if (err.code === 'P2002') {
