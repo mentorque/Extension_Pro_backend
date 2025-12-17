@@ -155,7 +155,9 @@ async function hrLookup(req, res) {
       return res.status(200).send(csv);
     }
 
-    return res.status(200).json({ success: true, results });
+    // For 5 or fewer companies, return the raw array so the frontend
+    // can consume it without any changes.
+    return res.status(200).json(results);
   } catch (error) {
     console.error('hrLookup error:', error);
     throw error; // Let the centralized error handler deal with it
