@@ -93,8 +93,12 @@ function extractServiceName(path) {
  */
 async function createAuditLog(logData) {
   try {
+    // Do not persist userEmail in the database (field does not exist on AuditLog model)
+    // but allow it to exist on logData for Slack notifications.
+    const { userEmail, ...dbData } = logData;
+
     await prisma.auditLog.create({
-      data: logData
+      data: dbData
     });
   } catch (error) {
     // Don't throw - audit logging should never break the main flow

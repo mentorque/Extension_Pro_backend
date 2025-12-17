@@ -9901,6 +9901,7 @@ export namespace Prisma {
   export type AuditLogMinAggregateOutputType = {
     id: string | null
     userId: string | null
+    userEmail: string | null
     service: string | null
     method: string | null
     path: string | null
@@ -9917,6 +9918,7 @@ export namespace Prisma {
   export type AuditLogMaxAggregateOutputType = {
     id: string | null
     userId: string | null
+    userEmail: string | null
     service: string | null
     method: string | null
     path: string | null
@@ -9933,6 +9935,7 @@ export namespace Prisma {
   export type AuditLogCountAggregateOutputType = {
     id: number
     userId: number
+    userEmail: number
     service: number
     method: number
     path: number
@@ -9964,6 +9967,7 @@ export namespace Prisma {
   export type AuditLogMinAggregateInputType = {
     id?: true
     userId?: true
+    userEmail?: true
     service?: true
     method?: true
     path?: true
@@ -9980,6 +9984,7 @@ export namespace Prisma {
   export type AuditLogMaxAggregateInputType = {
     id?: true
     userId?: true
+    userEmail?: true
     service?: true
     method?: true
     path?: true
@@ -9996,6 +10001,7 @@ export namespace Prisma {
   export type AuditLogCountAggregateInputType = {
     id?: true
     userId?: true
+    userEmail?: true
     service?: true
     method?: true
     path?: true
@@ -10102,6 +10108,7 @@ export namespace Prisma {
   export type AuditLogGroupByOutputType = {
     id: string
     userId: string | null
+    userEmail: string | null
     service: string
     method: string
     path: string
@@ -10140,6 +10147,7 @@ export namespace Prisma {
   export type AuditLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    userEmail?: boolean
     service?: boolean
     method?: boolean
     path?: boolean
@@ -10159,6 +10167,7 @@ export namespace Prisma {
   export type AuditLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    userEmail?: boolean
     service?: boolean
     method?: boolean
     path?: boolean
@@ -10178,6 +10187,7 @@ export namespace Prisma {
   export type AuditLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    userEmail?: boolean
     service?: boolean
     method?: boolean
     path?: boolean
@@ -10197,6 +10207,7 @@ export namespace Prisma {
   export type AuditLogSelectScalar = {
     id?: boolean
     userId?: boolean
+    userEmail?: boolean
     service?: boolean
     method?: boolean
     path?: boolean
@@ -10213,7 +10224,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type AuditLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "service" | "method" | "path" | "statusCode" | "errorCode" | "errorMessage" | "requestBody" | "responseBody" | "requestHeaders" | "responseTime" | "ipAddress" | "userAgent" | "createdAt" | "deletedAt", ExtArgs["result"]["auditLog"]>
+  export type AuditLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "userEmail" | "service" | "method" | "path" | "statusCode" | "errorCode" | "errorMessage" | "requestBody" | "responseBody" | "requestHeaders" | "responseTime" | "ipAddress" | "userAgent" | "createdAt" | "deletedAt", ExtArgs["result"]["auditLog"]>
 
   export type $AuditLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AuditLog"
@@ -10221,6 +10232,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string | null
+      userEmail: string | null
       service: string
       method: string
       path: string
@@ -10660,6 +10672,7 @@ export namespace Prisma {
   interface AuditLogFieldRefs {
     readonly id: FieldRef<"AuditLog", 'String'>
     readonly userId: FieldRef<"AuditLog", 'String'>
+    readonly userEmail: FieldRef<"AuditLog", 'String'>
     readonly service: FieldRef<"AuditLog", 'String'>
     readonly method: FieldRef<"AuditLog", 'String'>
     readonly path: FieldRef<"AuditLog", 'String'>
@@ -11193,6 +11206,7 @@ export namespace Prisma {
   export const AuditLogScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
+    userEmail: 'userEmail',
     service: 'service',
     method: 'method',
     path: 'path',
@@ -12045,6 +12059,7 @@ export namespace Prisma {
     NOT?: AuditLogWhereInput | AuditLogWhereInput[]
     id?: StringFilter<"AuditLog"> | string
     userId?: StringNullableFilter<"AuditLog"> | string | null
+    userEmail?: StringNullableFilter<"AuditLog"> | string | null
     service?: StringFilter<"AuditLog"> | string
     method?: StringFilter<"AuditLog"> | string
     path?: StringFilter<"AuditLog"> | string
@@ -12064,6 +12079,7 @@ export namespace Prisma {
   export type AuditLogOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrderInput | SortOrder
+    userEmail?: SortOrderInput | SortOrder
     service?: SortOrder
     method?: SortOrder
     path?: SortOrder
@@ -12086,6 +12102,7 @@ export namespace Prisma {
     OR?: AuditLogWhereInput[]
     NOT?: AuditLogWhereInput | AuditLogWhereInput[]
     userId?: StringNullableFilter<"AuditLog"> | string | null
+    userEmail?: StringNullableFilter<"AuditLog"> | string | null
     service?: StringFilter<"AuditLog"> | string
     method?: StringFilter<"AuditLog"> | string
     path?: StringFilter<"AuditLog"> | string
@@ -12105,6 +12122,7 @@ export namespace Prisma {
   export type AuditLogOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrderInput | SortOrder
+    userEmail?: SortOrderInput | SortOrder
     service?: SortOrder
     method?: SortOrder
     path?: SortOrder
@@ -12132,6 +12150,7 @@ export namespace Prisma {
     NOT?: AuditLogScalarWhereWithAggregatesInput | AuditLogScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AuditLog"> | string
     userId?: StringNullableWithAggregatesFilter<"AuditLog"> | string | null
+    userEmail?: StringNullableWithAggregatesFilter<"AuditLog"> | string | null
     service?: StringWithAggregatesFilter<"AuditLog"> | string
     method?: StringWithAggregatesFilter<"AuditLog"> | string
     path?: StringWithAggregatesFilter<"AuditLog"> | string
@@ -12971,6 +12990,7 @@ export namespace Prisma {
   export type AuditLogCreateInput = {
     id?: string
     userId?: string | null
+    userEmail?: string | null
     service: string
     method: string
     path: string
@@ -12990,6 +13010,7 @@ export namespace Prisma {
   export type AuditLogUncheckedCreateInput = {
     id?: string
     userId?: string | null
+    userEmail?: string | null
     service: string
     method: string
     path: string
@@ -13009,6 +13030,7 @@ export namespace Prisma {
   export type AuditLogUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userEmail?: NullableStringFieldUpdateOperationsInput | string | null
     service?: StringFieldUpdateOperationsInput | string
     method?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
@@ -13028,6 +13050,7 @@ export namespace Prisma {
   export type AuditLogUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userEmail?: NullableStringFieldUpdateOperationsInput | string | null
     service?: StringFieldUpdateOperationsInput | string
     method?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
@@ -13047,6 +13070,7 @@ export namespace Prisma {
   export type AuditLogCreateManyInput = {
     id?: string
     userId?: string | null
+    userEmail?: string | null
     service: string
     method: string
     path: string
@@ -13066,6 +13090,7 @@ export namespace Prisma {
   export type AuditLogUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userEmail?: NullableStringFieldUpdateOperationsInput | string | null
     service?: StringFieldUpdateOperationsInput | string
     method?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
@@ -13085,6 +13110,7 @@ export namespace Prisma {
   export type AuditLogUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userEmail?: NullableStringFieldUpdateOperationsInput | string | null
     service?: StringFieldUpdateOperationsInput | string
     method?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
@@ -13751,6 +13777,7 @@ export namespace Prisma {
   export type AuditLogCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    userEmail?: SortOrder
     service?: SortOrder
     method?: SortOrder
     path?: SortOrder
@@ -13775,6 +13802,7 @@ export namespace Prisma {
   export type AuditLogMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    userEmail?: SortOrder
     service?: SortOrder
     method?: SortOrder
     path?: SortOrder
@@ -13791,6 +13819,7 @@ export namespace Prisma {
   export type AuditLogMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    userEmail?: SortOrder
     service?: SortOrder
     method?: SortOrder
     path?: SortOrder

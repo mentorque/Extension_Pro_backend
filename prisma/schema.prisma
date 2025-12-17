@@ -169,6 +169,7 @@ model UserStatus {
 model AuditLog {
   id             String    @id @default(cuid())
   userId         String? // Nullable for unauthenticated requests
+  userEmail      String? // Nullable - stored for convenience, not required
   service        String // API endpoint/service name (e.g., '/api/chat', '/api/coverletter')
   method         String // HTTP method (GET, POST, etc.)
   path           String // Request path

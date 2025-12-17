@@ -238,6 +238,7 @@ exports.Prisma.UserStatusScalarFieldEnum = {
 exports.Prisma.AuditLogScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  userEmail: 'userEmail',
   service: 'service',
   method: 'method',
   path: 'path',
