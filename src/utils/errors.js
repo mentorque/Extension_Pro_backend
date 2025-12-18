@@ -222,17 +222,7 @@ function normalizeError(error) {
     );
   }
 
-  // Handle quota/rate limit errors
-  const errorMessage = (error.message || '').toLowerCase();
-  if (errorMessage.includes('quota') || 
-      errorMessage.includes('rate limit') || 
-      errorMessage.includes('resource exhausted')) {
-    let message = 'Quota exceeded. Please try again later.';
-    if (errorMessage.includes('rate limit')) {
-      message = 'Rate limit exceeded. Please wait a moment.';
-    }
-    return new QuotaError(message, { originalError: error.message });
-  }
+  // Removed quota error detection - all AI service errors are treated generically
 
   // Handle JSON parsing errors
   if (error instanceof SyntaxError && error.message.includes('JSON')) {

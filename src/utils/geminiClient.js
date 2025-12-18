@@ -1,7 +1,7 @@
 // backend/src/utils/geminiClient.js
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { gemini_flash } = require('./llms.json');
-const { AppError, QuotaError, ERROR_CODES } = require('./errors');
+const { AppError, ERROR_CODES } = require('./errors');
 
 /**
  * Get all available Gemini API keys (primary + fallbacks)
@@ -27,37 +27,7 @@ function getApiKeys() {
 }
 
 /**
- * Check if error is a quota/resource exhausted error
- */
-function isQuotaError(error) {
-  if (!error) return false;
-  
-  const errorMessage = error.message?.toLowerCase() || '';
-  const errorCode = error.code || '';
-  const errorStatus = error.status || '';
-  
-  // Check for various quota/resource exhausted indicators
-  const quotaIndicators = [
-    'quota',
-    'resource exhausted',
-    'rate limit',
-    '429',
-    '503',
-    'insufficient quota',
-    'quota exceeded',
-    'billing',
-    'permission denied'
-  ];
-  
-  return quotaIndicators.some(indicator => 
-    errorMessage.includes(indicator) || 
-    errorCode.toString().includes(indicator) ||
-    errorStatus.toString().includes(indicator)
-  );
-}
-
-/**
- * Generate content with automatic fallback to next API key on quota errors
+ * Generate content with automatic fallback to next API key on errors
  * @param {string} prompt - The prompt to send to Gemini
  * @param {string} controllerName - Name of the controller for logging
  * @returns {Promise<Object>} - The response from Gemini
@@ -97,33 +67,26 @@ async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN') {
       
     } catch (error) {
       lastError = error;
-      const isQuota = isQuotaError(error);
       
       console.error(`[${controllerName}] API key ${keyIndex} failed:`, {
-        isQuotaError: isQuota,
         errorMessage: error.message,
         errorCode: error.code,
         hasMoreKeys: i < apiKeys.length - 1
       });
       
-      // If it's a quota error and we have more keys, try the next one
-      if (isQuota && i < apiKeys.length - 1) {
-        console.log(`[${controllerName}] Quota exceeded, trying fallback API key ${keyIndex + 1}...`);
+      // If we have more keys, try the next one
+      if (i < apiKeys.length - 1) {
+        console.log(`[${controllerName}] API key ${keyIndex} failed, trying fallback API key ${keyIndex + 1}...`);
         continue;
       }
       
-      // If it's not a quota error or it's the last key, throw the error
-      // Normalize the error if it's not already an AppError
-      if (!(error instanceof AppError) && !(error instanceof QuotaError)) {
-        if (isQuota) {
-          throw new QuotaError('AI service quota exceeded. Please try again later.');
-        } else {
-          throw new AppError(
-            ERROR_CODES.AI_SERVICE_ERROR,
-            error.message || 'AI service error occurred',
-            502
-          );
-        }
+      // If it's the last key, normalize and throw the error
+      if (!(error instanceof AppError)) {
+        throw new AppError(
+          ERROR_CODES.AI_SERVICE_ERROR,
+          error.message || 'AI service error occurred',
+          502
+        );
       }
       throw error;
     }
@@ -142,7 +105,6 @@ async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN') {
 
 module.exports = {
   generateContentWithFallback,
-  getApiKeys,
-  isQuotaError
+  getApiKeys
 };
 
