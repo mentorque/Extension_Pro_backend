@@ -2,6 +2,43 @@
 const prisma = require('../utils/prismaClient');
 const { ValidationError, NotFoundError, asyncHandler } = require('../utils/errors');
 
+/**
+ * Validates if a title is actually a job title and not navigation/button text
+ * @param {string} title - The title to validate
+ * @returns {boolean} - True if valid job title, false otherwise
+ */
+const isValidJobTitle = (title) => {
+  if (!title || typeof title !== 'string') {
+    return false;
+  }
+
+  const trimmedTitle = title.trim();
+  
+  // Basic length checks
+  if (trimmedTitle.length < 3 || trimmedTitle.length > 200) {
+    return false;
+  }
+
+  // Must contain at least 3 letters (not just numbers/symbols)
+  if (!/[a-zA-Z]{3,}/.test(trimmedTitle)) {
+    return false;
+  }
+
+  const titleLower = trimmedTitle.toLowerCase();
+
+  // Reject if contains "keyword" or "update" (case-insensitive)
+  if (titleLower.includes('keyword') || titleLower.includes('update')) {
+    return false;
+  }
+
+  // Reject if it's only numbers, spaces, dashes, or dots
+  if (/^[0-9\s\-\.]+$/.test(trimmedTitle)) {
+    return false;
+  }
+
+  return true;
+};
+
 // Get all applied jobs for a user
 const getAppliedJobs = asyncHandler(async (req, res) => {
   const startTime = Date.now();
@@ -41,6 +78,12 @@ const addAppliedJob = asyncHandler(async (req, res) => {
   if (!title || !url) {
     console.log(`[APPLIED_JOBS] POST /api/applied-jobs - User: ${userId} - Validation failed: Missing title or URL`);
     throw new ValidationError('Title and URL are required');
+  }
+
+  // Validate that title is actually a job title and not navigation/button text
+  if (!isValidJobTitle(title)) {
+    console.log(`[APPLIED_JOBS] POST /api/applied-jobs - User: ${userId} - Validation failed: Invalid job title (contains navigation/button text): "${title}"`);
+    throw new ValidationError('Invalid job title. The title appears to be navigation or button text, not an actual job posting. Please ensure you are tracking an actual job posting.');
   }
 
   // Check if job already exists for this user
