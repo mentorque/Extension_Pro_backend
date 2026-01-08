@@ -8,6 +8,7 @@ const { handleFileUpload } = require('./middleware/fileUpload'); // FIXED: handl
 
 // Import controllers
 const authController = require('./controllers/auth');
+const usageController = require('./controllers/usage');
 const chatController = require('./controllers/chat');
 const coverletterController = require('./controllers/coverletter');
 const experienceController = require('./controllers/experience');
@@ -24,6 +25,9 @@ router.get('/health', (req, res) => {
 
 // Public API key validation endpoint (no auth required)
 router.post('/auth/validate', authController.validateApiKeyPublic);
+
+// Public usage check endpoint (requires API key in header, but uses its own validation)
+router.get('/usage', usageController.getDailyUsageByApiKey);
 
 // Protected routes (require API key)
 router.use(authenticateApiKey); // Apply auth middleware to all routes below
@@ -51,5 +55,8 @@ router.get('/applied-jobs', appliedJobsController.getAppliedJobs);
 router.post('/applied-jobs', appliedJobsController.addAppliedJob);
 router.delete('/applied-jobs/:id', appliedJobsController.deleteAppliedJob);
 router.patch('/applied-jobs/:id/status', appliedJobsController.updateJobStatus);
+
+// Usage routes (authenticated)
+router.get('/usage/daily', usageController.getDailyUsage);
 
 module.exports = router;

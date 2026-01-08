@@ -26,8 +26,56 @@ const isValidJobTitle = (title) => {
 
   const titleLower = trimmedTitle.toLowerCase();
 
-  // Reject if contains "keyword" or "update" (case-insensitive)
-  if (titleLower.includes('keyword') || titleLower.includes('update')) {
+  // Reject specific extension UI texts that are being incorrectly captured as job titles
+  // These exact texts must be rejected
+  const exactUiTextsToReject = [
+    'keywords & skills analyzer',
+    'keywords and skills analyzer',
+    'cover letter generator',
+    'coverletter generator',
+    'update to our terms',
+    'ask about your fit',
+    'ask about your experience',
+    'ask about your fit or experience'
+  ];
+  
+  // Check for exact matches first (most important)
+  if (exactUiTextsToReject.some(uiText => titleLower === uiText)) {
+    return false;
+  }
+  
+  // Additional UI patterns that should be rejected
+  const uiPatternsToReject = [
+    'update terms',
+    // Partial matches for common UI patterns
+    'keywords &',
+    '& skills analyzer',
+    'cover letter generator',
+    'letter generator'
+  ];
+  
+  // Check for partial matches
+  if (uiPatternsToReject.some(uiText => 
+    titleLower.startsWith(uiText + ' ') || 
+    titleLower.endsWith(' ' + uiText) ||
+    titleLower.includes(' ' + uiText + ' ')
+  )) {
+    return false;
+  }
+  
+  // Reject if title contains specific patterns that indicate UI text
+  // Pattern: "keywords" + "analyzer" together (from "Keywords & Skills Analyzer")
+  if (titleLower.includes('keyword') && titleLower.includes('analyzer')) {
+    return false;
+  }
+  
+  // Pattern: "update" + "terms" together (from "Update to our terms")
+  if (titleLower.includes('update') && (titleLower.includes('terms') || titleLower.includes('our'))) {
+    return false;
+  }
+  
+  // Pattern: "cover letter" + "generator" together (from "Cover Letter Generator")
+  if ((titleLower.includes('cover letter') || titleLower.includes('coverletter')) && titleLower.includes('generator')) {
     return false;
   }
 

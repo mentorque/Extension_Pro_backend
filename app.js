@@ -11,30 +11,80 @@ const { auditLogMiddleware } = require('./src/middleware/auditLog');
 const app = express();
 
 // Middleware
-app.use(helmet());
+// Configure Helmet to work with CORS (especially for Chrome extensions)
+app.use(helmet({
+  crossOriginEmbedderPolicy: false, // Allow cross-origin requests
+  contentSecurityPolicy: false, // Disable CSP for API endpoints (can be enabled later with proper config)
+  crossOriginResourcePolicy: { policy: "cross-origin" }, // Allow cross-origin resources
+  crossOriginOpenerPolicy: false // Allow cross-origin opener
+}));
 
 // Enhanced CORS configuration for browser extension
+// Chrome extensions use a unique origin format, so we need to allow all origins
 app.use(cors({
-  origin: [
-    'chrome-extension://*',
-    'moz-extension://*',
-    'safari-extension://*',
-    'http://localhost:*',
-    'https://localhost:*',
-    'https://platform-frontend-gamma-two.vercel.app',
-    'https://extensionbackend-production-cf91.up.railway.app'
-  ],
-  credentials: true,
+  origin: function (origin, callback) {
+    // Always allow requests with no origin (Chrome extensions, Postman, curl, etc.)
+    if (!origin) {
+      console.log('[CORS] Allowing request with no origin header');
+      return callback(null, true);
+    }
+    
+    console.log('[CORS] Checking origin:', origin);
+    
+    // Allow Chrome extensions
+    if (origin.startsWith('chrome-extension://')) {
+      console.log('[CORS] Allowing Chrome extension origin');
+      return callback(null, true);
+    }
+    
+    // Allow Firefox extensions
+    if (origin.startsWith('moz-extension://')) {
+      console.log('[CORS] Allowing Firefox extension origin');
+      return callback(null, true);
+    }
+    
+    // Allow Safari extensions
+    if (origin.startsWith('safari-extension://')) {
+      console.log('[CORS] Allowing Safari extension origin');
+      return callback(null, true);
+    }
+    
+    // Allow localhost (any port)
+    if (origin.startsWith('http://localhost:') || origin.startsWith('https://localhost:')) {
+      console.log('[CORS] Allowing localhost origin');
+      return callback(null, true);
+    }
+    
+    // Allow specific production domains
+    const allowedOrigins = [
+      'https://platform-frontend-gamma-two.vercel.app',
+      'https://extensionbackend-production-cf91.up.railway.app',
+      'https://app.mentorquedu.com'
+    ];
+    
+    if (allowedOrigins.includes(origin)) {
+      console.log('[CORS] Allowing production origin');
+      return callback(null, true);
+    }
+    
+    // Default: allow all (for Chrome extensions which may have varying origins)
+    console.log('[CORS] Allowing origin (default)');
+    callback(null, true);
+  },
+  credentials: false, // Changed to false to match frontend (credentials: 'omit')
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: [
     'Content-Type',
     'Authorization',
     'x-api-key',
+    'X-API-Key',
     'X-Requested-With',
     'Accept',
     'Origin'
   ],
-  exposedHeaders: ['x-api-key']
+  exposedHeaders: ['x-api-key', 'X-API-Key'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 
 // Custom request logging middleware for performance tracking

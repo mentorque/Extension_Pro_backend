@@ -107,13 +107,53 @@ async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN', m
         lastError = error;
         const isRetryable = isRetryableError(error);
         
-        console.error(`[${controllerName}] API key ${keyIndex} failed${retryAttempt > 0 ? ` (retry ${retryAttempt})` : ''}:`, {
-          errorMessage: error.message,
-          errorCode: error.code,
-          isRetryable: isRetryable,
-          retryAttempt: retryAttempt,
-          maxRetries: maxRetries
-        });
+        // Log the complete raw error object for debugging
+        console.error('\n' + '='.repeat(80));
+        console.error(`[${controllerName}] GEMINI API ERROR - API Key ${keyIndex}${isFallback ? ' (FALLBACK)' : ' (PRIMARY)'}${retryAttempt > 0 ? ` - RETRY ${retryAttempt}/${maxRetries}` : ''}`);
+        console.error('='.repeat(80));
+        
+        // Log all error properties
+        console.error('Error Type:', error.constructor.name);
+        console.error('Error Name:', error.name);
+        console.error('Error Message:', error.message);
+        console.error('Error Code:', error.code);
+        console.error('Error Status:', error.status);
+        console.error('Error Status Code:', error.statusCode);
+        
+        // Log full error object structure
+        console.error('\n--- Full Error Object ---');
+        console.error(JSON.stringify(error, Object.getOwnPropertyNames(error), 2));
+        
+        // Log error stack if available
+        if (error.stack) {
+          console.error('\n--- Error Stack Trace ---');
+          console.error(error.stack);
+        }
+        
+        // Log additional properties that might exist
+        if (error.cause) {
+          console.error('\n--- Error Cause ---');
+          console.error(JSON.stringify(error.cause, null, 2));
+        }
+        
+        if (error.response) {
+          console.error('\n--- Error Response ---');
+          console.error(JSON.stringify(error.response, null, 2));
+        }
+        
+        if (error.config) {
+          console.error('\n--- Request Config ---');
+          console.error(JSON.stringify(error.config, null, 2));
+        }
+        
+        // Log retry information
+        console.error('\n--- Retry Information ---');
+        console.error('Is Retryable:', isRetryable);
+        console.error('Retry Attempt:', retryAttempt);
+        console.error('Max Retries:', maxRetries);
+        console.error('API Key Index:', keyIndex);
+        console.error('Is Fallback Key:', isFallback);
+        console.error('='.repeat(80) + '\n');
         
         // If it's retryable and we haven't exhausted retries, try again
         if (isRetryable && retryAttempt < maxRetries) {
@@ -134,8 +174,24 @@ async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN', m
     }
   }
   
-  // If we've exhausted all keys and retries, throw the last error
+  // If we've exhausted all keys and retries, log final error and throw
   if (lastError) {
+    console.error('\n' + '='.repeat(80));
+    console.error(`[${controllerName}] ALL API KEYS EXHAUSTED - FINAL ERROR`);
+    console.error('='.repeat(80));
+    console.error('Final Error Type:', lastError.constructor.name);
+    console.error('Final Error Name:', lastError.name);
+    console.error('Final Error Message:', lastError.message);
+    console.error('Final Error Code:', lastError.code);
+    console.error('Final Error Status:', lastError.status);
+    console.error('\n--- Complete Final Error Object ---');
+    console.error(JSON.stringify(lastError, Object.getOwnPropertyNames(lastError), 2));
+    if (lastError.stack) {
+      console.error('\n--- Final Error Stack Trace ---');
+      console.error(lastError.stack);
+    }
+    console.error('='.repeat(80) + '\n');
+    
     if (!(lastError instanceof AppError)) {
       // Check if it was a service unavailable error
       const errorMessage = (lastError.message || '').toLowerCase();
