@@ -93,17 +93,32 @@ const generateKeywords = asyncHandler(async (req, res) => {
   const textExtractTime = Date.now() - textExtractStartTime;
   console.log(`[KEYWORDS] ⏱️  Text extraction: ${textExtractTime}ms`);
   
-  // Log response metadata if available
+  // Log token usage (input and output tokens)
   const usageMetadata = response.usageMetadata || {};
-  if (usageMetadata.totalTokenCount) {
-    console.log(`[KEYWORDS] 🎯 Token Usage Details:`, {
-      promptTokens: usageMetadata.promptTokenCount || 'N/A',
-      candidatesTokens: usageMetadata.candidatesTokenCount || 'N/A',
-      totalTokens: usageMetadata.totalTokenCount || 'N/A',
-      responseTextLength: text.length,
-      responseWordCount: text.split(/\s+/).length
-    });
+  const inputTokens = usageMetadata.promptTokenCount ?? null;
+  const outputTokens = usageMetadata.candidatesTokenCount ?? null;
+  const totalTokens = usageMetadata.totalTokenCount ?? null;
+  
+  console.log(`[KEYWORDS] 🎯 TOKEN USAGE:`);
+  console.log(`[KEYWORDS]    📥 INPUT TOKENS:  ${inputTokens !== null ? inputTokens : 'N/A'}`);
+  console.log(`[KEYWORDS]    📤 OUTPUT TOKENS: ${outputTokens !== null ? outputTokens : 'N/A'}`);
+  console.log(`[KEYWORDS]    📊 TOTAL TOKENS:  ${totalTokens !== null ? totalTokens : 'N/A'}`);
+  
+  if (inputTokens !== null && outputTokens !== null) {
+    const inputOutputRatio = ((inputTokens / (inputTokens + outputTokens)) * 100).toFixed(1);
+    console.log(`[KEYWORDS]    📈 Input/Output Ratio: ${inputOutputRatio}% input, ${(100 - inputOutputRatio).toFixed(1)}% output`);
   }
+  
+  if (totalTokens !== null && geminiTime > 0) {
+    const tokensPerSecond = ((totalTokens / geminiTime) * 1000).toFixed(2);
+    console.log(`[KEYWORDS]    ⚡ Tokens/Second: ${tokensPerSecond}`);
+  }
+  
+  console.log(`[KEYWORDS] 📝 Response Details:`, {
+    responseTextLength: text.length,
+    responseWordCount: text.split(/\s+/).length,
+    responseSizeKB: (text.length / 1024).toFixed(2)
+  });
 
   // Step 4: Parse JSON
   const parseStartTime = Date.now();

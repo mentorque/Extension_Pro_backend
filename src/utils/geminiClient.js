@@ -127,19 +127,31 @@ async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN', m
         const safetyRatings = candidates[0]?.safetyRatings || [];
         
         console.log(`[${controllerName}] ✅ Gemini API responded in ${apiCallTime}ms`);
+        
+        // Log token usage explicitly (input and output tokens)
+        console.log(`[${controllerName}] 🎯 TOKEN USAGE:`);
+        console.log(`[${controllerName}]    📥 INPUT TOKENS:  ${promptTokenCount !== 'N/A' ? promptTokenCount : 'N/A'}`);
+        console.log(`[${controllerName}]    📤 OUTPUT TOKENS: ${candidatesTokenCount !== 'N/A' ? candidatesTokenCount : 'N/A'}`);
+        console.log(`[${controllerName}]    📊 TOTAL TOKENS:  ${totalTokenCount !== 'N/A' ? totalTokenCount : 'N/A'}`);
+        
+        if (promptTokenCount !== 'N/A' && candidatesTokenCount !== 'N/A') {
+          const inputOutputRatio = ((promptTokenCount / (promptTokenCount + candidatesTokenCount)) * 100).toFixed(1);
+          console.log(`[${controllerName}]    📈 Input/Output Ratio: ${inputOutputRatio}% input, ${(100 - inputOutputRatio).toFixed(1)}% output`);
+        }
+        
+        if (totalTokenCount !== 'N/A' && apiCallTime > 0) {
+          const tokensPerSecond = ((totalTokenCount / apiCallTime) * 1000).toFixed(2);
+          const inputTokensPerSecond = promptTokenCount !== 'N/A' ? ((promptTokenCount / apiCallTime) * 1000).toFixed(2) : 'N/A';
+          const outputTokensPerSecond = candidatesTokenCount !== 'N/A' ? ((candidatesTokenCount / apiCallTime) * 1000).toFixed(2) : 'N/A';
+          console.log(`[${controllerName}]    ⚡ Tokens/Second: ${tokensPerSecond} (Input: ${inputTokensPerSecond}, Output: ${outputTokensPerSecond})`);
+        }
+        
         console.log(`[${controllerName}] 📊 Response Details:`, {
           responseLength: responseLength,
           responseWordCount: responseWordCount,
           responseSizeKB: (responseLength / 1024).toFixed(2),
           finishReason: finishReason,
           hasSafetyRatings: safetyRatings.length > 0
-        });
-        console.log(`[${controllerName}] 🎯 Token Usage:`, {
-          promptTokens: promptTokenCount,
-          candidatesTokens: candidatesTokenCount,
-          totalTokens: totalTokenCount,
-          tokensPerSecond: totalTokenCount !== 'N/A' ? ((totalTokenCount / apiCallTime) * 1000).toFixed(2) : 'N/A',
-          promptTokensPerSecond: promptTokenCount !== 'N/A' ? ((promptTokenCount / apiCallTime) * 1000).toFixed(2) : 'N/A'
         });
         
         if (isFallback || retryAttempt > 0) {
