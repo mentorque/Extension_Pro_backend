@@ -57,7 +57,7 @@ app.use(cors({
     
     // Allow specific production domains
     const allowedOrigins = [
-      'https://platform-frontend-gamma-two.vercel.app',
+    'https://platform-frontend-gamma-two.vercel.app',
       'https://extensionbackend-production-cf91.up.railway.app',
       'https://app.mentorquedu.com'
     ];

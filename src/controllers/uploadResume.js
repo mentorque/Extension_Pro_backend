@@ -4,6 +4,8 @@ const fs = require('fs');
 const { generateContentWithFallback } = require('../utils/geminiClient');
 const { resumeParser } = require('../utils/prompts.json');
 const { ValidationError, asyncHandler } = require('../utils/errors');
+const { validateSkills } = require('./userSkills');
+const prisma = require('../utils/prismaClient');
 
 const SYSTEM_PROMPT = resumeParser;
 const EXPERIENCE_SCHEMA = fs.readFileSync(path.join(__dirname, '../schemas/experience.md'), 'utf8');
@@ -60,6 +62,32 @@ const uploadResume = asyncHandler(async (req, res) => {
 
     const extractedResult = extractJSONFromString(text);
     console.log('[uploadResume] Parsed result keys:', Object.keys(extractedResult || {}));
+
+    // Save skills to UserSkills if user is authenticated and skills exist
+    if (req.user && extractedResult?.formatted_resume?.skills && Array.isArray(extractedResult.formatted_resume.skills)) {
+      try {
+        const userId = req.user.id;
+        const userSkills = extractedResult.formatted_resume.skills;
+        const validatedSkills = validateSkills(userSkills);
+        
+        await prisma.userSkills.upsert({
+          where: { userId },
+          update: {
+            skills: validatedSkills,
+            updatedAt: new Date()
+          },
+          create: {
+            userId,
+            skills: validatedSkills
+          }
+        });
+        
+        console.log('[uploadResume] Saved user skills:', validatedSkills.length);
+      } catch (skillError) {
+        // Don't fail the request if skill saving fails
+        console.error('[uploadResume] Error saving user skills:', skillError);
+      }
+    }
 
     res.json({ success: true, result: extractedResult });
   } finally {

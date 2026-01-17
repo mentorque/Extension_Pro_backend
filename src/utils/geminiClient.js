@@ -91,11 +91,56 @@ async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN', m
           console.log(`[${controllerName}] Attempting with API key ${keyIndex}${isFallback ? ' (fallback)' : ' (primary)'}`);
         }
         
+        const apiCallStartTime = Date.now();
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: gemini_flash });
         
+        // Log request details
+        const promptLength = prompt.length;
+        const promptWordCount = prompt.split(/\s+/).length;
+        console.log(`[${controllerName}] 🚀 Sending request to Gemini API...`);
+        console.log(`[${controllerName}] 📝 Request Details:`, {
+          model: gemini_flash,
+          promptLength: promptLength,
+          promptWordCount: promptWordCount,
+          promptSizeKB: (promptLength / 1024).toFixed(2),
+          estimatedTokens: Math.ceil(promptWordCount * 1.3) // Rough estimate: ~1.3 tokens per word
+        });
+        
         const result = await model.generateContent(prompt);
+        const apiCallTime = Date.now() - apiCallStartTime;
+        
         const response = result.response;
+        const responseText = response.text();
+        const responseLength = responseText.length;
+        const responseWordCount = responseText.split(/\s+/).length;
+        
+        // Extract usage metadata
+        const usageMetadata = response.usageMetadata || {};
+        const promptTokenCount = usageMetadata.promptTokenCount || 'N/A';
+        const candidatesTokenCount = usageMetadata.candidatesTokenCount || 'N/A';
+        const totalTokenCount = usageMetadata.totalTokenCount || 'N/A';
+        
+        // Extract candidate details
+        const candidates = response.candidates || [];
+        const finishReason = candidates[0]?.finishReason || 'N/A';
+        const safetyRatings = candidates[0]?.safetyRatings || [];
+        
+        console.log(`[${controllerName}] ✅ Gemini API responded in ${apiCallTime}ms`);
+        console.log(`[${controllerName}] 📊 Response Details:`, {
+          responseLength: responseLength,
+          responseWordCount: responseWordCount,
+          responseSizeKB: (responseLength / 1024).toFixed(2),
+          finishReason: finishReason,
+          hasSafetyRatings: safetyRatings.length > 0
+        });
+        console.log(`[${controllerName}] 🎯 Token Usage:`, {
+          promptTokens: promptTokenCount,
+          candidatesTokens: candidatesTokenCount,
+          totalTokens: totalTokenCount,
+          tokensPerSecond: totalTokenCount !== 'N/A' ? ((totalTokenCount / apiCallTime) * 1000).toFixed(2) : 'N/A',
+          promptTokensPerSecond: promptTokenCount !== 'N/A' ? ((promptTokenCount / apiCallTime) * 1000).toFixed(2) : 'N/A'
+        });
         
         if (isFallback || retryAttempt > 0) {
           console.log(`[${controllerName}] Successfully used ${isFallback ? 'fallback ' : ''}API key ${keyIndex}${retryAttempt > 0 ? ` (after ${retryAttempt} retries)` : ''}`);

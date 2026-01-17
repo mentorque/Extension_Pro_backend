@@ -25,6 +25,8 @@ model User {
   Progress        Progress?
   AdminMentor     AdminMentor? @relation(fields: [mentorId], references: [id])
   UserStatus      UserStatus?
+  UserSkills      UserSkills?
+  ResumeSettings  ResumeSettings?
 
   @@index([firebaseUid])
   @@index([email])
@@ -193,4 +195,68 @@ model AuditLog {
   @@index([deletedAt])
   @@index([userId, createdAt])
   @@index([service, createdAt])
+}
+
+model UserSkills {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  skills          Json      // Array of skill strings
+  skillsDisplayMode String? // "twoColumnar" | "lineTime" - from ResumeCompiler
+  skillsLineTime  Json?     // Array of { heading, skills } objects (for lineTime mode)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([deletedAt])
+}
+
+model ResumeSettings {
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  apiKeyId          String?
+  
+  // Personal Info
+  personalInfo      Json
+  
+  // Resume Content
+  professionalSummary String?
+  education         Json
+  experience        Json
+  skills            Json      // Array of strings (for twoColumnar mode)
+  projects          Json
+  customSections    Json?
+  
+  // Display Settings
+  skillsDisplayMode String    @default("twoColumnar")
+  skillsLineTime    Json?
+  
+  // Section Configuration
+  sectionOrder      Json
+  sectionNames      Json
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
+  
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([apiKeyId])
+  @@index([deletedAt])
+}
+
+// FreetrialUsers model - belongs to Extension_Free_Tier but shared database
+// Added to prevent accidental deletion when syncing schemas
+model FreetrialUsers {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  contactNumber String
+  occupation    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([email])
 }

@@ -255,6 +255,47 @@ exports.Prisma.AuditLogScalarFieldEnum = {
   deletedAt: 'deletedAt'
 };
 
+exports.Prisma.UserSkillsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  skills: 'skills',
+  skillsDisplayMode: 'skillsDisplayMode',
+  skillsLineTime: 'skillsLineTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.ResumeSettingsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  apiKeyId: 'apiKeyId',
+  personalInfo: 'personalInfo',
+  professionalSummary: 'professionalSummary',
+  education: 'education',
+  experience: 'experience',
+  skills: 'skills',
+  projects: 'projects',
+  customSections: 'customSections',
+  skillsDisplayMode: 'skillsDisplayMode',
+  skillsLineTime: 'skillsLineTime',
+  sectionOrder: 'sectionOrder',
+  sectionNames: 'sectionNames',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.FreetrialUsersScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  contactNumber: 'contactNumber',
+  occupation: 'occupation',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -294,7 +335,10 @@ exports.Prisma.ModelName = {
   AdminMentor: 'AdminMentor',
   MentorSessionNote: 'MentorSessionNote',
   UserStatus: 'UserStatus',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  UserSkills: 'UserSkills',
+  ResumeSettings: 'ResumeSettings',
+  FreetrialUsers: 'FreetrialUsers'
 };
 
 /**

@@ -16,6 +16,8 @@ const hrLookupController = require('./controllers/hrLookup');
 const keywordsController = require('./controllers/keywords');
 const uploadResumeController = require('./controllers/uploadResume');
 const appliedJobsController = require('./controllers/appliedJobs');
+const userSkillsController = require('./controllers/userSkills');
+const resumeController = require('./controllers/resume');
 
 // Public routes (no auth required)
 // Health check
@@ -58,5 +60,12 @@ router.patch('/applied-jobs/:id/status', appliedJobsController.updateJobStatus);
 
 // Usage routes (authenticated)
 router.get('/usage/daily', usageController.getDailyUsage);
+
+// User skills routes
+router.get('/user-skills', userSkillsController.getUserSkills);
+router.post('/user-skills', userSkillsController.saveUserSkills);
+
+// Resume routes
+router.get('/resume/load', resumeController.loadResume);
 
 module.exports = router;
