@@ -1,36 +1,39 @@
 // backend/src/utils/geminiClient.js
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { gemini_flash } = require('./llms.json');
+// COMMENTED OUT: Switched to OpenAI GPT-4.1 nano for speed optimization
+// const { GoogleGenerativeAI } = require("@google/generative-ai");
+// const { gemini_flash } = require('./llms.json');
 const { AppError, ERROR_CODES } = require('./errors');
 
 /**
  * Get all available Gemini API keys (primary + fallbacks)
+ * COMMENTED OUT: Switched to OpenAI
  */
-function getApiKeys() {
-  const keys = [];
-  
-  // Primary key
-  if (process.env.GEMINI_API_KEY) {
-    keys.push(process.env.GEMINI_API_KEY);
-  }
-  
-  // Fallback keys
-  if (process.env.GEMINI_API_KEY_FALLBACK_1) {
-    keys.push(process.env.GEMINI_API_KEY_FALLBACK_1);
-  }
-  
-  if (process.env.GEMINI_API_KEY_FALLBACK_2) {
-    keys.push(process.env.GEMINI_API_KEY_FALLBACK_2);
-  }
-  
-  return keys;
-}
+// function getApiKeys() {
+//   const keys = [];
+//   
+//   // Primary key
+//   if (process.env.GEMINI_API_KEY) {
+//     keys.push(process.env.GEMINI_API_KEY);
+//   }
+//   
+//   // Fallback keys
+//   if (process.env.GEMINI_API_KEY_FALLBACK_1) {
+//     keys.push(process.env.GEMINI_API_KEY_FALLBACK_1);
+//   }
+//   
+//   if (process.env.GEMINI_API_KEY_FALLBACK_2) {
+//     keys.push(process.env.GEMINI_API_KEY_FALLBACK_2);
+//   }
+//   
+//   return keys;
+// }
 
 /**
  * Check if error is a retryable error (503, 429, temporary issues)
  * This detects errors from Gemini API like "503 Service Unavailable" and "overloaded"
+ * COMMENTED OUT: Switched to OpenAI
  */
-function isRetryableError(error) {
+// function isRetryableError(error) {
   if (!error) return false;
   
   const errorMessage = (error.message || '').toLowerCase();
@@ -52,16 +55,17 @@ function isRetryableError(error) {
   );
   
   return isRetryable;
-}
+// }
 
 /**
  * Generate content with automatic fallback to next API key and retry logic
+ * COMMENTED OUT: Switched to OpenAI - use openaiClient.js instead
  * @param {string} prompt - The prompt to send to Gemini
  * @param {string} controllerName - Name of the controller for logging
  * @param {number} maxRetries - Maximum number of retries per key (default: 2)
  * @returns {Promise<Object>} - The response from Gemini
  */
-async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN', maxRetries = 2) {
+// async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN', maxRetries = 2) {
   const apiKeys = getApiKeys();
   
   if (apiKeys.length === 0) {
@@ -273,10 +277,18 @@ async function generateContentWithFallback(prompt, controllerName = 'UNKNOWN', m
     'All AI API keys failed. Please try again later.',
     502
   );
-}
+// }
 
+// COMMENTED OUT: Switched to OpenAI
+// module.exports = {
+//   generateContentWithFallback,
+//   getApiKeys
+// };
+
+// Re-export from OpenAI client for backward compatibility
+const { generateContentWithFallback: openaiGenerateContent } = require('./openaiClient');
 module.exports = {
-  generateContentWithFallback,
-  getApiKeys
+  generateContentWithFallback: openaiGenerateContent,
+  getApiKeys: () => [] // Return empty array for compatibility
 };
 

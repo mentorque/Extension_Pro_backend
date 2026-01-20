@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const { generateContentWithFallback } = require('../utils/geminiClient');
+const { generateContentWithFallback } = require('../utils/openaiClient');
 const { experienceSummary } = require('../utils/prompts.json');
 const { ValidationError, asyncHandler } = require('../utils/errors');
 
@@ -32,12 +32,11 @@ const generateExperience = asyncHandler(async (req, res) => {
   }
 
   const experienceString = JSON.stringify(experience);
-  const fullPrompt = `${SYSTEM_PROMPT}\n Job Description:\n${jobDescription}\n Experience:\n${experienceString}\nResponse Format:${EXPERIENCE_SCHEMA}`;
+  const fullPrompt = `${SYSTEM_PROMPT}\n\nJob Description:\n${jobDescription}\n\nExperience:\n${experienceString}\n\nIMPORTANT INSTRUCTIONS:\n- You MUST respond with ONLY a valid JSON object\n- Do NOT include any text, markdown, code blocks, or explanations outside the JSON\n- Follow the Response Format schema EXACTLY\n- Ensure all JSON is valid and parseable\n\nResponse Format:${EXPERIENCE_SCHEMA}`;
 
   const response = await generateContentWithFallback(fullPrompt, 'EXPERIENCE');
   const text = response.text();
   const extractedResult = extractJSONFromString(text);
-  console.log(extractedResult);
   res.json({ success: true, result: extractedResult });
 });
 

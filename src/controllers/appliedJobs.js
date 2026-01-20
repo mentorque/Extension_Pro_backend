@@ -92,7 +92,6 @@ const getAppliedJobs = asyncHandler(async (req, res) => {
   const startTime = Date.now();
   const userId = req.user.id;
   
-  console.log(`[APPLIED_JOBS] GET /api/applied-jobs - User: ${userId} - Starting fetch`);
   
   const appliedJobs = await prisma.appliedJob.findMany({
     where: { userId },
@@ -100,7 +99,6 @@ const getAppliedJobs = asyncHandler(async (req, res) => {
   });
 
   const duration = Date.now() - startTime;
-  console.log(`[APPLIED_JOBS] GET /api/applied-jobs - User: ${userId} - Success: Found ${appliedJobs.length} jobs in ${duration}ms`);
 
   return res.status(200).json({
     success: true,
@@ -110,27 +108,15 @@ const getAppliedJobs = asyncHandler(async (req, res) => {
 
 // Add a new applied job
 const addAppliedJob = asyncHandler(async (req, res) => {
-  const startTime = Date.now();
   const userId = req.user.id;
   const { title, company, location, url, appliedDate, appliedText } = req.body;
-  
-  console.log(`[APPLIED_JOBS] POST /api/applied-jobs - User: ${userId} - Adding job:`, {
-    title: title?.substring(0, 50) + (title?.length > 50 ? '...' : ''),
-    company,
-    location,
-    url: url?.substring(0, 100) + (url?.length > 100 ? '...' : ''),
-    appliedDate,
-    appliedText
-  });
 
   if (!title || !url) {
-    console.log(`[APPLIED_JOBS] POST /api/applied-jobs - User: ${userId} - Validation failed: Missing title or URL`);
     throw new ValidationError('Title and URL are required');
   }
 
   // Validate that title is actually a job title and not navigation/button text
   if (!isValidJobTitle(title)) {
-    console.log(`[APPLIED_JOBS] POST /api/applied-jobs - User: ${userId} - Validation failed: Invalid job title (contains navigation/button text): "${title}"`);
     throw new ValidationError('Invalid job title. The title appears to be navigation or button text, not an actual job posting. Please ensure you are tracking an actual job posting.');
   }
 
@@ -143,11 +129,6 @@ const addAppliedJob = asyncHandler(async (req, res) => {
   });
 
   if (existing) {
-    const duration = Date.now() - startTime;
-    console.log(`[APPLIED_JOBS] POST /api/applied-jobs - User: ${userId} - Job already exists (${duration}ms):`, {
-      existingId: existing.id,
-      existingTitle: existing.title
-    });
     return res.status(200).json({
       success: true,
       message: 'Job already tracked',
@@ -169,7 +150,6 @@ const addAppliedJob = asyncHandler(async (req, res) => {
   });
 
   const duration = Date.now() - startTime;
-  console.log(`[APPLIED_JOBS] POST /api/applied-jobs - User: ${userId} - Success: Created job ${appliedJob.id} in ${duration}ms`);
 
   return res.status(201).json({
     success: true,
@@ -179,11 +159,9 @@ const addAppliedJob = asyncHandler(async (req, res) => {
 
 // Delete an applied job
 const deleteAppliedJob = asyncHandler(async (req, res) => {
-  const startTime = Date.now();
   const userId = req.user.id;
   const { id } = req.params;
   
-  console.log(`[APPLIED_JOBS] DELETE /api/applied-jobs/${id} - User: ${userId} - Starting deletion`);
 
   // Verify the job belongs to the user
   const job = await prisma.appliedJob.findFirst({
@@ -195,7 +173,6 @@ const deleteAppliedJob = asyncHandler(async (req, res) => {
 
   if (!job) {
     const duration = Date.now() - startTime;
-    console.log(`[APPLIED_JOBS] DELETE /api/applied-jobs/${id} - User: ${userId} - Job not found (${duration}ms)`);
     throw new NotFoundError('Applied job not found');
   }
 
@@ -204,7 +181,6 @@ const deleteAppliedJob = asyncHandler(async (req, res) => {
   });
 
   const duration = Date.now() - startTime;
-  console.log(`[APPLIED_JOBS] DELETE /api/applied-jobs/${id} - User: ${userId} - Success: Deleted job "${job.title}" in ${duration}ms`);
 
   return res.status(200).json({
     success: true,
@@ -214,15 +190,12 @@ const deleteAppliedJob = asyncHandler(async (req, res) => {
 
 // Update job status
 const updateJobStatus = asyncHandler(async (req, res) => {
-  const startTime = Date.now();
   const userId = req.user.id;
   const { id } = req.params;
   const { status } = req.body;
   
-  console.log(`[APPLIED_JOBS] PATCH /api/applied-jobs/${id}/status - User: ${userId} - Updating status to: ${status}`);
 
   if (!status) {
-    console.log(`[APPLIED_JOBS] PATCH /api/applied-jobs/${id}/status - User: ${userId} - Validation failed: Missing status`);
     throw new ValidationError('Status is required');
   }
 
@@ -236,7 +209,6 @@ const updateJobStatus = asyncHandler(async (req, res) => {
 
   if (!job) {
     const duration = Date.now() - startTime;
-    console.log(`[APPLIED_JOBS] PATCH /api/applied-jobs/${id}/status - User: ${userId} - Job not found (${duration}ms)`);
     throw new NotFoundError('Applied job not found');
   }
 
@@ -246,7 +218,6 @@ const updateJobStatus = asyncHandler(async (req, res) => {
   });
 
   const duration = Date.now() - startTime;
-  console.log(`[APPLIED_JOBS] PATCH /api/applied-jobs/${id}/status - User: ${userId} - Success: Updated job "${job.title}" status from "${job.status}" to "${status}" in ${duration}ms`);
 
   return res.status(200).json({
     success: true,

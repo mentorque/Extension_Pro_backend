@@ -1,7 +1,7 @@
 // src/controllers/keywords.js
 const path = require('path');
 const fs = require('fs');
-const { generateContentWithFallback } = require('../utils/geminiClient');
+const { generateContentWithFallback } = require('../utils/openaiClient');
 const { keywordExtraction } = require('../utils/prompts.json');
 const { ValidationError, asyncHandler } = require('../utils/errors');
 
@@ -38,104 +38,18 @@ function extractJSONFromString(input) {
 }
 
 const generateKeywords = asyncHandler(async (req, res) => {
-  const startTime = Date.now();
-  console.log('[KEYWORDS] ===== Request received =====');
-  console.log('[KEYWORDS] Request body:', {
-    hasJobDescription: !!req.body?.jobDescription,
-    hasSkills: !!req.body?.skills,
-    jobDescriptionLength: req.body?.jobDescription?.length || 0,
-    skillsLength: Array.isArray(req.body?.skills) ? req.body.skills.length : 'not array',
-    bodyKeys: Object.keys(req.body || {}),
-    contentType: req.headers['content-type'],
-  });
-  
   const { jobDescription, skills } = req.body;
 
   if (!jobDescription || !skills) {
-    console.error('[KEYWORDS] Missing required fields:', {
-      hasJobDescription: !!jobDescription,
-      hasSkills: !!skills,
-      jobDescription: jobDescription ? 'present' : 'missing',
-      skills: skills ? 'present' : 'missing'
-    });
     throw new ValidationError('Missing required fields: jobDescription and skills are required');
   }
 
-  // Step 1: Prepare prompt
-  const promptStartTime = Date.now();
   const skillsString = JSON.stringify(skills);
-  const fullPrompt = `${SYSTEM_PROMPT}\n Job Description:\n${jobDescription}\n\nCurrent Skills:\n${skillsString}\n\nResponse Format:${SKILLS_SCHEMA}`;
-  const promptTime = Date.now() - promptStartTime;
-  const promptLength = fullPrompt.length;
-  const promptWordCount = fullPrompt.split(/\s+/).length;
-  console.log(`[KEYWORDS] ⏱️  Prompt preparation: ${promptTime}ms`);
-  console.log(`[KEYWORDS] 📝 Prompt Stats:`, {
-    totalLength: promptLength,
-    wordCount: promptWordCount,
-    sizeKB: (promptLength / 1024).toFixed(2),
-    jobDescriptionLength: jobDescription.length,
-    skillsCount: Array.isArray(skills) ? skills.length : 0,
-    skillsStringLength: skillsString.length,
-    systemPromptLength: SYSTEM_PROMPT.length,
-    schemaLength: SKILLS_SCHEMA.length
-  });
+  const fullPrompt = `${SYSTEM_PROMPT}\n\nJob Description:\n${jobDescription}\n\nCurrent Skills:\n${skillsString}\n\nIMPORTANT INSTRUCTIONS:\n- You MUST respond with ONLY a valid JSON object\n- Do NOT include any text, markdown, code blocks, or explanations outside the JSON\n- Follow the Response Format schema EXACTLY\n- Ensure all JSON is valid and parseable\n- Format all skills using standard professional capitalization as shown in the schema examples (e.g., "Python", "React", "Machine Learning", "AWS")\n\nResponse Format:${SKILLS_SCHEMA}`;
 
-  // Step 2: Call Gemini API
-  const geminiStartTime = Date.now();
-  console.log('[KEYWORDS] 📡 Calling Gemini API...');
   const response = await generateContentWithFallback(fullPrompt, 'KEYWORDS');
-  const geminiTime = Date.now() - geminiStartTime;
-  console.log(`[KEYWORDS] ✅ Gemini API response received: ${geminiTime}ms`);
-
-  // Step 3: Extract text from response
-  const textExtractStartTime = Date.now();
   const text = response.text();
-  const textExtractTime = Date.now() - textExtractStartTime;
-  console.log(`[KEYWORDS] ⏱️  Text extraction: ${textExtractTime}ms`);
-  
-  // Log token usage (input and output tokens)
-  const usageMetadata = response.usageMetadata || {};
-  const inputTokens = usageMetadata.promptTokenCount ?? null;
-  const outputTokens = usageMetadata.candidatesTokenCount ?? null;
-  const totalTokens = usageMetadata.totalTokenCount ?? null;
-  
-  console.log(`[KEYWORDS] 🎯 TOKEN USAGE:`);
-  console.log(`[KEYWORDS]    📥 INPUT TOKENS:  ${inputTokens !== null ? inputTokens : 'N/A'}`);
-  console.log(`[KEYWORDS]    📤 OUTPUT TOKENS: ${outputTokens !== null ? outputTokens : 'N/A'}`);
-  console.log(`[KEYWORDS]    📊 TOTAL TOKENS:  ${totalTokens !== null ? totalTokens : 'N/A'}`);
-  
-  if (inputTokens !== null && outputTokens !== null) {
-    const inputOutputRatio = ((inputTokens / (inputTokens + outputTokens)) * 100).toFixed(1);
-    console.log(`[KEYWORDS]    📈 Input/Output Ratio: ${inputOutputRatio}% input, ${(100 - inputOutputRatio).toFixed(1)}% output`);
-  }
-  
-  if (totalTokens !== null && geminiTime > 0) {
-    const tokensPerSecond = ((totalTokens / geminiTime) * 1000).toFixed(2);
-    console.log(`[KEYWORDS]    ⚡ Tokens/Second: ${tokensPerSecond}`);
-  }
-  
-  console.log(`[KEYWORDS] 📝 Response Details:`, {
-    responseTextLength: text.length,
-    responseWordCount: text.split(/\s+/).length,
-    responseSizeKB: (text.length / 1024).toFixed(2)
-  });
-
-  // Step 4: Parse JSON
-  const parseStartTime = Date.now();
   const extractedResult = extractJSONFromString(text);
-  const parseTime = Date.now() - parseStartTime;
-  console.log(`[KEYWORDS] ⏱️  JSON parsing: ${parseTime}ms`);
-
-  // Total time
-  const totalTime = Date.now() - startTime;
-  console.log(`[KEYWORDS] ===== Request completed =====`);
-  console.log(`[KEYWORDS] 📊 TIMING BREAKDOWN:`);
-  console.log(`[KEYWORDS]    - Prompt preparation: ${promptTime}ms`);
-  console.log(`[KEYWORDS]    - Gemini API call: ${geminiTime}ms (${((geminiTime / totalTime) * 100).toFixed(1)}%)`);
-  console.log(`[KEYWORDS]    - Text extraction: ${textExtractTime}ms`);
-  console.log(`[KEYWORDS]    - JSON parsing: ${parseTime}ms`);
-  console.log(`[KEYWORDS]    - TOTAL TIME: ${totalTime}ms`);
-  console.log(`[KEYWORDS] =============================`);
 
   res.json({ success: true, result: extractedResult });
 });

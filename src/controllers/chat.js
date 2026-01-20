@@ -1,4 +1,4 @@
-const { generateContentWithFallback } = require('../utils/geminiClient');
+const { generateContentWithFallback } = require('../utils/openaiClient');
 const { chatAssistant } = require('../utils/prompts.json');
 const { ValidationError, asyncHandler } = require('../utils/errors');
 
@@ -12,9 +12,9 @@ const chatWithContext = asyncHandler(async (req, res) => {
   }
 
   const resumeString = typeof resume === 'string' ? resume : JSON.stringify(resume);
-  const fullPrompt = `${SYSTEM_PROMPT}\n\nJob Description:\n${jobDescription}\n\nCandidate Resume (JSON):\n${resumeString}\n\nUser Question:\n${question}`;
+  const fullPrompt = `${SYSTEM_PROMPT}\n\nJob Description:\n${jobDescription}\n\nCandidate Resume (JSON):\n${resumeString}\n\nUser Question:\n${question}\n\nIMPORTANT: Follow all style rules and formatting requirements exactly as specified in the system prompt.`;
 
-  const response = await generateContentWithFallback(fullPrompt, 'CHAT');
+  const response = await generateContentWithFallback(fullPrompt, 'CHAT', 2, false); // requiresJson=false for chat
   const text = (response && typeof response.text === 'function') ? response.text() : '';
 
   let answer = (text || '').trim();
