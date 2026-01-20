@@ -89,16 +89,12 @@ const isValidJobTitle = (title) => {
 
 // Get all applied jobs for a user
 const getAppliedJobs = asyncHandler(async (req, res) => {
-  const startTime = Date.now();
   const userId = req.user.id;
-  
   
   const appliedJobs = await prisma.appliedJob.findMany({
     where: { userId },
     orderBy: { appliedDate: 'desc' }
   });
-
-  const duration = Date.now() - startTime;
 
   return res.status(200).json({
     success: true,
@@ -149,8 +145,6 @@ const addAppliedJob = asyncHandler(async (req, res) => {
     }
   });
 
-  const duration = Date.now() - startTime;
-
   return res.status(201).json({
     success: true,
     appliedJob
@@ -172,15 +166,12 @@ const deleteAppliedJob = asyncHandler(async (req, res) => {
   });
 
   if (!job) {
-    const duration = Date.now() - startTime;
     throw new NotFoundError('Applied job not found');
   }
 
   await prisma.appliedJob.delete({
     where: { id }
   });
-
-  const duration = Date.now() - startTime;
 
   return res.status(200).json({
     success: true,
@@ -208,7 +199,6 @@ const updateJobStatus = asyncHandler(async (req, res) => {
   });
 
   if (!job) {
-    const duration = Date.now() - startTime;
     throw new NotFoundError('Applied job not found');
   }
 
@@ -216,8 +206,6 @@ const updateJobStatus = asyncHandler(async (req, res) => {
     where: { id },
     data: { status }
   });
-
-  const duration = Date.now() - startTime;
 
   return res.status(200).json({
     success: true,
