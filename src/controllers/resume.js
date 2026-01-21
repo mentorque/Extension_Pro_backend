@@ -35,8 +35,18 @@ const loadResume = asyncHandler(async (req, res) => {
     }),
   ]);
 
+  // Log what we got from the database
+  console.log('[loadResume] Database fetch results:', {
+    userId,
+    hasSettings: !!settings,
+    hasUser: !!user,
+    userFullName: user?.fullName,
+    userEmail: user?.email,
+    personalInfoFromDB: settings?.personalInfo
+  });
+
   // Parse fullName from User profile
-  const { firstName, lastName } = parseFullName(user?.fullName);
+  const { firstName: userFirstName, lastName: userLastName } = parseFullName(user?.fullName || '');
   const userEmail = user?.email || '';
 
   // If no saved settings, return null (will use defaults with user profile data)
@@ -46,23 +56,49 @@ const loadResume = asyncHandler(async (req, res) => {
       result: null,
       hasResume: false,
       profileData: user ? {
-        firstName: firstName || '',
-        lastName: lastName || '',
+        firstName: userFirstName || '',
+        lastName: userLastName || '',
         email: userEmail || '',
       } : null,
       message: 'No saved resume settings found. Using default template with profile data.',
     });
   }
 
-  const savedPersonalInfo = settings.personalInfo || {};
+  // Ensure personalInfo is properly parsed (it's JSON in DB, Prisma should parse it automatically)
+  let savedPersonalInfo = {};
+  try {
+    if (settings.personalInfo) {
+      // If it's already an object (Prisma parsed it), use it directly
+      // If it's a string, parse it
+      savedPersonalInfo = typeof settings.personalInfo === 'string' 
+        ? JSON.parse(settings.personalInfo) 
+        : settings.personalInfo;
+    }
+  } catch (error) {
+    console.error('[loadResume] Error parsing personalInfo:', error);
+    savedPersonalInfo = {};
+  }
+
+  console.log('[loadResume] Personal info merge:', {
+    userFirstName,
+    userLastName,
+    userEmail,
+    savedPersonalInfo,
+    savedFirstName: savedPersonalInfo?.firstName,
+    savedLastName: savedPersonalInfo?.lastName,
+    savedEmail: savedPersonalInfo?.email
+  });
   
   // Merge User profile data into personalInfo (User data takes precedence for firstName/lastName/email)
+  // If User table has firstName/lastName, use those; otherwise use savedPersonalInfo values
   const mergedPersonalInfo = {
-    ...savedPersonalInfo,
-    firstName: firstName || savedPersonalInfo?.firstName || '',
-    lastName: lastName || savedPersonalInfo?.lastName || '',
-    email: userEmail || savedPersonalInfo?.email || '',
+    ...savedPersonalInfo, // Start with all saved personal info (phoneNumber, linkedin, location, etc.)
+    firstName: userFirstName || savedPersonalInfo?.firstName || '', // User.fullName takes precedence
+    lastName: userLastName || savedPersonalInfo?.lastName || '', // User.fullName takes precedence
+    email: userEmail || savedPersonalInfo?.email || '', // User.email takes precedence
   };
+
+  console.log('[loadResume] Final merged personalInfo:', mergedPersonalInfo);
 
   const resumeData = {
     personalInfo: mergedPersonalInfo,
@@ -84,8 +120,8 @@ const loadResume = asyncHandler(async (req, res) => {
     result: resumeData,
     hasResume: true,
     profileData: user ? {
-      firstName: firstName || '',
-      lastName: lastName || '',
+      firstName: userFirstName || '',
+      lastName: userLastName || '',
       email: userEmail || '',
     } : null,
     message: 'Resume loaded successfully',
