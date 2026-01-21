@@ -71,11 +71,15 @@ app.use(cors({
     'X-API-Key',
     'X-Requested-With',
     'Accept',
-    'Origin'
+    'Origin',
+    'Cache-Control',
+    'Pragma',
+    'Expires'
   ],
   exposedHeaders: ['x-api-key', 'X-API-Key'],
   preflightContinue: false,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
+  maxAge: 86400 // Cache preflight requests for 24 hours
 }));
 
 // Custom request logging middleware - removed verbose logging for performance
@@ -107,6 +111,37 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
     cors: 'enabled'
   });
+});
+
+// Ensure CORS headers are set for all responses
+app.use((req, res, next) => {
+  // Set CORS headers for all responses
+  const origin = req.headers.origin;
+  
+  if (!origin || 
+      origin.startsWith('chrome-extension://') ||
+      origin.startsWith('moz-extension://') ||
+      origin.startsWith('safari-extension://') ||
+      origin.startsWith('http://localhost:') ||
+      origin.startsWith('https://localhost:')) {
+    res.header('Access-Control-Allow-Origin', origin || '*');
+  } else {
+    res.header('Access-Control-Allow-Origin', '*');
+  }
+  
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-api-key, X-API-Key, X-Requested-With, Accept, Origin, Cache-Control, Pragma, Expires');
+  res.header('Access-Control-Expose-Headers', 'x-api-key, X-API-Key');
+  res.header('Access-Control-Max-Age', '86400');
+  
+  // Prevent caching for dynamic endpoints
+  if (req.path.includes('/resume/load') || req.path.includes('/applied-jobs')) {
+    res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.header('Pragma', 'no-cache');
+    res.header('Expires', '0');
+  }
+  
+  next();
 });
 
 // Routes - CHANGED THIS LINE
