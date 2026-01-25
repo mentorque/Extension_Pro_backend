@@ -66,6 +66,7 @@ router.get('/user-skills', userSkillsController.getUserSkills);
 router.post('/user-skills', userSkillsController.saveUserSkills);
 
 // Resume routes
+router.get('/resume/fetch-primary', resumeController.fetchPrimaryResume);
 router.get('/resume/load', resumeController.loadResume);
 
 module.exports = router;

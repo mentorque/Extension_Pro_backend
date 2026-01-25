@@ -270,6 +270,9 @@ exports.Prisma.ResumeSettingsScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   apiKeyId: 'apiKeyId',
+  name: 'name',
+  shareToken: 'shareToken',
+  isPrimary: 'isPrimary',
   personalInfo: 'personalInfo',
   professionalSummary: 'professionalSummary',
   education: 'education',
@@ -281,6 +284,7 @@ exports.Prisma.ResumeSettingsScalarFieldEnum = {
   skillsLineTime: 'skillsLineTime',
   sectionOrder: 'sectionOrder',
   sectionNames: 'sectionNames',
+  deletedSections: 'deletedSections',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'

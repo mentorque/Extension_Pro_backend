@@ -1772,11 +1772,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     apiKeys: number
     appliedJobs: number
+    ResumeSettings: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     apiKeys?: boolean | UserCountOutputTypeCountApiKeysArgs
     appliedJobs?: boolean | UserCountOutputTypeCountAppliedJobsArgs
+    ResumeSettings?: boolean | UserCountOutputTypeCountResumeSettingsArgs
   }
 
   // Custom InputTypes
@@ -1802,6 +1804,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAppliedJobsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AppliedJobWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountResumeSettingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ResumeSettingsWhereInput
   }
 
 
@@ -2156,7 +2165,7 @@ export namespace Prisma {
       AdminMentor: Prisma.$AdminMentorPayload<ExtArgs> | null
       UserStatus: Prisma.$UserStatusPayload<ExtArgs> | null
       UserSkills: Prisma.$UserSkillsPayload<ExtArgs> | null
-      ResumeSettings: Prisma.$ResumeSettingsPayload<ExtArgs> | null
+      ResumeSettings: Prisma.$ResumeSettingsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2569,7 +2578,7 @@ export namespace Prisma {
     AdminMentor<T extends User$AdminMentorArgs<ExtArgs> = {}>(args?: Subset<T, User$AdminMentorArgs<ExtArgs>>): Prisma__AdminMentorClient<$Result.GetResult<Prisma.$AdminMentorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     UserStatus<T extends User$UserStatusArgs<ExtArgs> = {}>(args?: Subset<T, User$UserStatusArgs<ExtArgs>>): Prisma__UserStatusClient<$Result.GetResult<Prisma.$UserStatusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     UserSkills<T extends User$UserSkillsArgs<ExtArgs> = {}>(args?: Subset<T, User$UserSkillsArgs<ExtArgs>>): Prisma__UserSkillsClient<$Result.GetResult<Prisma.$UserSkillsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    ResumeSettings<T extends User$ResumeSettingsArgs<ExtArgs> = {}>(args?: Subset<T, User$ResumeSettingsArgs<ExtArgs>>): Prisma__ResumeSettingsClient<$Result.GetResult<Prisma.$ResumeSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    ResumeSettings<T extends User$ResumeSettingsArgs<ExtArgs> = {}>(args?: Subset<T, User$ResumeSettingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResumeSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3145,6 +3154,11 @@ export namespace Prisma {
      */
     include?: ResumeSettingsInclude<ExtArgs> | null
     where?: ResumeSettingsWhereInput
+    orderBy?: ResumeSettingsOrderByWithRelationInput | ResumeSettingsOrderByWithRelationInput[]
+    cursor?: ResumeSettingsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ResumeSettingsScalarFieldEnum | ResumeSettingsScalarFieldEnum[]
   }
 
   /**
@@ -12475,6 +12489,9 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     apiKeyId: string | null
+    name: string | null
+    shareToken: string | null
+    isPrimary: boolean | null
     professionalSummary: string | null
     skillsDisplayMode: string | null
     createdAt: Date | null
@@ -12486,6 +12503,9 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     apiKeyId: string | null
+    name: string | null
+    shareToken: string | null
+    isPrimary: boolean | null
     professionalSummary: string | null
     skillsDisplayMode: string | null
     createdAt: Date | null
@@ -12497,6 +12517,9 @@ export namespace Prisma {
     id: number
     userId: number
     apiKeyId: number
+    name: number
+    shareToken: number
+    isPrimary: number
     personalInfo: number
     professionalSummary: number
     education: number
@@ -12508,6 +12531,7 @@ export namespace Prisma {
     skillsLineTime: number
     sectionOrder: number
     sectionNames: number
+    deletedSections: number
     createdAt: number
     updatedAt: number
     deletedAt: number
@@ -12519,6 +12543,9 @@ export namespace Prisma {
     id?: true
     userId?: true
     apiKeyId?: true
+    name?: true
+    shareToken?: true
+    isPrimary?: true
     professionalSummary?: true
     skillsDisplayMode?: true
     createdAt?: true
@@ -12530,6 +12557,9 @@ export namespace Prisma {
     id?: true
     userId?: true
     apiKeyId?: true
+    name?: true
+    shareToken?: true
+    isPrimary?: true
     professionalSummary?: true
     skillsDisplayMode?: true
     createdAt?: true
@@ -12541,6 +12571,9 @@ export namespace Prisma {
     id?: true
     userId?: true
     apiKeyId?: true
+    name?: true
+    shareToken?: true
+    isPrimary?: true
     personalInfo?: true
     professionalSummary?: true
     education?: true
@@ -12552,6 +12585,7 @@ export namespace Prisma {
     skillsLineTime?: true
     sectionOrder?: true
     sectionNames?: true
+    deletedSections?: true
     createdAt?: true
     updatedAt?: true
     deletedAt?: true
@@ -12634,6 +12668,9 @@ export namespace Prisma {
     id: string
     userId: string
     apiKeyId: string | null
+    name: string | null
+    shareToken: string | null
+    isPrimary: boolean
     personalInfo: JsonValue
     professionalSummary: string | null
     education: JsonValue
@@ -12645,6 +12682,7 @@ export namespace Prisma {
     skillsLineTime: JsonValue | null
     sectionOrder: JsonValue
     sectionNames: JsonValue
+    deletedSections: JsonValue | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -12671,6 +12709,9 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     apiKeyId?: boolean
+    name?: boolean
+    shareToken?: boolean
+    isPrimary?: boolean
     personalInfo?: boolean
     professionalSummary?: boolean
     education?: boolean
@@ -12682,6 +12723,7 @@ export namespace Prisma {
     skillsLineTime?: boolean
     sectionOrder?: boolean
     sectionNames?: boolean
+    deletedSections?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
@@ -12692,6 +12734,9 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     apiKeyId?: boolean
+    name?: boolean
+    shareToken?: boolean
+    isPrimary?: boolean
     personalInfo?: boolean
     professionalSummary?: boolean
     education?: boolean
@@ -12703,6 +12748,7 @@ export namespace Prisma {
     skillsLineTime?: boolean
     sectionOrder?: boolean
     sectionNames?: boolean
+    deletedSections?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
@@ -12713,6 +12759,9 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     apiKeyId?: boolean
+    name?: boolean
+    shareToken?: boolean
+    isPrimary?: boolean
     personalInfo?: boolean
     professionalSummary?: boolean
     education?: boolean
@@ -12724,6 +12773,7 @@ export namespace Prisma {
     skillsLineTime?: boolean
     sectionOrder?: boolean
     sectionNames?: boolean
+    deletedSections?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
@@ -12734,6 +12784,9 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     apiKeyId?: boolean
+    name?: boolean
+    shareToken?: boolean
+    isPrimary?: boolean
     personalInfo?: boolean
     professionalSummary?: boolean
     education?: boolean
@@ -12745,12 +12798,13 @@ export namespace Prisma {
     skillsLineTime?: boolean
     sectionOrder?: boolean
     sectionNames?: boolean
+    deletedSections?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
   }
 
-  export type ResumeSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "apiKeyId" | "personalInfo" | "professionalSummary" | "education" | "experience" | "skills" | "projects" | "customSections" | "skillsDisplayMode" | "skillsLineTime" | "sectionOrder" | "sectionNames" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["resumeSettings"]>
+  export type ResumeSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "apiKeyId" | "name" | "shareToken" | "isPrimary" | "personalInfo" | "professionalSummary" | "education" | "experience" | "skills" | "projects" | "customSections" | "skillsDisplayMode" | "skillsLineTime" | "sectionOrder" | "sectionNames" | "deletedSections" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["resumeSettings"]>
   export type ResumeSettingsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -12770,6 +12824,9 @@ export namespace Prisma {
       id: string
       userId: string
       apiKeyId: string | null
+      name: string | null
+      shareToken: string | null
+      isPrimary: boolean
       personalInfo: Prisma.JsonValue
       professionalSummary: string | null
       education: Prisma.JsonValue
@@ -12781,6 +12838,7 @@ export namespace Prisma {
       skillsLineTime: Prisma.JsonValue | null
       sectionOrder: Prisma.JsonValue
       sectionNames: Prisma.JsonValue
+      deletedSections: Prisma.JsonValue | null
       createdAt: Date
       updatedAt: Date
       deletedAt: Date | null
@@ -13211,6 +13269,9 @@ export namespace Prisma {
     readonly id: FieldRef<"ResumeSettings", 'String'>
     readonly userId: FieldRef<"ResumeSettings", 'String'>
     readonly apiKeyId: FieldRef<"ResumeSettings", 'String'>
+    readonly name: FieldRef<"ResumeSettings", 'String'>
+    readonly shareToken: FieldRef<"ResumeSettings", 'String'>
+    readonly isPrimary: FieldRef<"ResumeSettings", 'Boolean'>
     readonly personalInfo: FieldRef<"ResumeSettings", 'Json'>
     readonly professionalSummary: FieldRef<"ResumeSettings", 'String'>
     readonly education: FieldRef<"ResumeSettings", 'Json'>
@@ -13222,6 +13283,7 @@ export namespace Prisma {
     readonly skillsLineTime: FieldRef<"ResumeSettings", 'Json'>
     readonly sectionOrder: FieldRef<"ResumeSettings", 'Json'>
     readonly sectionNames: FieldRef<"ResumeSettings", 'Json'>
+    readonly deletedSections: FieldRef<"ResumeSettings", 'Json'>
     readonly createdAt: FieldRef<"ResumeSettings", 'DateTime'>
     readonly updatedAt: FieldRef<"ResumeSettings", 'DateTime'>
     readonly deletedAt: FieldRef<"ResumeSettings", 'DateTime'>
@@ -14851,6 +14913,9 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     apiKeyId: 'apiKeyId',
+    name: 'name',
+    shareToken: 'shareToken',
+    isPrimary: 'isPrimary',
     personalInfo: 'personalInfo',
     professionalSummary: 'professionalSummary',
     education: 'education',
@@ -14862,6 +14927,7 @@ export namespace Prisma {
     skillsLineTime: 'skillsLineTime',
     sectionOrder: 'sectionOrder',
     sectionNames: 'sectionNames',
+    deletedSections: 'deletedSections',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     deletedAt: 'deletedAt'
@@ -15036,7 +15102,7 @@ export namespace Prisma {
     AdminMentor?: XOR<AdminMentorNullableScalarRelationFilter, AdminMentorWhereInput> | null
     UserStatus?: XOR<UserStatusNullableScalarRelationFilter, UserStatusWhereInput> | null
     UserSkills?: XOR<UserSkillsNullableScalarRelationFilter, UserSkillsWhereInput> | null
-    ResumeSettings?: XOR<ResumeSettingsNullableScalarRelationFilter, ResumeSettingsWhereInput> | null
+    ResumeSettings?: ResumeSettingsListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -15056,7 +15122,7 @@ export namespace Prisma {
     AdminMentor?: AdminMentorOrderByWithRelationInput
     UserStatus?: UserStatusOrderByWithRelationInput
     UserSkills?: UserSkillsOrderByWithRelationInput
-    ResumeSettings?: ResumeSettingsOrderByWithRelationInput
+    ResumeSettings?: ResumeSettingsOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -15079,7 +15145,7 @@ export namespace Prisma {
     AdminMentor?: XOR<AdminMentorNullableScalarRelationFilter, AdminMentorWhereInput> | null
     UserStatus?: XOR<UserStatusNullableScalarRelationFilter, UserStatusWhereInput> | null
     UserSkills?: XOR<UserSkillsNullableScalarRelationFilter, UserSkillsWhereInput> | null
-    ResumeSettings?: XOR<ResumeSettingsNullableScalarRelationFilter, ResumeSettingsWhereInput> | null
+    ResumeSettings?: ResumeSettingsListRelationFilter
   }, "id" | "firebaseUid" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -15907,6 +15973,9 @@ export namespace Prisma {
     id?: StringFilter<"ResumeSettings"> | string
     userId?: StringFilter<"ResumeSettings"> | string
     apiKeyId?: StringNullableFilter<"ResumeSettings"> | string | null
+    name?: StringNullableFilter<"ResumeSettings"> | string | null
+    shareToken?: StringNullableFilter<"ResumeSettings"> | string | null
+    isPrimary?: BoolFilter<"ResumeSettings"> | boolean
     personalInfo?: JsonFilter<"ResumeSettings">
     professionalSummary?: StringNullableFilter<"ResumeSettings"> | string | null
     education?: JsonFilter<"ResumeSettings">
@@ -15918,6 +15987,7 @@ export namespace Prisma {
     skillsLineTime?: JsonNullableFilter<"ResumeSettings">
     sectionOrder?: JsonFilter<"ResumeSettings">
     sectionNames?: JsonFilter<"ResumeSettings">
+    deletedSections?: JsonNullableFilter<"ResumeSettings">
     createdAt?: DateTimeFilter<"ResumeSettings"> | Date | string
     updatedAt?: DateTimeFilter<"ResumeSettings"> | Date | string
     deletedAt?: DateTimeNullableFilter<"ResumeSettings"> | Date | string | null
@@ -15928,6 +15998,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     apiKeyId?: SortOrderInput | SortOrder
+    name?: SortOrderInput | SortOrder
+    shareToken?: SortOrderInput | SortOrder
+    isPrimary?: SortOrder
     personalInfo?: SortOrder
     professionalSummary?: SortOrderInput | SortOrder
     education?: SortOrder
@@ -15939,6 +16012,7 @@ export namespace Prisma {
     skillsLineTime?: SortOrderInput | SortOrder
     sectionOrder?: SortOrder
     sectionNames?: SortOrder
+    deletedSections?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
@@ -15947,11 +16021,14 @@ export namespace Prisma {
 
   export type ResumeSettingsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    userId?: string
+    shareToken?: string
     AND?: ResumeSettingsWhereInput | ResumeSettingsWhereInput[]
     OR?: ResumeSettingsWhereInput[]
     NOT?: ResumeSettingsWhereInput | ResumeSettingsWhereInput[]
+    userId?: StringFilter<"ResumeSettings"> | string
     apiKeyId?: StringNullableFilter<"ResumeSettings"> | string | null
+    name?: StringNullableFilter<"ResumeSettings"> | string | null
+    isPrimary?: BoolFilter<"ResumeSettings"> | boolean
     personalInfo?: JsonFilter<"ResumeSettings">
     professionalSummary?: StringNullableFilter<"ResumeSettings"> | string | null
     education?: JsonFilter<"ResumeSettings">
@@ -15963,16 +16040,20 @@ export namespace Prisma {
     skillsLineTime?: JsonNullableFilter<"ResumeSettings">
     sectionOrder?: JsonFilter<"ResumeSettings">
     sectionNames?: JsonFilter<"ResumeSettings">
+    deletedSections?: JsonNullableFilter<"ResumeSettings">
     createdAt?: DateTimeFilter<"ResumeSettings"> | Date | string
     updatedAt?: DateTimeFilter<"ResumeSettings"> | Date | string
     deletedAt?: DateTimeNullableFilter<"ResumeSettings"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "userId">
+  }, "id" | "shareToken">
 
   export type ResumeSettingsOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     apiKeyId?: SortOrderInput | SortOrder
+    name?: SortOrderInput | SortOrder
+    shareToken?: SortOrderInput | SortOrder
+    isPrimary?: SortOrder
     personalInfo?: SortOrder
     professionalSummary?: SortOrderInput | SortOrder
     education?: SortOrder
@@ -15984,6 +16065,7 @@ export namespace Prisma {
     skillsLineTime?: SortOrderInput | SortOrder
     sectionOrder?: SortOrder
     sectionNames?: SortOrder
+    deletedSections?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
@@ -15999,6 +16081,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"ResumeSettings"> | string
     userId?: StringWithAggregatesFilter<"ResumeSettings"> | string
     apiKeyId?: StringNullableWithAggregatesFilter<"ResumeSettings"> | string | null
+    name?: StringNullableWithAggregatesFilter<"ResumeSettings"> | string | null
+    shareToken?: StringNullableWithAggregatesFilter<"ResumeSettings"> | string | null
+    isPrimary?: BoolWithAggregatesFilter<"ResumeSettings"> | boolean
     personalInfo?: JsonWithAggregatesFilter<"ResumeSettings">
     professionalSummary?: StringNullableWithAggregatesFilter<"ResumeSettings"> | string | null
     education?: JsonWithAggregatesFilter<"ResumeSettings">
@@ -16010,6 +16095,7 @@ export namespace Prisma {
     skillsLineTime?: JsonNullableWithAggregatesFilter<"ResumeSettings">
     sectionOrder?: JsonWithAggregatesFilter<"ResumeSettings">
     sectionNames?: JsonWithAggregatesFilter<"ResumeSettings">
+    deletedSections?: JsonNullableWithAggregatesFilter<"ResumeSettings">
     createdAt?: DateTimeWithAggregatesFilter<"ResumeSettings"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ResumeSettings"> | Date | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"ResumeSettings"> | Date | string | null
@@ -16093,7 +16179,7 @@ export namespace Prisma {
     AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -16112,7 +16198,7 @@ export namespace Prisma {
     Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsUncheckedCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsUncheckedCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -16131,7 +16217,7 @@ export namespace Prisma {
     AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -16150,7 +16236,7 @@ export namespace Prisma {
     Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUncheckedUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUncheckedUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -17124,6 +17210,9 @@ export namespace Prisma {
   export type ResumeSettingsCreateInput = {
     id?: string
     apiKeyId?: string | null
+    name?: string | null
+    shareToken?: string | null
+    isPrimary?: boolean
     personalInfo: JsonNullValueInput | InputJsonValue
     professionalSummary?: string | null
     education: JsonNullValueInput | InputJsonValue
@@ -17135,6 +17224,7 @@ export namespace Prisma {
     skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
     sectionOrder: JsonNullValueInput | InputJsonValue
     sectionNames: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -17145,6 +17235,9 @@ export namespace Prisma {
     id?: string
     userId: string
     apiKeyId?: string | null
+    name?: string | null
+    shareToken?: string | null
+    isPrimary?: boolean
     personalInfo: JsonNullValueInput | InputJsonValue
     professionalSummary?: string | null
     education: JsonNullValueInput | InputJsonValue
@@ -17156,6 +17249,7 @@ export namespace Prisma {
     skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
     sectionOrder: JsonNullValueInput | InputJsonValue
     sectionNames: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -17164,6 +17258,9 @@ export namespace Prisma {
   export type ResumeSettingsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     apiKeyId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
     personalInfo?: JsonNullValueInput | InputJsonValue
     professionalSummary?: NullableStringFieldUpdateOperationsInput | string | null
     education?: JsonNullValueInput | InputJsonValue
@@ -17175,6 +17272,7 @@ export namespace Prisma {
     skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
     sectionOrder?: JsonNullValueInput | InputJsonValue
     sectionNames?: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17185,6 +17283,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     apiKeyId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
     personalInfo?: JsonNullValueInput | InputJsonValue
     professionalSummary?: NullableStringFieldUpdateOperationsInput | string | null
     education?: JsonNullValueInput | InputJsonValue
@@ -17196,6 +17297,7 @@ export namespace Prisma {
     skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
     sectionOrder?: JsonNullValueInput | InputJsonValue
     sectionNames?: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17205,6 +17307,9 @@ export namespace Prisma {
     id?: string
     userId: string
     apiKeyId?: string | null
+    name?: string | null
+    shareToken?: string | null
+    isPrimary?: boolean
     personalInfo: JsonNullValueInput | InputJsonValue
     professionalSummary?: string | null
     education: JsonNullValueInput | InputJsonValue
@@ -17216,6 +17321,7 @@ export namespace Prisma {
     skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
     sectionOrder: JsonNullValueInput | InputJsonValue
     sectionNames: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -17224,6 +17330,9 @@ export namespace Prisma {
   export type ResumeSettingsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     apiKeyId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
     personalInfo?: JsonNullValueInput | InputJsonValue
     professionalSummary?: NullableStringFieldUpdateOperationsInput | string | null
     education?: JsonNullValueInput | InputJsonValue
@@ -17235,6 +17344,7 @@ export namespace Prisma {
     skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
     sectionOrder?: JsonNullValueInput | InputJsonValue
     sectionNames?: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17244,6 +17354,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     apiKeyId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
     personalInfo?: JsonNullValueInput | InputJsonValue
     professionalSummary?: NullableStringFieldUpdateOperationsInput | string | null
     education?: JsonNullValueInput | InputJsonValue
@@ -17255,6 +17368,7 @@ export namespace Prisma {
     skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
     sectionOrder?: JsonNullValueInput | InputJsonValue
     sectionNames?: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17430,9 +17544,10 @@ export namespace Prisma {
     isNot?: UserSkillsWhereInput | null
   }
 
-  export type ResumeSettingsNullableScalarRelationFilter = {
-    is?: ResumeSettingsWhereInput | null
-    isNot?: ResumeSettingsWhereInput | null
+  export type ResumeSettingsListRelationFilter = {
+    every?: ResumeSettingsWhereInput
+    some?: ResumeSettingsWhereInput
+    none?: ResumeSettingsWhereInput
   }
 
   export type SortOrderInput = {
@@ -17445,6 +17560,10 @@ export namespace Prisma {
   }
 
   export type AppliedJobOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ResumeSettingsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18110,6 +18229,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     apiKeyId?: SortOrder
+    name?: SortOrder
+    shareToken?: SortOrder
+    isPrimary?: SortOrder
     personalInfo?: SortOrder
     professionalSummary?: SortOrder
     education?: SortOrder
@@ -18121,6 +18243,7 @@ export namespace Prisma {
     skillsLineTime?: SortOrder
     sectionOrder?: SortOrder
     sectionNames?: SortOrder
+    deletedSections?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
@@ -18130,6 +18253,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     apiKeyId?: SortOrder
+    name?: SortOrder
+    shareToken?: SortOrder
+    isPrimary?: SortOrder
     professionalSummary?: SortOrder
     skillsDisplayMode?: SortOrder
     createdAt?: SortOrder
@@ -18141,6 +18267,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     apiKeyId?: SortOrder
+    name?: SortOrder
+    shareToken?: SortOrder
+    isPrimary?: SortOrder
     professionalSummary?: SortOrder
     skillsDisplayMode?: SortOrder
     createdAt?: SortOrder
@@ -18216,10 +18345,11 @@ export namespace Prisma {
     connect?: UserSkillsWhereUniqueInput
   }
 
-  export type ResumeSettingsCreateNestedOneWithoutUserInput = {
-    create?: XOR<ResumeSettingsCreateWithoutUserInput, ResumeSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ResumeSettingsCreateOrConnectWithoutUserInput
-    connect?: ResumeSettingsWhereUniqueInput
+  export type ResumeSettingsCreateNestedManyWithoutUserInput = {
+    create?: XOR<ResumeSettingsCreateWithoutUserInput, ResumeSettingsUncheckedCreateWithoutUserInput> | ResumeSettingsCreateWithoutUserInput[] | ResumeSettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ResumeSettingsCreateOrConnectWithoutUserInput | ResumeSettingsCreateOrConnectWithoutUserInput[]
+    createMany?: ResumeSettingsCreateManyUserInputEnvelope
+    connect?: ResumeSettingsWhereUniqueInput | ResumeSettingsWhereUniqueInput[]
   }
 
   export type ApiKeyUncheckedCreateNestedManyWithoutUserInput = {
@@ -18254,10 +18384,11 @@ export namespace Prisma {
     connect?: UserSkillsWhereUniqueInput
   }
 
-  export type ResumeSettingsUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<ResumeSettingsCreateWithoutUserInput, ResumeSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ResumeSettingsCreateOrConnectWithoutUserInput
-    connect?: ResumeSettingsWhereUniqueInput
+  export type ResumeSettingsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ResumeSettingsCreateWithoutUserInput, ResumeSettingsUncheckedCreateWithoutUserInput> | ResumeSettingsCreateWithoutUserInput[] | ResumeSettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ResumeSettingsCreateOrConnectWithoutUserInput | ResumeSettingsCreateOrConnectWithoutUserInput[]
+    createMany?: ResumeSettingsCreateManyUserInputEnvelope
+    connect?: ResumeSettingsWhereUniqueInput | ResumeSettingsWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -18356,14 +18487,18 @@ export namespace Prisma {
     update?: XOR<XOR<UserSkillsUpdateToOneWithWhereWithoutUserInput, UserSkillsUpdateWithoutUserInput>, UserSkillsUncheckedUpdateWithoutUserInput>
   }
 
-  export type ResumeSettingsUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ResumeSettingsCreateWithoutUserInput, ResumeSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ResumeSettingsCreateOrConnectWithoutUserInput
-    upsert?: ResumeSettingsUpsertWithoutUserInput
-    disconnect?: ResumeSettingsWhereInput | boolean
-    delete?: ResumeSettingsWhereInput | boolean
-    connect?: ResumeSettingsWhereUniqueInput
-    update?: XOR<XOR<ResumeSettingsUpdateToOneWithWhereWithoutUserInput, ResumeSettingsUpdateWithoutUserInput>, ResumeSettingsUncheckedUpdateWithoutUserInput>
+  export type ResumeSettingsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ResumeSettingsCreateWithoutUserInput, ResumeSettingsUncheckedCreateWithoutUserInput> | ResumeSettingsCreateWithoutUserInput[] | ResumeSettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ResumeSettingsCreateOrConnectWithoutUserInput | ResumeSettingsCreateOrConnectWithoutUserInput[]
+    upsert?: ResumeSettingsUpsertWithWhereUniqueWithoutUserInput | ResumeSettingsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ResumeSettingsCreateManyUserInputEnvelope
+    set?: ResumeSettingsWhereUniqueInput | ResumeSettingsWhereUniqueInput[]
+    disconnect?: ResumeSettingsWhereUniqueInput | ResumeSettingsWhereUniqueInput[]
+    delete?: ResumeSettingsWhereUniqueInput | ResumeSettingsWhereUniqueInput[]
+    connect?: ResumeSettingsWhereUniqueInput | ResumeSettingsWhereUniqueInput[]
+    update?: ResumeSettingsUpdateWithWhereUniqueWithoutUserInput | ResumeSettingsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ResumeSettingsUpdateManyWithWhereWithoutUserInput | ResumeSettingsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ResumeSettingsScalarWhereInput | ResumeSettingsScalarWhereInput[]
   }
 
   export type ApiKeyUncheckedUpdateManyWithoutUserNestedInput = {
@@ -18424,14 +18559,18 @@ export namespace Prisma {
     update?: XOR<XOR<UserSkillsUpdateToOneWithWhereWithoutUserInput, UserSkillsUpdateWithoutUserInput>, UserSkillsUncheckedUpdateWithoutUserInput>
   }
 
-  export type ResumeSettingsUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ResumeSettingsCreateWithoutUserInput, ResumeSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ResumeSettingsCreateOrConnectWithoutUserInput
-    upsert?: ResumeSettingsUpsertWithoutUserInput
-    disconnect?: ResumeSettingsWhereInput | boolean
-    delete?: ResumeSettingsWhereInput | boolean
-    connect?: ResumeSettingsWhereUniqueInput
-    update?: XOR<XOR<ResumeSettingsUpdateToOneWithWhereWithoutUserInput, ResumeSettingsUpdateWithoutUserInput>, ResumeSettingsUncheckedUpdateWithoutUserInput>
+  export type ResumeSettingsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ResumeSettingsCreateWithoutUserInput, ResumeSettingsUncheckedCreateWithoutUserInput> | ResumeSettingsCreateWithoutUserInput[] | ResumeSettingsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ResumeSettingsCreateOrConnectWithoutUserInput | ResumeSettingsCreateOrConnectWithoutUserInput[]
+    upsert?: ResumeSettingsUpsertWithWhereUniqueWithoutUserInput | ResumeSettingsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ResumeSettingsCreateManyUserInputEnvelope
+    set?: ResumeSettingsWhereUniqueInput | ResumeSettingsWhereUniqueInput[]
+    disconnect?: ResumeSettingsWhereUniqueInput | ResumeSettingsWhereUniqueInput[]
+    delete?: ResumeSettingsWhereUniqueInput | ResumeSettingsWhereUniqueInput[]
+    connect?: ResumeSettingsWhereUniqueInput | ResumeSettingsWhereUniqueInput[]
+    update?: ResumeSettingsUpdateWithWhereUniqueWithoutUserInput | ResumeSettingsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ResumeSettingsUpdateManyWithWhereWithoutUserInput | ResumeSettingsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ResumeSettingsScalarWhereInput | ResumeSettingsScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutApiKeysInput = {
@@ -19017,6 +19156,9 @@ export namespace Prisma {
   export type ResumeSettingsCreateWithoutUserInput = {
     id?: string
     apiKeyId?: string | null
+    name?: string | null
+    shareToken?: string | null
+    isPrimary?: boolean
     personalInfo: JsonNullValueInput | InputJsonValue
     professionalSummary?: string | null
     education: JsonNullValueInput | InputJsonValue
@@ -19028,6 +19170,7 @@ export namespace Prisma {
     skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
     sectionOrder: JsonNullValueInput | InputJsonValue
     sectionNames: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -19036,6 +19179,9 @@ export namespace Prisma {
   export type ResumeSettingsUncheckedCreateWithoutUserInput = {
     id?: string
     apiKeyId?: string | null
+    name?: string | null
+    shareToken?: string | null
+    isPrimary?: boolean
     personalInfo: JsonNullValueInput | InputJsonValue
     professionalSummary?: string | null
     education: JsonNullValueInput | InputJsonValue
@@ -19047,6 +19193,7 @@ export namespace Prisma {
     skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
     sectionOrder: JsonNullValueInput | InputJsonValue
     sectionNames: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -19055,6 +19202,11 @@ export namespace Prisma {
   export type ResumeSettingsCreateOrConnectWithoutUserInput = {
     where: ResumeSettingsWhereUniqueInput
     create: XOR<ResumeSettingsCreateWithoutUserInput, ResumeSettingsUncheckedCreateWithoutUserInput>
+  }
+
+  export type ResumeSettingsCreateManyUserInputEnvelope = {
+    data: ResumeSettingsCreateManyUserInput | ResumeSettingsCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type ApiKeyUpsertWithWhereUniqueWithoutUserInput = {
@@ -19310,53 +19462,47 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ResumeSettingsUpsertWithoutUserInput = {
+  export type ResumeSettingsUpsertWithWhereUniqueWithoutUserInput = {
+    where: ResumeSettingsWhereUniqueInput
     update: XOR<ResumeSettingsUpdateWithoutUserInput, ResumeSettingsUncheckedUpdateWithoutUserInput>
     create: XOR<ResumeSettingsCreateWithoutUserInput, ResumeSettingsUncheckedCreateWithoutUserInput>
-    where?: ResumeSettingsWhereInput
   }
 
-  export type ResumeSettingsUpdateToOneWithWhereWithoutUserInput = {
-    where?: ResumeSettingsWhereInput
+  export type ResumeSettingsUpdateWithWhereUniqueWithoutUserInput = {
+    where: ResumeSettingsWhereUniqueInput
     data: XOR<ResumeSettingsUpdateWithoutUserInput, ResumeSettingsUncheckedUpdateWithoutUserInput>
   }
 
-  export type ResumeSettingsUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    apiKeyId?: NullableStringFieldUpdateOperationsInput | string | null
-    personalInfo?: JsonNullValueInput | InputJsonValue
-    professionalSummary?: NullableStringFieldUpdateOperationsInput | string | null
-    education?: JsonNullValueInput | InputJsonValue
-    experience?: JsonNullValueInput | InputJsonValue
-    skills?: JsonNullValueInput | InputJsonValue
-    projects?: JsonNullValueInput | InputJsonValue
-    customSections?: NullableJsonNullValueInput | InputJsonValue
-    skillsDisplayMode?: StringFieldUpdateOperationsInput | string
-    skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
-    sectionOrder?: JsonNullValueInput | InputJsonValue
-    sectionNames?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  export type ResumeSettingsUpdateManyWithWhereWithoutUserInput = {
+    where: ResumeSettingsScalarWhereInput
+    data: XOR<ResumeSettingsUpdateManyMutationInput, ResumeSettingsUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type ResumeSettingsUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    apiKeyId?: NullableStringFieldUpdateOperationsInput | string | null
-    personalInfo?: JsonNullValueInput | InputJsonValue
-    professionalSummary?: NullableStringFieldUpdateOperationsInput | string | null
-    education?: JsonNullValueInput | InputJsonValue
-    experience?: JsonNullValueInput | InputJsonValue
-    skills?: JsonNullValueInput | InputJsonValue
-    projects?: JsonNullValueInput | InputJsonValue
-    customSections?: NullableJsonNullValueInput | InputJsonValue
-    skillsDisplayMode?: StringFieldUpdateOperationsInput | string
-    skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
-    sectionOrder?: JsonNullValueInput | InputJsonValue
-    sectionNames?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  export type ResumeSettingsScalarWhereInput = {
+    AND?: ResumeSettingsScalarWhereInput | ResumeSettingsScalarWhereInput[]
+    OR?: ResumeSettingsScalarWhereInput[]
+    NOT?: ResumeSettingsScalarWhereInput | ResumeSettingsScalarWhereInput[]
+    id?: StringFilter<"ResumeSettings"> | string
+    userId?: StringFilter<"ResumeSettings"> | string
+    apiKeyId?: StringNullableFilter<"ResumeSettings"> | string | null
+    name?: StringNullableFilter<"ResumeSettings"> | string | null
+    shareToken?: StringNullableFilter<"ResumeSettings"> | string | null
+    isPrimary?: BoolFilter<"ResumeSettings"> | boolean
+    personalInfo?: JsonFilter<"ResumeSettings">
+    professionalSummary?: StringNullableFilter<"ResumeSettings"> | string | null
+    education?: JsonFilter<"ResumeSettings">
+    experience?: JsonFilter<"ResumeSettings">
+    skills?: JsonFilter<"ResumeSettings">
+    projects?: JsonFilter<"ResumeSettings">
+    customSections?: JsonNullableFilter<"ResumeSettings">
+    skillsDisplayMode?: StringFilter<"ResumeSettings"> | string
+    skillsLineTime?: JsonNullableFilter<"ResumeSettings">
+    sectionOrder?: JsonFilter<"ResumeSettings">
+    sectionNames?: JsonFilter<"ResumeSettings">
+    deletedSections?: JsonNullableFilter<"ResumeSettings">
+    createdAt?: DateTimeFilter<"ResumeSettings"> | Date | string
+    updatedAt?: DateTimeFilter<"ResumeSettings"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"ResumeSettings"> | Date | string | null
   }
 
   export type UserCreateWithoutApiKeysInput = {
@@ -19374,7 +19520,7 @@ export namespace Prisma {
     AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutApiKeysInput = {
@@ -19392,7 +19538,7 @@ export namespace Prisma {
     Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsUncheckedCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsUncheckedCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutApiKeysInput = {
@@ -19426,7 +19572,7 @@ export namespace Prisma {
     AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApiKeysInput = {
@@ -19444,7 +19590,7 @@ export namespace Prisma {
     Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUncheckedUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUncheckedUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAppliedJobsInput = {
@@ -19462,7 +19608,7 @@ export namespace Prisma {
     AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAppliedJobsInput = {
@@ -19480,7 +19626,7 @@ export namespace Prisma {
     Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsUncheckedCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsUncheckedCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAppliedJobsInput = {
@@ -19514,7 +19660,7 @@ export namespace Prisma {
     AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAppliedJobsInput = {
@@ -19532,7 +19678,7 @@ export namespace Prisma {
     Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUncheckedUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUncheckedUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProgressInput = {
@@ -19550,7 +19696,7 @@ export namespace Prisma {
     AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProgressInput = {
@@ -19568,7 +19714,7 @@ export namespace Prisma {
     appliedJobs?: AppliedJobUncheckedCreateNestedManyWithoutUserInput
     UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsUncheckedCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsUncheckedCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProgressInput = {
@@ -19602,7 +19748,7 @@ export namespace Prisma {
     AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProgressInput = {
@@ -19620,7 +19766,7 @@ export namespace Prisma {
     appliedJobs?: AppliedJobUncheckedUpdateManyWithoutUserNestedInput
     UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUncheckedUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUncheckedUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAdminMentorInput = {
@@ -19638,7 +19784,7 @@ export namespace Prisma {
     Progress?: ProgressCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdminMentorInput = {
@@ -19656,7 +19802,7 @@ export namespace Prisma {
     Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsUncheckedCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsUncheckedCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdminMentorInput = {
@@ -19716,7 +19862,7 @@ export namespace Prisma {
     Progress?: ProgressCreateNestedOneWithoutUserInput
     AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserStatusInput = {
@@ -19734,7 +19880,7 @@ export namespace Prisma {
     appliedJobs?: AppliedJobUncheckedCreateNestedManyWithoutUserInput
     Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
     UserSkills?: UserSkillsUncheckedCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsUncheckedCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserStatusInput = {
@@ -19768,7 +19914,7 @@ export namespace Prisma {
     Progress?: ProgressUpdateOneWithoutUserNestedInput
     AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserStatusInput = {
@@ -19786,7 +19932,7 @@ export namespace Prisma {
     appliedJobs?: AppliedJobUncheckedUpdateManyWithoutUserNestedInput
     Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUncheckedUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUncheckedUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutUserSkillsInput = {
@@ -19804,7 +19950,7 @@ export namespace Prisma {
     Progress?: ProgressCreateNestedOneWithoutUserInput
     AdminMentor?: AdminMentorCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserSkillsInput = {
@@ -19822,7 +19968,7 @@ export namespace Prisma {
     appliedJobs?: AppliedJobUncheckedCreateNestedManyWithoutUserInput
     Progress?: ProgressUncheckedCreateNestedOneWithoutUserInput
     UserStatus?: UserStatusUncheckedCreateNestedOneWithoutUserInput
-    ResumeSettings?: ResumeSettingsUncheckedCreateNestedOneWithoutUserInput
+    ResumeSettings?: ResumeSettingsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserSkillsInput = {
@@ -19856,7 +20002,7 @@ export namespace Prisma {
     Progress?: ProgressUpdateOneWithoutUserNestedInput
     AdminMentor?: AdminMentorUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserSkillsInput = {
@@ -19874,7 +20020,7 @@ export namespace Prisma {
     appliedJobs?: AppliedJobUncheckedUpdateManyWithoutUserNestedInput
     Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUncheckedUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutResumeSettingsInput = {
@@ -19990,6 +20136,29 @@ export namespace Prisma {
     deletedAt?: Date | string | null
   }
 
+  export type ResumeSettingsCreateManyUserInput = {
+    id?: string
+    apiKeyId?: string | null
+    name?: string | null
+    shareToken?: string | null
+    isPrimary?: boolean
+    personalInfo: JsonNullValueInput | InputJsonValue
+    professionalSummary?: string | null
+    education: JsonNullValueInput | InputJsonValue
+    experience: JsonNullValueInput | InputJsonValue
+    skills: JsonNullValueInput | InputJsonValue
+    projects: JsonNullValueInput | InputJsonValue
+    customSections?: NullableJsonNullValueInput | InputJsonValue
+    skillsDisplayMode?: string
+    skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
+    sectionOrder: JsonNullValueInput | InputJsonValue
+    sectionNames: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
   export type ApiKeyUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     key?: StringFieldUpdateOperationsInput | string
@@ -20065,6 +20234,75 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type ResumeSettingsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    personalInfo?: JsonNullValueInput | InputJsonValue
+    professionalSummary?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: JsonNullValueInput | InputJsonValue
+    experience?: JsonNullValueInput | InputJsonValue
+    skills?: JsonNullValueInput | InputJsonValue
+    projects?: JsonNullValueInput | InputJsonValue
+    customSections?: NullableJsonNullValueInput | InputJsonValue
+    skillsDisplayMode?: StringFieldUpdateOperationsInput | string
+    skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
+    sectionOrder?: JsonNullValueInput | InputJsonValue
+    sectionNames?: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ResumeSettingsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    personalInfo?: JsonNullValueInput | InputJsonValue
+    professionalSummary?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: JsonNullValueInput | InputJsonValue
+    experience?: JsonNullValueInput | InputJsonValue
+    skills?: JsonNullValueInput | InputJsonValue
+    projects?: JsonNullValueInput | InputJsonValue
+    customSections?: NullableJsonNullValueInput | InputJsonValue
+    skillsDisplayMode?: StringFieldUpdateOperationsInput | string
+    skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
+    sectionOrder?: JsonNullValueInput | InputJsonValue
+    sectionNames?: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ResumeSettingsUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    personalInfo?: JsonNullValueInput | InputJsonValue
+    professionalSummary?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: JsonNullValueInput | InputJsonValue
+    experience?: JsonNullValueInput | InputJsonValue
+    skills?: JsonNullValueInput | InputJsonValue
+    projects?: JsonNullValueInput | InputJsonValue
+    customSections?: NullableJsonNullValueInput | InputJsonValue
+    skillsDisplayMode?: StringFieldUpdateOperationsInput | string
+    skillsLineTime?: NullableJsonNullValueInput | InputJsonValue
+    sectionOrder?: JsonNullValueInput | InputJsonValue
+    sectionNames?: JsonNullValueInput | InputJsonValue
+    deletedSections?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type UserCreateManyAdminMentorInput = {
     id?: string
     firebaseUid: string
@@ -20092,7 +20330,7 @@ export namespace Prisma {
     Progress?: ProgressUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminMentorInput = {
@@ -20110,7 +20348,7 @@ export namespace Prisma {
     Progress?: ProgressUncheckedUpdateOneWithoutUserNestedInput
     UserStatus?: UserStatusUncheckedUpdateOneWithoutUserNestedInput
     UserSkills?: UserSkillsUncheckedUpdateOneWithoutUserNestedInput
-    ResumeSettings?: ResumeSettingsUncheckedUpdateOneWithoutUserNestedInput
+    ResumeSettings?: ResumeSettingsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutAdminMentorInput = {

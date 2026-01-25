@@ -26,7 +26,7 @@ model User {
   AdminMentor     AdminMentor? @relation(fields: [mentorId], references: [id])
   UserStatus      UserStatus?
   UserSkills      UserSkills?
-  ResumeSettings  ResumeSettings?
+  ResumeSettings  ResumeSettings[]
 
   @@index([firebaseUid])
   @@index([email])
@@ -214,8 +214,11 @@ model UserSkills {
 
 model ResumeSettings {
   id                String    @id @default(cuid())
-  userId            String    @unique
+  userId            String    // Remove unique constraint to allow multiple resumes per user
   apiKeyId          String?
+  name              String?   // Optional resume name/title
+  shareToken        String?   @unique // Token for public sharing
+  isPrimary         Boolean   @default(false) // Primary resume for extension integration
   
   // Personal Info
   personalInfo      Json
@@ -235,6 +238,7 @@ model ResumeSettings {
   // Section Configuration
   sectionOrder      Json
   sectionNames      Json
+  deletedSections   Json?     // Array of deleted section IDs
   
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
@@ -245,6 +249,8 @@ model ResumeSettings {
   @@index([userId])
   @@index([apiKeyId])
   @@index([deletedAt])
+  @@index([shareToken])
+  @@index([userId, isPrimary])
 }
 
 // FreetrialUsers model - belongs to Extension_Free_Tier but shared database

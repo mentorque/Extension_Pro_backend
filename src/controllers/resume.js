@@ -16,6 +16,65 @@ function parseFullName(fullName) {
   return { firstName, lastName };
 }
 
+// Fetch primary resume ID for a user (independent route, queries DB directly using Prisma)
+const fetchPrimaryResume = asyncHandler(async (req, res) => {
+  if (!req.user) {
+    throw new AppError(ERROR_CODES.AUTHENTICATION_ERROR, 'Authentication required', 401);
+  }
+
+  const userId = req.user.id;
+
+  // Fetch primary resume from database using Prisma client
+  const primaryResume = await prisma.resumeSettings.findFirst({
+    where: {
+      userId,
+      isPrimary: true,
+      deletedAt: null
+    },
+    select: {
+      id: true,
+      name: true
+    },
+    orderBy: { updatedAt: 'desc' }
+  });
+
+  if (!primaryResume) {
+    // Fallback: Get most recent resume if no primary found
+    const recentResume = await prisma.resumeSettings.findFirst({
+      where: {
+        userId,
+        deletedAt: null
+      },
+      orderBy: { updatedAt: 'desc' },
+      select: { id: true, name: true }
+    });
+
+    if (!recentResume) {
+      return res.json({
+        success: true,
+        hasPrimary: false,
+        resumeId: null,
+        message: 'No resume found',
+      });
+    }
+
+    return res.json({
+      success: true,
+      hasPrimary: false,
+      resumeId: recentResume.id,
+      resumeName: recentResume.name || null,
+      message: 'No primary resume set, using most recent',
+    });
+  }
+
+  return res.json({
+    success: true,
+    hasPrimary: true,
+    resumeId: primaryResume.id,
+    resumeName: primaryResume.name || null,
+  });
+});
+
 const loadResume = asyncHandler(async (req, res) => {
   // req.user is set by authenticateApiKey middleware
   if (!req.user) {
@@ -23,11 +82,25 @@ const loadResume = asyncHandler(async (req, res) => {
   }
 
   const userId = req.user.id;
+  
+  // Resume ID MUST be provided in request header (x-resume-id) or query parameter
+  const resumeId = req.headers['x-resume-id'] || req.query.resumeId;
+  
+  if (!resumeId) {
+    return res.status(400).json({
+      success: false,
+      message: 'Resume ID is required. Please provide x-resume-id header or resumeId query parameter. Call /resume/fetch-primary first to get the primary resume ID.',
+    });
+  }
 
-  // Fetch both resume settings and user profile
+  // Load resume by ID
   const [settings, user] = await Promise.all([
-    prisma.resumeSettings.findUnique({
-      where: { userId },
+    prisma.resumeSettings.findFirst({
+      where: { 
+        id: resumeId,
+        userId,
+        deletedAt: null
+      }
     }),
     prisma.user.findUnique({
       where: { id: userId },
@@ -129,5 +202,6 @@ const loadResume = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
+  fetchPrimaryResume,
   loadResume
 };
