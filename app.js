@@ -22,46 +22,7 @@ app.use(helmet({
 // Enhanced CORS configuration for browser extension
 // Chrome extensions use a unique origin format, so we need to allow all origins
 app.use(cors({
-  origin: function (origin, callback) {
-    // Always allow requests with no origin (Chrome extensions, Postman, curl, etc.)
-    if (!origin) {
-      return callback(null, true);
-    }
-    
-    // Allow Chrome extensions
-    if (origin.startsWith('chrome-extension://')) {
-      return callback(null, true);
-    }
-    
-    // Allow Firefox extensions
-    if (origin.startsWith('moz-extension://')) {
-      return callback(null, true);
-    }
-    
-    // Allow Safari extensions
-    if (origin.startsWith('safari-extension://')) {
-      return callback(null, true);
-    }
-    
-    // Allow localhost (any port)
-    if (origin.startsWith('http://localhost:') || origin.startsWith('https://localhost:')) {
-      return callback(null, true);
-    }
-    
-    // Allow specific production domains
-    const allowedOrigins = [
-    'https://platform-frontend-gamma-two.vercel.app',
-      'https://extensionbackend-production-cf91.up.railway.app',
-      'https://app.mentorquedu.com'
-    ];
-    
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    
-    // Default: allow all (for Chrome extensions which may have varying origins)
-    callback(null, true);
-  },
+  origin: true, // Allow all origins (simpler and more reliable for extensions)
   credentials: false, // Changed to false to match frontend (credentials: 'omit')
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: [
@@ -74,7 +35,8 @@ app.use(cors({
     'Origin',
     'Cache-Control',
     'Pragma',
-    'Expires'
+    'Expires',
+    'x-resume-id'
   ],
   exposedHeaders: ['x-api-key', 'X-API-Key'],
   preflightContinue: false,
@@ -113,26 +75,23 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Ensure CORS headers are set for all responses
+// Ensure CORS headers are set on all responses (fallback if cors() doesn't set them)
 app.use((req, res, next) => {
-  // Set CORS headers for all responses
-  const origin = req.headers.origin;
-  
-  if (!origin || 
-      origin.startsWith('chrome-extension://') ||
-      origin.startsWith('moz-extension://') ||
-      origin.startsWith('safari-extension://') ||
-      origin.startsWith('http://localhost:') ||
-      origin.startsWith('https://localhost:')) {
-    res.header('Access-Control-Allow-Origin', origin || '*');
-  } else {
-    res.header('Access-Control-Allow-Origin', '*');
+  // Always ensure Access-Control-Allow-Origin is set
+  const existingOrigin = res.get('Access-Control-Allow-Origin');
+  if (!existingOrigin || existingOrigin === 'null' || existingOrigin === 'undefined') {
+    const origin = req.headers.origin;
+    if (origin) {
+      res.header('Access-Control-Allow-Origin', origin);
+    } else {
+      res.header('Access-Control-Allow-Origin', '*');
+    }
   }
   
+  // Always set other CORS headers to ensure they're present
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-api-key, X-API-Key, X-Requested-With, Accept, Origin, Cache-Control, Pragma, Expires');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-api-key, X-API-Key, X-Requested-With, Accept, Origin, Cache-Control, Pragma, Expires, x-resume-id');
   res.header('Access-Control-Expose-Headers', 'x-api-key, X-API-Key');
-  res.header('Access-Control-Max-Age', '86400');
   
   // Prevent caching for dynamic endpoints
   if (req.path.includes('/resume/load') || req.path.includes('/applied-jobs')) {
